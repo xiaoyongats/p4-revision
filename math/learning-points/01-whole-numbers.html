@@ -1,0 +1,546 @@
+<title>Whole Numbers Quick Notes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = method/working, orange = answer, green = correct, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">P4 Math · Numbers</span>
+    <h1>Whole Numbers</h1>
+    <p class="lead">Numbers up to 100 000: place value, words, comparing, rounding and number patterns. <span class="w">Blue is the method</span>, <span class="f">orange is the answer</span>.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#place">Place value</a>
+      <a href="#words">Words & numerals</a>
+      <a href="#compare">Comparing</a>
+      <a href="#round">Rounding</a>
+      <a href="#patterns">Patterns</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="place">
+    <div class="sec-head"><span class="tag water">1</span><h2>Place value</h2></div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table class="pv">
+          <tr><th>Ten thousands</th><th>Thousands</th><th>Hundreds</th><th>Tens</th><th>Ones</th></tr>
+          <tr><td>4</td><td>2</td><td><b class="f">7</b></td><td>5</td><td>3</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li>In <b>42 753</b>, the digit 7 is in the <b>hundreds</b> place. Its <b>value</b> is <b class="f">700</b>.</li>
+        <li>42 753 = 40 000 + 2000 + 700 + 50 + 3</li>
+        <li>"Which digit is in the tens place of 56 780?" → <b class="f">8</b>. Read the question: <b>digit</b> or <b>value</b>?</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-place" data-sec="place"> I got this</label>
+  </section>
+
+  <section id="words">
+    <div class="sec-head"><span class="tag water">2</span><h2>Words and numerals</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">Fifty-eight thousand and thirty-nine</span><div class="stp"><b>thousands</b><span>58</span><b>rest</b><span>039 (no hundreds → write 0)</span></div><span class="ans">58 039</span></div>
+      <div class="ex"><span class="exq">Forty thousand and eleven</span><div class="stp"><b>thousands</b><span>40</span><b>rest</b><span>011</span></div><span class="ans">40 011</span></div>
+    </div>
+    <div class="card"><p>After the word <b>thousand</b> there must always be <b>3 digits</b>. Fill empty places with <b>0</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-words" data-sec="words"> I got this</label>
+  </section>
+
+  <section id="compare">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Comparing and ordering</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Count the digits</span><span class="to">→</span><span class="box">Compare from the left</span><span class="to">→</span><span class="box">First different digit decides</span></div>
+      <p>Order 1053, 1305, 1035 from smallest: look at the hundreds digit (0, 3, 0), then the tens digit.</p>
+      <p class="ans">1035, 1053, 1305</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-compare" data-sec="compare"> I got this</label>
+  </section>
+
+  <section id="round">
+    <div class="sec-head"><span class="tag food">4</span><h2>Rounding</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Find the place you round to</span><span class="to">→</span><span class="box">Look at the digit on its RIGHT</span><span class="to">→</span><span class="box">0–4: stay · 5–9: go up</span></div>
+      <div class="grid2">
+        <div class="ex"><span class="exq">Round 39 520 to the nearest hundred</span><div class="stp"><b>hundreds digit</b><span>5</span><b>digit on right</b><span>2 → stay</span></div><span class="ans">39 500</span></div>
+        <div class="ex"><span class="exq">Round 46 381 to the nearest thousand</span><div class="stp"><b>thousands digit</b><span>6</span><b>digit on right</b><span>3 → stay</span></div><span class="ans">46 000</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Range questions (very common)</h3>
+      <p>A number is <b>2900</b> when rounded to the nearest ten. Numbers that round to 2900 go from <b>2895</b> to <b>2904</b>.</p>
+      <div class="chart">
+        <svg viewBox="0 0 420 70" role="img" aria-labelledby="rngT">
+          <title id="rngT">Number line from 2890 to 2910. Numbers from 2895 to 2904 round to 2900.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)" text-anchor="middle">
+            <line x1="20" y1="30" x2="400" y2="30" stroke="var(--muted)" stroke-width="2"/>
+            <rect x="115" y="22" width="171" height="16" rx="8" fill="var(--food-soft)" stroke="var(--food)" stroke-width="2"/>
+            <text x="20" y="60">2890</text><text x="124" y="60" fill="var(--food)">2895</text><text x="210" y="60">2900</text><text x="276" y="60" fill="var(--food)">2904</text><text x="400" y="60">2910</text>
+          </g>
+        </svg>
+      </div>
+      <p><b>Smallest</b> = 2895 · <b>Greatest</b> = 2904. For the nearest hundred, 72 000 comes from <b>71 950 to 72 049</b>.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-round" data-sec="round"> I got this</label>
+  </section>
+
+  <section id="patterns">
+    <div class="sec-head"><span class="tag sun">5</span><h2>Number patterns</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">34 456, 34 756, ___, 35 356</span><div class="stp"><b>rule</b><span>+300 each time</span></div><span class="ans">35 056</span></div>
+      <div class="ex"><span class="exq">2628, 2828, 2808, 3008, ___, 3188</span><div class="stp"><b>rule</b><span>+200, −20, +200, −20 …</span><b>next</b><span>3008 − 20</span></div><span class="ans">2988</span></div>
+    </div>
+    <div class="card">
+      <h3>Figure patterns</h3>
+      <p>Make a table. Look for a rule that links the <b>figure number</b> to the count.</p>
+      <div class="tbl-wrap"><table class="pv">
+        <tr><th>Figure</th><th>1</th><th>2</th><th>3</th><th>4</th><th>n</th></tr>
+        <tr><td>Squares on each side</td><td>3</td><td>4</td><td>5</td><td>6</td><td>n + 2</td></tr>
+        <tr><td>Total squares</td><td>9</td><td>16</td><td>25</td><td>36</td><td>(n + 2) × (n + 2)</td></tr>
+      </table></div>
+      <p>Figure 9 → 11 × 11 = <b class="f">121</b> squares.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-patterns" data-sec="patterns"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>"Value of 7 in 42 753" → 7</span></div><div class="row"><span class="ok">✓</span><span>The <b>value</b> is <b>700</b>. The <b>digit</b> is 7.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Fifty-eight thousand and thirty-nine → 5839</span></div><div class="row"><span class="ok">✓</span><span>3 digits after the thousands: <b>58 039</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>72 050 rounds to 72 000 (nearest hundred)</span></div><div class="row"><span class="ok">✓</span><span>Tens digit is 5 → round up to <b>72 100</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Smallest number that rounds to 2900 is 2850.</span></div><div class="row"><span class="ok">✓</span><span>Nearest <b>ten</b> → only ±5: <b>2895</b>.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Digit ≠ value. 7 in the hundreds place has value 700.</div>
+        <div>Rounding: look one place to the right. 5 or more → go up.</div>
+        <div>Patterns: find the rule between terms, check it works for all of them.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Work out each answer on paper first, then type it in. Press <b>Check my answers</b> to see your score and the worked solutions.</p>
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: Short answers</h3><p class="hint">Type the number only. Write fractions like 2/3 and mixed numbers like 1 2/9 (with a space).</p><div id="saq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Problem sums</h3><p class="hint">Show your working on paper, then type the final answer.</p><div id="psq" class="qpart"></div></div>
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+<script>
+function frac(h){return String(h).replace(/\[\[(?:(\d+) )?([\d?]+)\/([\d?]+)\]\]/g,function(_,w,a,b){return (w||'')+'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>';});}
+document.querySelectorAll('.wrap > header, .wrap > section:not(#quiz)').forEach(function(s){if(s.innerHTML.indexOf('[[')>-1)s.innerHTML=frac(s.innerHTML);});
+(function(){
+  var KEY='p4m-whole-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ (math) ---------- */
+(function(){
+  var MCQ=[
+    {q:'Fifty-eight thousand and thirty-nine in numerals is ___.',o:['58 390','58 309','58 039','50 839'],a:2,e:'58 thousand, then 039 (0 hundreds, 3 tens, 9 ones).'},
+    {q:'Which number becomes 72 000 when rounded to the nearest hundred?',o:['71 839','71 952','72 050','72 499'],a:1,e:'Numbers from 71 950 to 72 049 round to 72 000. 72 050 rounds to 72 100.'},
+    {q:'In which number does the digit 6 stand for 600?',o:['6790','7690','7906','9760'],a:1,e:'In 7690, the 6 is in the hundreds place.'},
+    {q:'In the number 56 780, which digit is in the tens place?',o:['5','6','7','8'],a:3,e:'Ones = 0, tens = 8.'},
+    {q:'Which shows 4890, 4809 and 4089 from the smallest to the greatest?',o:['4890, 4809, 4089','4089, 4890, 4809','4809, 4089, 4890','4089, 4809, 4890'],a:3,e:'All start with 4. Compare hundreds: 0, 8, 8. Then tens: 4809 has 0 tens, 4890 has 9 tens.'},
+    {q:'What is the value of the digit 4 in 34 109?',o:['4','40','400','4000'],a:3,e:'The 4 is in the thousands place, so its value is 4000.'},
+    {q:'What comes next? 12 450, 12 750, 13 050, ___',o:['13 150','13 350','13 550','14 050'],a:1,e:'The rule is +300.'},
+    {q:'30 000 + 5000 + 70 + 2 = ___',o:['3572','35 702','35 072','30 572'],a:2,e:'3 ten thousands, 5 thousands, 0 hundreds, 7 tens, 2 ones.'}
+  ];
+  var SA=[
+    {q:'What is the value of the digit 7 in 42 753?',a:['700'],e:'7 is in the hundreds place → 700.'},
+    {q:'Write forty thousand and eleven in numerals.',a:['40011'],e:'40 thousand, then 011.'},
+    {q:'Round 39 520 to the nearest hundred.',a:['39500'],e:'Hundreds digit 5, the digit on its right is 2 → stay → 39 500.'},
+    {q:'Find the missing number: 34 456, 34 756, ___, 35 356, 35 656',a:['35056'],e:'Rule +300: 34 756 + 300 = 35 056.'},
+    {q:'A number is 2900 when rounded to the nearest ten. What is the smallest possible number?',a:['2895'],e:'Numbers 2895 to 2904 round to 2900.'},
+    {q:'Find the missing number: 2628, 2828, 2808, 3008, ___, 3188',a:['2988'],e:'Rule: +200, −20 in turn. 3008 − 20 = 2988, then 2988 + 200 = 3188 ✓.'},
+    {q:'Round 46 381 to the nearest thousand.',a:['46000'],e:'Thousands digit 6, the digit on its right is 3 → stay.'}
+  ];
+  var PS=[
+    {q:'A square pattern has shaded squares around the outside and unshaded squares inside. Figure 1 is 3 × 3 (1 unshaded), Figure 2 is 4 × 4 (4 unshaded), Figure 3 is 5 × 5 (9 unshaded).',
+     parts:[{p:'(a) How many shaded squares are there in Figure 4?',a:['20'],m:2},{p:'(b) What is the total number of squares in Figure 9?',a:['121'],m:2}],
+     sol:'<div class="ln">Figure n has (n + 2) squares on each side and n × n unshaded squares.</div><div class="ln">(a) Figure 4: 6 × 6 = 36 squares, 4 × 4 = 16 unshaded → 36 − 16 = <b class="f">20</b> shaded.</div><div class="ln">(b) Figure 9: 11 × 11 = <b class="f">121</b>.</div>'},
+    {q:'Use each of the digits 3, 0, 8, 1, 6 once to make 5-digit numbers.',
+     parts:[{p:'(a) What is the greatest number?',a:['86310'],m:1},{p:'(b) What is the smallest number?',a:['10368'],m:2}],
+     sol:'<div class="ln">(a) Biggest digits first: <b class="f">86 310</b>.</div><div class="ln">(b) Smallest digits first, but a number cannot start with 0. Put 1 first, then 0: <b class="f">10 368</b>.</div>'},
+    {q:'A whole number is 5600 when rounded to the nearest hundred.',
+     parts:[{p:'(a) What is the greatest possible number?',a:['5649'],m:1},{p:'(b) What is the smallest possible number?',a:['5550'],m:1}],
+     sol:'<div class="ln">Numbers from 5550 to 5649 round to 5600.</div><div class="ln">(a) <b class="f">5649</b> (5650 would round to 5700). (b) <b class="f">5550</b>.</div>'}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=frac(html);return e;}
+  /* Answer matching: same text (extra spaces ignored), or the same numeric value unless the item says exact. */
+  function clean(s,u){
+    s=String(s==null?'':s).toLowerCase().replace(/[−–]/g,'-').replace(/,/g,'').replace(/\$/g,'').replace(/°|degrees?/g,'').trim();
+    (u||'').split('|').filter(Boolean).forEach(function(x){x=x.toLowerCase();if(s.length>x.length&&s.slice(-x.length)===x)s=s.slice(0,-x.length).trim();});
+    return s.replace(/\s+/g,' ').trim();
+  }
+  function val(s){
+    var m;
+    if((m=s.match(/^(-?\d*\.?\d+)$/)))return parseFloat(m[1]);
+    if((m=s.match(/^(\d+) (\d+)\/(\d+)$/)))return +m[1]+(+m[2])/(+m[3]);
+    if((m=s.match(/^(\d+)\/(\d+)$/)))return (+m[1])/(+m[2]);
+    return null;
+  }
+  function ok(input,item){
+    var u=(item.unit||'')+'|'+(item.u||'');
+    var a=clean(input,u);if(!a)return false;
+    return item.a.some(function(acc){
+      var b=clean(acc,u);
+      if(a===b)return true;
+      if(!/\//.test(b)&&a.replace(/ /g,'')===b.replace(/ /g,''))return true;
+      if(item.exact)return false;
+      var x=val(a),y=val(b);return x!=null&&y!=null&&Math.abs(x-y)<1e-9;
+    });
+  }
+  function answerInput(id,unit,pre){
+    var w=el('div','ansrow');
+    if(pre)w.appendChild(el('span','unit',pre));
+    var inp=document.createElement('input');inp.type='text';inp.id=id;inp.autocomplete='off';inp.setAttribute('aria-label','Answer');inp.placeholder='answer';
+    w.appendChild(inp);if(unit)w.appendChild(el('span','unit',unit));return w;
+  }
+  function show(item){return (item.pre||'')+item.a[0]+(item.unit?' '+item.unit:'');}
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){var lab=el('label','opt');var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));opts.appendChild(lab);});
+    card.appendChild(opts);document.getElementById('mcq').appendChild(card);
+  });
+  SA.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='sa'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    card.appendChild(answerInput('saans'+i,item.unit,item.pre));
+    document.getElementById('saq').appendChild(card);
+  });
+  PS.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='ps'+i;var tot=item.parts.reduce(function(s,p){return s+(p.m||1);},0);
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',tot+' marks'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    item.parts.forEach(function(p,j){
+      var row=el('div','psrow');row.id='ps'+i+'_'+j;
+      if(p.p)row.appendChild(el('div','qtext',p.p));
+      row.appendChild(answerInput('psans'+i+'_'+j,p.unit,p.pre));card.appendChild(row);
+    });
+    document.getElementById('psq').appendChild(card);
+  });
+  function clearFb(card){card.querySelectorAll('.feedback').forEach(function(f){f.remove();});card.classList.remove('right','wrong','partial');}
+  function state(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+  function check(){
+    var blanks=0,sA=0,sB=0,sC=0,mC=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFb(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      var labels=card.querySelectorAll('.opt');labels.forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      labels[item.a].classList.add('is-correct');
+      var good=c&&+c.value===item.a;if(good)sA++;
+      if(c&&!good)labels[+c.value].classList.add('is-picked-wrong');
+      state(card,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('div','work',item.e));card.appendChild(fb);
+    });
+    SA.forEach(function(item,i){
+      var card=document.getElementById('sa'+i);clearFb(card);
+      var v=document.getElementById('saans'+i).value;if(!v.trim())blanks++;
+      var good=ok(v,item);if(good)sB++;state(card,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(v.trim()?'Not quite.':'No answer.')+' Answer: '+show(item)));
+      fb.appendChild(el('div','work',item.e));card.appendChild(fb);
+    });
+    PS.forEach(function(item,i){
+      var card=document.getElementById('ps'+i);clearFb(card);var got=0,max=0;
+      item.parts.forEach(function(p,j){
+        var row=document.getElementById('ps'+i+'_'+j);row.classList.remove('is-right','is-wrong');
+        var v=document.getElementById('psans'+i+'_'+j).value;if(!v.trim())blanks++;
+        var m=p.m||1;max+=m;var good=ok(v,p);if(good)got+=m;
+        row.classList.add(good?'is-right':'is-wrong');
+        row.appendChild(el('div','feedback mini-fb','<span class="verdict">'+(good?'✓ ':'✗ ')+'Answer: '+show(p)+'</span>'));
+      });
+      sC+=got;mC+=max;state(card,got,max);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict','Worked solution'));fb.appendChild(el('div','work',item.sol));card.appendChild(fb);
+    });
+    var max=MCQ.length+SA.length+mC,total=sA+sB+sC;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+sA+'/'+MCQ.length+'</span><span>Short answers: '+sB+'/'+SA.length+'</span><span>Problem sums: '+sC+'/'+mC+'</span>';
+    var pct=total/max;
+    document.getElementById('scoremsg').textContent=pct>=0.9?'Excellent! You know this topic well.':pct>=0.7?'Good work. Study the worked solutions for the ones you missed.':pct>=0.5?'Getting there. Read the notes again, then try again.':'Go through the notes and worked examples, then have another go.';
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    try{localStorage.setItem('p4m-whole-best',String(Math.max(total,+(localStorage.getItem('p4m-whole-best')||0))));localStorage.setItem('p4m-whole-max',String(max));}catch(e){}
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+  function reset(){
+    document.querySelectorAll('#quiz input').forEach(function(r){if(r.type==='radio')r.checked=false;else r.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFb);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .psrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    document.getElementById('scorebox').hidden=true;document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>

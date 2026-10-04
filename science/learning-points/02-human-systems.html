@@ -1,0 +1,590 @@
+<title>Human Systems Quick Notes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = water/cold, orange = food/heat, green = living/correct, brown = soil/solid, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">P4 Science · Chapter 2</span>
+    <h1>Human Systems</h1>
+    <p class="lead">The key points about the body's systems and how we digest food. Look out for the colours: <span class="f">orange is food</span> and <span class="w">blue is water</span>.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#systems">Systems</a>
+      <a href="#together">Working together</a>
+      <a href="#path">Path of food</a>
+      <a href="#organs">Each organ</a>
+      <a href="#graph">Reading the graph</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="systems">
+    <div class="sec-head"><span class="tag sun">1</span><h2>Organs and systems</h2></div>
+    <div class="card">
+      <p class="big">An <b>organ</b> is a body part with a special job. <b>Organs work together</b> to form a <b>system</b>.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--food)">Digestive</td><td>Mouth, gullet, stomach, small intestine, large intestine.<br><b class="f">Breaks down food into simpler substances</b> that the body can absorb.</td></tr>
+        <tr><td style="--part:var(--water)">Respiratory</td><td>Nose, windpipe, lungs.<br><b>Takes air into and out of the body</b>: takes in oxygen and gives out carbon dioxide.</td></tr>
+        <tr><td style="--part:var(--warn)">Circulatory</td><td><b>Heart, blood and blood vessels.</b><br><b>Transports digested food, water and oxygen</b> to all parts of the body.</td></tr>
+        <tr><td style="--part:var(--soil)">Skeletal</td><td>Bones: skull, ribcage, backbone.<br><b>Supports the body and gives it shape</b>, <b>protects</b> organs, and helps us <b>move</b>.</td></tr>
+        <tr><td style="--part:var(--leaf)">Muscular</td><td>Muscles.<br>Work with the bones to <b>move</b> the body.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>The skeleton protects</h3>
+      <div class="grid3">
+        <div class="mini soil"><h3>Skull</h3><p>protects the <b>brain</b></p></div>
+        <div class="mini soil"><h3>Ribcage</h3><p>protects the <b>heart and lungs</b></p></div>
+        <div class="mini soil"><h3>Backbone</h3><p>protects the <b>spinal cord</b></p></div>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-systems" data-sec="systems"> I got this</label>
+  </section>
+
+  <section id="together">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Systems work together</h2></div>
+    <div class="grid2">
+      <div class="mini food"><h3>Digestive + circulatory</h3><p>Digested food is <b class="f">absorbed into the blood</b> in the small intestine. The blood <b>carries it to all parts</b> of the body.</p></div>
+      <div class="mini soil"><h3>Skeletal + muscular</h3><p>Muscles are attached to bones. Muscles <b>pull on the bones</b> to move them.</p></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-together" data-sec="together"> I got this</label>
+  </section>
+
+  <section id="path">
+    <div class="sec-head"><span class="tag food">3</span><h2>The path of food</h2></div>
+    <div class="card">
+      <p class="big"><b>Digestion</b> means breaking down food into <b>simpler substances</b> that can be <b class="f">absorbed into the blood</b>.</p>
+      <div class="steps">
+        <span class="box" style="border-color:var(--food)">Mouth</span><span class="to">→</span>
+        <span class="box">Gullet</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--food)">Stomach</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--food)">Small intestine</span><span class="to">→</span>
+        <span class="box">Large intestine</span><span class="to">→</span>
+        <span class="box">Anus</span>
+      </div>
+      <p class="hint">Orange border = digestion happens here.</p>
+    </div>
+    <div class="card">
+      <h3>Food does NOT pass through these</h3>
+      <p>The <b>liver</b>, <b>gall bladder</b> and <b>pancreas</b> make or store <b>digestive juices</b> for the small intestine. Food never goes through them.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-path" data-sec="path"> I got this</label>
+  </section>
+
+  <section id="organs">
+    <div class="sec-head"><span class="tag food">4</span><h2>What each organ does</h2></div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--food)">Mouth</td><td>Teeth <b>cut and chew</b> food into smaller pieces. <b>Saliva</b> is a digestive juice: <b class="f">digestion begins here</b>.</td></tr>
+        <tr><td style="--part:var(--line)">Gullet</td><td>Muscles <b>push food</b> down to the stomach. <b>No digestion.</b></td></tr>
+        <tr><td style="--part:var(--food)">Stomach</td><td><b>Churns</b> and mixes food with <b>digestive juices</b>.</td></tr>
+        <tr><td style="--part:var(--food)">Small intestine</td><td><b class="f">Digestion is completed.</b> <b class="f">Digested food is absorbed into the blood.</b></td></tr>
+        <tr><td style="--part:var(--water)">Large intestine</td><td><b class="w">Water is absorbed</b> from the undigested food. <b>No digestion.</b></td></tr>
+        <tr><td style="--part:var(--line)">Anus</td><td><b>Undigested food</b> leaves the body.</td></tr>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="mini sun"><h3>Why chew well?</h3><p>Smaller pieces → digestive juices can <b>digest the food faster</b>.</p></div>
+      <div class="mini food"><h3>Why is the small intestine long and folded?</h3><p>A <b>larger surface area</b> → <b class="f">more digested food is absorbed</b>.</p></div>
+    </div>
+    <div class="card">
+      <h3>Must-know answers</h3>
+      <div class="grid2">
+        <div><b>Digestion begins:</b> mouth</div>
+        <div><b>Digestion completed:</b> small intestine</div>
+        <div><b class="f">Digested food absorbed:</b> small intestine</div>
+        <div><b class="w">Water absorbed:</b> large intestine</div>
+        <div><b>Food passes, no digestion:</b> gullet, large intestine, anus</div>
+        <div><b>Juices, but no food passes:</b> liver, pancreas</div>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-organs" data-sec="organs"> I got this</label>
+  </section>
+
+  <section id="graph">
+    <div class="sec-head"><span class="tag water">5</span><h2>Reading the "digested food" graph</h2></div>
+    <div class="card">
+      <h3>Amount of digested food in each organ</h3>
+      <div class="bars">
+        <div class="barrow"><span>Mouth</span><div class="b" style="width:15%;background:var(--food)"></div></div>
+        <div class="barrow"><span>Gullet</span><div class="b" style="width:15%;background:var(--food)"></div></div>
+        <div class="barrow"><span>Stomach</span><div class="b" style="width:50%;background:var(--food)"></div></div>
+        <div class="barrow"><span>Small intestine</span><div class="b" style="width:90%;background:var(--food)"></div></div>
+        <div class="barrow"><span>Large intestine</span><span class="hint">none</span></div>
+      </div>
+      <ul>
+        <li><b>Mouth and gullet are the same</b>: the gullet <b>does not digest</b> food.</li>
+        <li><b>Small intestine is the highest</b>: digestion is <b>completed</b> there.</li>
+        <li><b>Large intestine has none</b>: the digested food was <b class="f">already absorbed</b> in the small intestine.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-graph" data-sec="graph"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Digestion happens in the gullet.</span></div><div class="row"><span class="ok">✓</span><span>The gullet only <b>pushes</b> food. No digestion.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Food passes through the liver.</span></div><div class="row"><span class="ok">✓</span><span>The liver and pancreas make juices. <b>Food does not pass through them.</b></span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The large intestine absorbs digested food.</span></div><div class="row"><span class="ok">✓</span><span><b class="f">Small</b> intestine absorbs digested food. <b class="w">Large</b> intestine absorbs water.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The circulatory system absorbs food.</span></div><div class="row"><span class="ok">✓</span><span>It <b>transports</b> digested food, water and oxygen.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Digestion begins in the stomach.</span></div><div class="row"><span class="ok">✓</span><span>Digestion begins in the <b>mouth</b> (saliva).</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Organs work together <span class="arrow">→</span> a system</div>
+        <div><span class="f">Digestion:</span> begins in the mouth <span class="arrow">→</span> completed in the small intestine</div>
+        <div><span class="f">Small intestine absorbs digested food.</span> <span class="w">Large intestine absorbs water.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Answer every question, then press <b>Check my answers</b>. For written answers, the marks come from the <b>keywords</b> you used, just like in the real exam.</p>
+
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: True or false?</h3><div id="tfq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Write your answer</h3><div id="oeq" class="qpart"></div></div>
+
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var KEY='p4-human-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ ---------- */
+(function(){
+  var MCQ=[
+    {q:'A diagram shows all the bones of the human body. Which system is this?',o:['skeletal system','muscular system','circulatory system','respiratory system'],a:0,
+     e:'The skeletal system is made of bones. It supports the body, gives it shape and protects organs.'},
+    {q:'Which two statements describe the circulatory system?<br>A: It absorbs digested food.<br>B: It breaks down food.<br>C: It is made up of the heart, blood and blood vessels.<br>D: It transports digested food and oxygen around the body.',o:['A and B','A and C','B and D','C and D'],a:3,
+     e:'A and B describe the digestive system. The circulatory system is the heart, blood and blood vessels, and it transports things around the body.'},
+    {q:'In which part of the digestive system is digested food absorbed into the blood?',o:['gullet','stomach','large intestine','small intestine'],a:3,
+     e:'Digested food is absorbed into the blood in the small intestine.'},
+    {q:'Food leaves the stomach. Where does it go next?',o:['gullet','mouth','large intestine','small intestine'],a:3,
+     e:'The order is mouth → gullet → stomach → small intestine → large intestine → anus.'},
+    {q:'Where does digestion BEGIN?',o:['mouth','gullet','stomach','small intestine'],a:0,
+     e:'Teeth break food into smaller pieces and saliva, a digestive juice, starts digestion in the mouth.'},
+    {q:'Which organ absorbs water from undigested food?',o:['stomach','small intestine','large intestine','gullet'],a:2,
+     e:'The large intestine absorbs water from the undigested food.'},
+    {q:'Which organ is protected by the ribcage?',o:['brain','stomach','lungs','small intestine'],a:2,
+     e:'The ribcage protects the heart and lungs. The skull protects the brain.'},
+    {q:'Which system takes air into and out of the body?',o:['digestive','respiratory','circulatory','skeletal'],a:1,
+     e:'The respiratory system (nose, windpipe, lungs) takes air in and out.'},
+    {q:'Which one does food NOT pass through?',o:['gullet','stomach','liver','large intestine'],a:2,
+     e:'The liver makes digestive juice for the small intestine, but food does not pass through it.'}
+  ];
+  var TF=[
+    {s:'The gullet digests food.',a:false,e:'False. The gullet only pushes food to the stomach.'},
+    {s:'Saliva is a digestive juice.',a:true,e:'True. Saliva starts digestion in the mouth.'},
+    {s:'Digestion is completed in the small intestine.',a:true,e:'True.'},
+    {s:'The large intestine absorbs digested food.',a:false,e:'False. The large intestine absorbs water. Digested food is absorbed in the small intestine.'},
+    {s:'Muscles pull on bones to move them.',a:true,e:'True. The muscular and skeletal systems work together.'}
+  ];
+  var OE=[
+    {q:'Explain why we should chew our food well.',
+     model:'Chewing breaks the food into smaller pieces, so the digestive juices can digest it faster.',
+     k:[{l:'smaller pieces',all:[/small/]},{l:'digested faster / more easily',all:[/digest/,/fast|quick|easi|easy|better/]}]},
+    {q:'Bread chewed for a long time starts to taste sweet. Explain.',
+     model:'Saliva contains a digestive juice that breaks down the starch in bread into sugar.',
+     k:[{l:'saliva breaks down the food',all:[/saliva/]},{l:'into sugar',all:[/sugar|sweet/]}]},
+    {q:'Why is the small intestine long and folded?',
+     model:'It has a larger surface area, so more digested food can be absorbed into the blood.',
+     k:[{l:'larger surface area',all:[/surface area/]},{l:'more digested food absorbed',all:[/absorb/,/food/]}]},
+    {q:'A graph shows the same amount of digested food in the mouth and the gullet. Why?',
+     model:'The gullet does not digest food.',
+     k:[{l:'gullet does not digest food',all:[/gullet/,/(not|no|doesn't|does not|don't)/,/digest/]}]},
+    {q:'The graph shows no digested food in the large intestine. Why?',
+     model:'All the digested food was already absorbed into the blood in the small intestine.',
+     k:[{l:'absorbed in the small intestine',all:[/absorb/,/small intestine/]}]},
+    {q:'How do the digestive system and the circulatory system work together?',
+     model:'The digestive system breaks down food. Digested food is absorbed into the blood in the small intestine, and the circulatory system transports it to all parts of the body.',
+     k:[{l:'digested food absorbed into the blood',all:[/absorb/,/blood/]},{l:'blood carries it to all parts',all:[/transport|carr|bring|deliver|send|move/,/(all|every|whole|different|other) (part|parts|body)|body/]}]},
+    {q:'How do the skeletal and muscular systems work together?',
+     model:'Muscles are attached to bones. The muscles pull on the bones to move them.',
+     k:[{l:'muscles pull the bones to move',all:[/muscle/,/pull|move/]}]}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+  var mcqBox=document.getElementById('mcq'),tfBox=document.getElementById('tfq'),oeBox=document.getElementById('oeq');
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){
+      var lab=el('label','opt');
+      var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;
+      lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));
+      opts.appendChild(lab);
+    });
+    card.appendChild(opts);
+    mcqBox.appendChild(card);
+  });
+  var tfCard=el('div','q');tfCard.id='tfcard';
+  var tfHead=el('div','qhead');tfHead.appendChild(el('span','qnum','Q'+(n+1)));tfHead.appendChild(el('span','qmarks',TF.length+' marks'));
+  tfCard.appendChild(tfHead);
+  tfCard.appendChild(el('p','qtext','Is each statement about the digestive system true or false?'));
+  var tfList=el('div','tf');
+  TF.forEach(function(item,i){
+    var row=el('div','tfrow');row.id='tfrow'+i;
+    row.appendChild(el('span',null,item.s));
+    var b=el('div','tfbtns');
+    ['True','False'].forEach(function(lbl){
+      var lab=el('label');var inp=document.createElement('input');inp.type='radio';inp.name='tf'+i;inp.id='tf'+i+lbl;inp.value=lbl==='True'?'1':'0';
+      lab.appendChild(inp);lab.appendChild(document.createTextNode(lbl));b.appendChild(lab);
+    });
+    row.appendChild(b);tfList.appendChild(row);
+  });
+  tfCard.appendChild(tfList);tfBox.appendChild(tfCard);
+  n++;
+  OE.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='oe'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',item.k.length+(item.k.length>1?' marks':' mark')));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var ta=document.createElement('textarea');ta.id='oeans'+i;ta.placeholder='Write your answer here…';ta.setAttribute('aria-label','Answer for question '+n);
+    card.appendChild(ta);
+    oeBox.appendChild(card);
+  });
+
+  function clearFeedback(card){var f=card.querySelector('.feedback');if(f)f.remove();card.classList.remove('right','wrong','partial');}
+  function setState(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+
+  var oeGot=[];
+  function renderScore(){
+    var mcqS=0,tfS=0,oeS=0,max=MCQ.length+TF.length;
+    MCQ.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)mcqS++;});
+    TF.forEach(function(item,i){var c=document.querySelector('input[name="tf'+i+'"]:checked');if(c&&(c.value==='1')===item.a)tfS++;});
+    OE.forEach(function(item,i){max+=item.k.length;oeS+=oeGot[i]?oeGot[i].filter(Boolean).length:0;});
+    var total=mcqS+tfS+oeS;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+mcqS+'/'+MCQ.length+'</span><span>True/false: '+tfS+'/'+TF.length+'</span><span>Written: '+oeS+'/'+(max-MCQ.length-TF.length)+'</span>';
+    var pct=total/max,msg;
+    if(pct>=0.9)msg='Excellent! You know this chapter well.';
+    else if(pct>=0.7)msg='Good work. Read the explanations for the ones you missed.';
+    else if(pct>=0.5)msg='Getting there. Go back over the sections above, then try again.';
+    else msg='Read the learning points again, then have another go.';
+    document.getElementById('scoremsg').textContent=msg;
+    try{localStorage.setItem('p4-human-best',String(Math.max(total,+(localStorage.getItem('p4-human-best')||0))));localStorage.setItem('p4-human-max',String(max));}catch(e){}
+  }
+
+  function check(){
+    var blanks=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFeedback(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      card.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      var labels=card.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');
+      var ok=c&&+c.value===item.a;
+      if(c&&!ok)labels[+c.value].classList.add('is-picked-wrong');
+      setState(card,ok?1:0,1);
+      var fb=el('div','feedback');
+      fb.appendChild(el('span','verdict',ok?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('p',null,item.e));
+      card.appendChild(fb);
+    });
+    var tfOk=0;
+    TF.forEach(function(item,i){
+      var row=document.getElementById('tfrow'+i);row.classList.remove('is-right','is-wrong');
+      var c=document.querySelector('input[name="tf'+i+'"]:checked');if(!c)blanks++;
+      var ok=c&&(c.value==='1')===item.a;if(ok)tfOk++;
+      row.classList.add(ok?'is-right':'is-wrong');
+    });
+    var tfCard=document.getElementById('tfcard');clearFeedback(tfCard);setState(tfCard,tfOk,TF.length);
+    var fb=el('div','feedback');fb.appendChild(el('span','verdict',tfOk+' of '+TF.length+' correct'));
+    var ul=el('ul');TF.forEach(function(item){ul.appendChild(el('li',null,item.e));});fb.appendChild(ul);tfCard.appendChild(fb);
+
+    OE.forEach(function(item,i){
+      var card=document.getElementById('oe'+i);clearFeedback(card);
+      var txt=(document.getElementById('oeans'+i).value||'').toLowerCase();
+      if(!txt.trim())blanks++;
+      oeGot[i]=item.k.map(function(g){return txt.trim()!==''&&g.all.every(function(r){return r.test(txt);});});
+      var fb=el('div','feedback');
+      var verdict=el('span','verdict');fb.appendChild(verdict);
+      fb.appendChild(el('p',null,'<b>Model answer:</b> '+item.model));
+      var kw=el('div','kw');
+      item.k.forEach(function(g,j){
+        var b=el('button',null,(oeGot[i][j]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+        b.addEventListener('click',function(){
+          oeGot[i][j]=!oeGot[i][j];
+          b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+          b.textContent=(oeGot[i][j]?'✓ ':'✗ ')+g.l;
+          paint();renderScore();
+        });
+        kw.appendChild(b);
+      });
+      fb.appendChild(el('p','hint','Keywords needed (1 mark each). Green means found in your answer. If you said the same idea in other words, tap it to give yourself the mark.'));
+      fb.appendChild(kw);
+      function paint(){
+        var got=oeGot[i].filter(Boolean).length;
+        card.classList.remove('right','wrong','partial');setState(card,got,item.k.length);
+        verdict.textContent=got+' of '+item.k.length+(item.k.length>1?' marks':' mark');
+      }
+      paint();
+      card.appendChild(fb);
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    renderScore();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+
+  function reset(){
+    document.querySelectorAll('#quiz input[type=radio]').forEach(function(r){r.checked=false;});
+    document.querySelectorAll('#quiz textarea').forEach(function(t){t.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFeedback);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .tfrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    oeGot=[];
+    document.getElementById('scorebox').hidden=true;
+    document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>

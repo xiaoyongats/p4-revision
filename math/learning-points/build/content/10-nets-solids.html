@@ -1,0 +1,124 @@
+<!--meta
+title: Nets and Solids Notes
+eyebrow: P4 Math · Geometry
+h1: Nets and Solids
+lead: Cubes, cuboids, prisms and pyramids, and how to tell whether a flat net folds into a solid. This is new in the 2025 exams.
+key: p4m-nets
+chips: solids=Solids|cube=Cube nets|prism=Prism nets|count=Faces edges vertices|traps=Watch out
+-->
+<!--body-->
+  <section id="solids">
+    <div class="sec-head"><span class="tag water">1</span><h2>The solids</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--water)">Cube</td><td>6 <b>equal square</b> faces</td></tr>
+      <tr><td style="--part:var(--water)">Cuboid</td><td>6 rectangular faces (opposite faces are the same)</td></tr>
+      <tr><td style="--part:var(--leaf)">Prism</td><td>2 <b>identical end faces</b> joined by rectangles. Triangular prism: 2 triangles + 3 rectangles. Same shape all the way along.</td></tr>
+      <tr><td style="--part:var(--food)">Pyramid</td><td>1 base + triangles that <b>meet at one point</b> (the apex). Square pyramid: 1 square + 4 triangles.</td></tr>
+      <tr><td style="--part:var(--muted)">Cone, cylinder</td><td>Have a curved surface. Not prisms or pyramids.</td></tr>
+    </table></div>
+    <div class="card"><p><b>Prism or pyramid?</b> Pointed top → pyramid. Same cross-section all along, two matching ends → prism.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-solids" data-sec="solids"> I got this</label>
+  </section>
+
+  <section id="cube">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Nets of a cube</h2></div>
+    <div class="card">
+      <p class="big">A cube net has <b>6 squares</b>. There are <b>11</b> different cube nets.</p>
+      <div class="grid2">
+        <div class="mini leaf"><h3>Signs it IS a net</h3><p>A row of 4 with <b>one square above and one below</b> (anywhere along the row) · staircase shapes · 3 + 3 rows shifted</p></div>
+        <div class="mini warn" style="background:var(--warn-soft)"><h3>Signs it is NOT</h3><p>A <b>2 × 2 block</b> · a row of <b>5 or 6</b> · two squares on the <b>same side</b> of a row of 4, so they overlap when folded</p></div>
+      </div>
+      <div data-chart="cubenets"></div>
+      <p class="hint">Test it: pick one square as the bottom and fold the others up in your head. Two faces landing on the same place → not a net.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-cube" data-sec="cube"> I got this</label>
+  </section>
+
+  <section id="prism">
+    <div class="sec-head"><span class="tag food">3</span><h2>Nets of a triangular prism</h2></div>
+    <div class="card">
+      <p><b>3 rectangles in a row</b> + <b>2 triangles</b>. The triangles must sit on the <b>long edges</b> of the strip (one above, one below) so they close the two open ends of the tube.</p>
+      <p>If both triangles are stuck on the <b>short ends</b> of the strip, they meet the edge that joins up to close the tube → <b>not a net</b>.</p>
+      <div data-chart="prismnets"></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-prism" data-sec="prism"> I got this</label>
+  </section>
+
+  <section id="count">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Faces, edges and vertices</h2></div>
+    <div class="tbl-wrap"><table class="pv">
+      <tr><th>Solid</th><th>Faces</th><th>Edges</th><th>Vertices (corners)</th></tr>
+      <tr><td>Cube / cuboid</td><td>6</td><td>12</td><td>8</td></tr>
+      <tr><td>Triangular prism</td><td>5</td><td>9</td><td>6</td></tr>
+      <tr><td>Square pyramid</td><td>5</td><td>8</td><td>5</td></tr>
+      <tr><td>Triangular pyramid</td><td>4</td><td>6</td><td>4</td></tr>
+    </table></div>
+    <div class="card"><p>A cube made from a net of 5 cm squares: area of the net = 6 × 25 = <b>150 cm²</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-count" data-sec="count"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Any 6 squares joined together make a cube net.</span></div><div class="row"><span class="ok">✓</span><span>No 2 × 2 block, no row longer than 4, no overlaps.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A square pyramid is a prism.</span></div><div class="row"><span class="ok">✓</span><span>Triangles meeting at a point → <b>pyramid</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Triangles on the short ends of a prism net.</span></div><div class="row"><span class="ok">✓</span><span>Triangles go on the <b>long edges</b>, one on each side.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Prism: 2 matching ends + rectangles. Pyramid: base + triangles to a point.</div>
+        <div>Cube net: 6 squares, no 2 × 2 block, row of at most 4.</div>
+        <div>Cube: 6 faces, 12 edges, 8 vertices.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  /* small net drawings: cells are [column,row] */
+  function net(cells,tri){
+    var s=20,maxc=0,maxr=0;cells.forEach(function(c){maxc=Math.max(maxc,c[0]);maxr=Math.max(maxr,c[1]);});
+    var w=(maxc+1)*s+4,h=(maxr+1)*s+4,out='<svg viewBox="0 0 '+w+' '+h+'" width="'+(w*1.6)+'" height="'+(h*1.6)+'" role="img" aria-label="net">';
+    cells.forEach(function(c){out+='<rect x="'+(c[0]*s+2)+'" y="'+(c[1]*s+2)+'" width="'+s+'" height="'+s+'" fill="var(--water-soft)" stroke="var(--water)" stroke-width="1.5"/>';});
+    (tri||[]).forEach(function(t){out+='<polygon points="'+t+'" fill="var(--food-soft)" stroke="var(--food)" stroke-width="1.5"/>';});
+    return out+'</svg>';
+  }
+  var NETS={
+    cross:net([[1,0],[0,1],[1,1],[2,1],[1,2],[1,3]]),
+    row4:net([[0,0],[0,1],[1,1],[2,1],[3,1],[3,2]]),
+    block:net([[0,0],[1,0],[0,1],[1,1],[2,1],[3,1]]),
+    stairs:net([[0,0],[1,0],[1,1],[2,1],[2,2],[3,2]]),
+    row5:net([[0,1],[1,1],[2,1],[3,1],[4,1],[2,0]])
+  };
+  /* prism nets: strip of 3 rectangles (each 20 wide, 30 tall) */
+  function prism(kind){
+    var r='',w=100,h=80;
+    for(var i=0;i<3;i++)r+='<rect x="'+(20+i*20)+'" y="25" width="20" height="30" fill="var(--water-soft)" stroke="var(--water)" stroke-width="1.5"/>';
+    var t=kind==='good'?['40,25 60,25 50,8','40,55 60,55 50,72']:['20,25 20,55 4,40','80,25 80,55 96,40'];
+    t.forEach(function(p){r+='<polygon points="'+p+'" fill="var(--food-soft)" stroke="var(--food)" stroke-width="1.5"/>';});
+    return '<svg viewBox="0 0 '+w+' '+h+'" width="'+(w*1.6)+'" height="'+(h*1.6)+'" role="img" aria-label="prism net">'+r+'</svg>';
+  }
+  function fill(id,html){document.querySelectorAll('[data-chart="'+id+'"]').forEach(function(d){d.innerHTML=html;});}
+  fill('cubenets','<div class="grid3"><div class="mini leaf"><h3>✓ cross</h3>'+NETS.cross+'</div><div class="mini leaf"><h3>✓ row of 4</h3>'+NETS.row4+'</div><div class="mini leaf"><h3>✓ staircase</h3>'+NETS.stairs+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ 2 × 2 block</h3>'+NETS.block+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ row of 5</h3>'+NETS.row5+'</div></div>');
+  fill('prismnets','<div class="grid2"><div class="mini leaf"><h3>✓ triangles on the long edges</h3>'+prism('good')+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ triangles on the short ends</h3>'+prism('bad')+'</div></div>');
+  var MCQ=[
+    {q:'Which of these is NOT a net of a cube?',o:[NETS.cross,NETS.row4,NETS.block,NETS.stairs],a:2,e:'It has a 2 × 2 block of squares. When folded, two faces would land on the same place.'},
+    {q:'How many faces does a triangular prism have?',o:['3','4','5','6'],a:2,e:'2 triangles + 3 rectangles = 5.'},
+    {q:'Which solid has exactly 4 faces, all triangles?',o:['triangular prism','square pyramid','triangular pyramid','cube'],a:2,e:'A triangular pyramid has a triangle base and 3 triangle sides.'},
+    {q:'Which of these is NOT a prism?',o:['cube','cuboid','triangular prism','square pyramid'],a:3,e:'A pyramid has triangles meeting at a point.'},
+    {q:'How many edges does a cube have?',o:['6','8','12','24'],a:2,e:'4 on top, 4 on the bottom, 4 upright.'},
+    {q:'Which is a net of a triangular prism?',o:[prism('good'),prism('bad')],a:0,e:'The triangles must be on the long edges of the strip, one on each side.'}
+  ];
+  var SA=[
+    {q:'How many faces does a square pyramid have?',a:['5'],e:'1 square base + 4 triangles.'},
+    {q:'How many vertices (corners) does a cuboid have?',a:['8'],e:'4 on top and 4 at the bottom.'},
+    {q:'How many edges does a triangular prism have?',a:['9'],e:'3 on each triangle (6) + 3 joining them.'},
+    {q:'How many different nets does a cube have?',a:['11'],e:'There are 11 different cube nets.'},
+    {q:'A row of 4 squares is part of a cube net. How many more squares are needed to complete the net?',a:['2'],e:'A cube has 6 faces. 6 − 4 = 2 (one above and one below the row).'}
+  ];
+  var PS=[
+    {q:'A cube is folded from a net made of squares with sides of 5 cm.',
+     parts:[{p:'(a) What is the total area of the net?',a:['150'],unit:'cm²',u:'cm2',m:2},{p:'(b) What is the total length of all the edges of the cube?',a:['60'],unit:'cm',m:2}],
+     sol:'<div class="ln">(a) 6 squares × (5 × 5) = 6 × 25 = <b class="f">150 cm²</b>.</div><div class="ln">(b) 12 edges × 5 cm = <b class="f">60 cm</b>.</div>'}
+  ];

@@ -1,0 +1,196 @@
+<!--meta
+title: Life Cycles Quick Notes
+eyebrow: P3 Review · Tested in P4 exams
+h1: Life Cycles
+lead: The key points about animal and plant life cycles, mosquitoes and germination.
+key: p3-lifecycles
+tf_intro: Is each statement about life cycles true or false?
+chips: four=4-stage|three=3-stage|mosquito=Mosquitoes|graphs=Day graphs|plants=Plant life cycle|traps=Watch out
+-->
+<!--body-->
+  <section id="four">
+    <div class="sec-head"><span class="tag food">1</span><h2>4-stage life cycle</h2></div>
+    <div class="card">
+      <div class="steps">
+        <span class="box" style="border-color:var(--food)">egg</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--food)">larva</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--food)">pupa</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--food)">adult</span>
+      </div>
+      <p><b>Examples:</b> butterfly, <b>mosquito</b>, <b>beetle</b>, housefly, mealworm.</p>
+      <ul>
+        <li>The larva <b>does not look like</b> the adult.</li>
+        <li>The larva <b>moults</b> (sheds its skin) to grow bigger.</li>
+        <li>The pupa does not eat.</li>
+        <li>Butterfly larva = <b>caterpillar</b>. It eats leaves, so it is a <b>pest</b> to farmers.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-four" data-sec="four"> I got this</label>
+  </section>
+
+  <section id="three">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>3-stage life cycles</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>With a nymph</h3>
+        <div class="steps"><span class="box">egg</span><span class="to">→</span><span class="box" style="border-color:var(--leaf)">nymph</span><span class="to">→</span><span class="box">adult</span></div>
+        <p><b>cockroach, grasshopper, dragonfly</b></p>
+        <ul>
+          <li>Nymph <b>looks like</b> the adult but has <b>no wings</b>.</li>
+          <li>Nymph <b>moults</b>. The adult does not.</li>
+          <li>Both have feelers.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Egg, young, adult</h3>
+        <div class="steps"><span class="box">egg</span><span class="to">→</span><span class="box" style="border-color:var(--leaf)">young</span><span class="to">→</span><span class="box">adult</span></div>
+        <p><b>chicken</b> (chick), <b>frog</b> (tadpole)</p>
+        <ul>
+          <li>A chick <b>looks like</b> the adult.</li>
+          <li>A tadpole <b>does not</b> look like the adult frog.</li>
+          <li>Frogs lay eggs <b>in water</b>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card"><p><b>Mammals</b> (cat, human) have <b>no egg stage</b>: the young are born alive.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-three" data-sec="three"> I got this</label>
+  </section>
+
+  <section id="mosquito">
+    <div class="sec-head"><span class="tag water">3</span><h2>Mosquitoes and dengue</h2></div>
+    <div class="grid2">
+      <div class="mini water"><h3>In water</h3><p><b>Egg, larva and pupa</b> all live in water. They breathe air at the surface through <b>breathing tubes</b>.</p></div>
+      <div class="mini sun"><h3>On land</h3><p>Only the <b>adult</b> lives on land and flies.</p></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--soil)">Oil on stagnant water</td><td>The oil <b>blocks the breathing tubes</b> of the larvae and pupae. They <b>cannot breathe and die</b> before becoming adults.</td></tr>
+        <tr><td style="--part:var(--water)">Remove stagnant water</td><td>Turn over pails, change vase water, clear gutters. Mosquitoes have <b>nowhere to lay eggs</b>.</td></tr>
+      </table>
+    </div>
+    <div class="card"><p>Warmer surroundings → <b>more mosquito eggs hatch</b> in a day.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-mosquito" data-sec="mosquito"> I got this</label>
+  </section>
+
+  <section id="graphs">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Reading "days in each stage" graphs</h2></div>
+    <div class="card">
+      <p><b>Add the days in order.</b> Example: egg 8 days, larva 12, pupa 6, adult 17.</p>
+      <div class="chart">
+        <svg viewBox="0 0 440 120" role="img" aria-labelledby="dayT">
+          <title id="dayT">A timeline: egg from day 1 to 8, larva from day 9 to 20, pupa from day 21 to 26, adult from day 27. Day 17 falls in the larva stage.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)">
+            <rect x="20" y="30" width="80" height="34" fill="var(--sun-soft)" stroke="var(--sun)"/>
+            <rect x="100" y="30" width="120" height="34" fill="var(--leaf-soft)" stroke="var(--leaf)"/>
+            <rect x="220" y="30" width="60" height="34" fill="var(--water-soft)" stroke="var(--water)"/>
+            <rect x="280" y="30" width="140" height="34" fill="var(--food-soft)" stroke="var(--food)"/>
+            <text x="60" y="52" text-anchor="middle">egg</text><text x="160" y="52" text-anchor="middle">larva</text>
+            <text x="250" y="52" text-anchor="middle">pupa</text><text x="350" y="52" text-anchor="middle">adult</text>
+            <text x="20" y="84">day 1</text><text x="88" y="84">8</text><text x="208" y="84">20</text><text x="268" y="84">26</text>
+            <line x1="190" y1="18" x2="190" y2="70" stroke="var(--warn)" stroke-width="3"/>
+            <text x="170" y="14" fill="var(--warn)">day 17</text>
+          </g>
+        </svg>
+      </div>
+      <ul>
+        <li>Day 17 is in the <b>larva</b> stage (days 9–20).</li>
+        <li>Hatching → adult = larva + pupa = 12 + 6 = <b>18 days</b>.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-graphs" data-sec="graphs"> I got this</label>
+  </section>
+
+  <section id="plants">
+    <div class="sec-head"><span class="tag leaf">5</span><h2>Plant life cycle and germination</h2></div>
+    <div class="card">
+      <div class="steps">
+        <span class="box">seed</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--leaf)">germinating seed</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--leaf)">seedling</span><span class="to">→</span>
+        <span class="box">young plant</span><span class="to">→</span>
+        <span class="box">adult plant (flowers, fruits, seeds)</span>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="mini leaf"><h3>Germination needs</h3><p><b class="w">water</b>, <b>air</b>, <b class="f">warmth</b>.<br>It does <b>NOT</b> need light or soil.</p></div>
+      <div class="mini soil"><h3>Root first</h3><p>The <b>root</b> grows out first, then the shoot.</p></div>
+      <div class="mini food"><h3>Seed leaves</h3><p>Store <b>food</b> for the young plant. They <b>shrink</b> as the food is used up.</p></div>
+      <div class="mini sun"><h3>After that</h3><p>The seedling needs <b>light</b> to make food. In the dark it grows <b>tall, thin, weak and yellow</b>.</p></div>
+    </div>
+    <div class="card">
+      <h3>Germination table: what is needed?</h3>
+      <div class="tbl-wrap">
+        <table class="jobs">
+          <tr><td style="--part:var(--warn)">A: light, water</td><td>did <b>not</b> germinate (no air)</td></tr>
+          <tr><td style="--part:var(--leaf)">B: water, air</td><td>germinated (no light, still fine)</td></tr>
+          <tr><td style="--part:var(--leaf)">C: light, water, air</td><td>germinated</td></tr>
+        </table>
+      </div>
+      <p>Conclusion: <b>water and air are needed</b>. Light is not.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-plants" data-sec="plants"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A grasshopper has a pupa stage.</span></div><div class="row"><span class="ok">✓</span><span>It has a <b>nymph</b> stage (3 stages).</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The mosquito pupa lives on land.</span></div><div class="row"><span class="ok">✓</span><span>Egg, larva and pupa are all <b>in water</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Seeds need light to germinate.</span></div><div class="row"><span class="ok">✓</span><span>Water, air and warmth. <b>No light needed.</b></span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Reading a day graph bar by bar without adding.</span></div><div class="row"><span class="ok">✓</span><span><b>Add the days in order</b> to find the stage.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>4 stages: egg → larva → pupa → adult (butterfly, mosquito, beetle)</div>
+        <div>3 stages: egg → nymph → adult (cockroach, grasshopper) or egg → young → adult (chicken, frog)</div>
+        <div>Germination needs water, air, warmth. Root first. Seed leaves shrink.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'Which animal has a 4-stage life cycle?',o:['beetle','chicken','grasshopper','frog'],a:0,e:'A beetle goes egg → larva → pupa → adult.'},
+    {q:'Which animal has a pupa stage?',o:['frog','chicken','mosquito','grasshopper'],a:2,e:'The mosquito has a 4-stage life cycle with a pupa.'},
+    {q:'Which statements about a cockroach nymph and adult are correct?<br>A: Both have feelers.<br>B: The nymph does not look like the adult.<br>C: The nymph has no wings; the adult has wings.<br>D: The nymph moults; the adult does not.',o:['A and B only','C and D only','A, B and D only','A, C and D only'],a:3,
+     e:'The nymph looks like the adult, so B is wrong.'},
+    {q:'Chicken: egg → young → adult. Frog: egg → young → adult. Which are similarities?<br>A: Both have 3 stages. B: Both have an egg stage. C: The young of both look like the adult. D: The young of both live on land and in water.',o:['A only','A and B only','C and D only','B, C and D only'],a:1,
+     e:'A tadpole does not look like the adult frog, and a chick does not live in water.'},
+    {q:'Egg 8 days, larva 12 days, pupa 6 days, adult 17 days. Which stage is the animal in on day 17 after the egg is laid?',o:['egg','larva','pupa','adult'],a:1,e:'Egg is days 1–8, larva is days 9–20. Day 17 is in the larva stage.'},
+    {q:'Pupa 6 days, larva 9 days, egg 6 days, adult 10 days. Which conclusion is correct?',o:['The pupa moults several times.','The insect is a pest for only 6 days.','The egg, larva and pupa live in water.','It takes 15 days to become an adult after hatching.'],a:3,
+     e:'After hatching: larva 9 + pupa 6 = 15 days. The others cannot be told from the graph.'},
+    {q:'Seeds germinated with water + air, and with light + water + air, but not with light + water only. What can be concluded?',o:['Light is needed.','Only air is needed.','Water and air are needed.','Warmth is not needed.'],a:2,
+     e:'The set-up without air did not germinate. The set-up without light did, so light is not needed.'},
+    {q:'Bean seeds on wet cotton: plate X by the window, plate Y in a black box by the window. What is the aim?',o:['If light is needed for seeds to grow','If water is needed to make food','If light affects the height of the seedlings','If water affects the height of the seedlings'],a:2,
+     e:'Only light is different between the plates. The seedlings\' height is compared.'},
+    {q:'Which animal has NO egg stage?',o:['butterfly','chicken','frog','cat'],a:3,e:'Mammals such as cats give birth to young alive.'}
+  ];
+  var TF=[
+    {s:'A caterpillar is the larva of a butterfly.',a:true,e:'True.'},
+    {s:'A tadpole looks like the adult frog.',a:false,e:'False.'},
+    {s:'The root grows out of a seed before the shoot.',a:true,e:'True.'},
+    {s:'Adult insects moult.',a:false,e:'False. Only the young (larva or nymph) moult.'},
+    {s:'Seed leaves store food for the young plant.',a:true,e:'True. They shrink as the food is used up.'}
+  ];
+  var OE=[
+    {q:'Fill in the mosquito life cycle starting from adult.',
+     model:'adult → egg → larva → pupa → adult',
+     k:[{l:'egg → larva → pupa',all:[/egg/,/larva/,/pupa/]}]},
+    {q:'Explain how spraying oil on stagnant water stops mosquitoes from breeding.',
+     model:'The oil blocks the breathing tubes of the larvae and pupae, so they cannot breathe and die before becoming adults.',
+     k:[{l:'blocks the breathing tubes',all:[/block|cover|clog/,/breath|tube|air/]},{l:'larvae cannot breathe and die',all:[/die|dead|cannot breathe|can't breathe|unable to breathe|suffocat/]}]},
+    {q:'30 mosquito eggs were kept at 22, 25 and 28 °C. 18, 23 and 28 eggs hatched in a day. How does temperature affect hatching?',
+     model:'The higher the temperature, the more eggs hatched in a day.',
+     k:[{l:'higher temperature → more eggs hatch',all:[/higher|warmer|hotter|increase/,/more|increase/]}]},
+    {q:'Insect W: egg → nymph → adult (150 days). Insect Z: egg → larva → pupa → adult (32 days). Is "more stages means a longer time to become an adult" correct? Explain.',
+     model:'No. Z has more stages but takes a shorter time (32 days) than W (150 days).',
+     k:[{l:'no',all:[/\bno\b|not correct|incorrect|wrong|false/]},{l:'Z has more stages but is faster',all:[/\bz\b|32|shorter|less|faster/]}]},
+    {q:'As a seedling grows, its seed leaves shrink. Explain.',
+     model:'The food stored in the seed leaves is used up by the seedling to grow.',
+     k:[{l:'stored food used up',all:[/food/,/\bus(e|ed|ing)\b|finish|run(s)? out/]}]},
+    {q:'Give one way to stop mosquitoes breeding at home, and explain how it works.',
+     model:'Remove stagnant water (turn over pails, change vase water), so mosquitoes have no place to lay their eggs.',
+     k:[{l:'remove / change stagnant water',all:[/water/,/remove|change|empty|turn over|throw|clear|pour/]},{l:'no place to lay eggs',all:[/egg|breed|lay/]}]}
+  ];

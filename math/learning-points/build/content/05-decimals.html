@@ -1,0 +1,152 @@
+<!--meta
+title: Decimals Quick Notes
+eyebrow: P4 Math · Decimals
+h1: Decimals
+lead: Tenths, hundredths and thousandths; changing fractions to decimals; comparing, rounding; and the four operations with decimals and money.
+key: p4m-decimals
+chips: place=Place value|convert=Fractions ↔ decimals|order=Comparing|round=Rounding|ops=Calculating|money=Money problems|traps=Watch out
+-->
+<!--body-->
+  <section id="place">
+    <div class="sec-head"><span class="tag water">1</span><h2>Place value</h2></div>
+    <div class="card">
+      <div class="tbl-wrap"><table class="pv">
+        <tr><th>Ones</th><th>.</th><th>Tenths</th><th>Hundredths</th><th>Thousandths</th></tr>
+        <tr><td>2</td><td>.</td><td><b class="f">5</b></td><td>3</td><td>8</td></tr>
+      </table></div>
+      <ul>
+        <li>In 2.538, the 5 stands for <b>5 tenths</b> (0.5), the 3 for 3 hundredths (0.03), the 8 for 8 thousandths (0.008).</li>
+        <li>39 thousandths = <b class="f">0.039</b> · 8 thousandths = <b class="f">0.008</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Reading a number line</h3>
+      <div class="chart">
+        <svg viewBox="0 0 420 70" role="img" aria-labelledby="dnT">
+          <title id="dnT">Number line from 0.4 to 0.5 with 10 small marks. Point A is on the 8th mark, 0.48.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)" text-anchor="middle">
+            <line x1="20" y1="30" x2="400" y2="30" stroke="var(--muted)" stroke-width="2"/>
+            <g stroke="var(--fg)" stroke-width="1.5">
+              <line x1="40" y1="18" x2="40" y2="42"/><line x1="74" y1="24" x2="74" y2="36"/><line x1="108" y1="24" x2="108" y2="36"/><line x1="142" y1="24" x2="142" y2="36"/><line x1="176" y1="24" x2="176" y2="36"/><line x1="210" y1="20" x2="210" y2="40"/><line x1="244" y1="24" x2="244" y2="36"/><line x1="278" y1="24" x2="278" y2="36"/><line x1="312" y1="24" x2="312" y2="36"/><line x1="346" y1="24" x2="346" y2="36"/><line x1="380" y1="18" x2="380" y2="42"/>
+            </g>
+            <text x="40" y="62">0.4</text><text x="380" y="62">0.5</text>
+            <circle cx="312" cy="30" r="6" fill="var(--food)"/><text x="312" y="12" fill="var(--food)">A</text>
+          </g>
+        </svg>
+      </div>
+      <p>0.4 to 0.5 has 10 small gaps → each is <b>0.01</b>. A is 8 gaps after 0.4 → <b class="f">0.48</b>.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-place" data-sec="place"> I got this</label>
+  </section>
+
+  <section id="convert">
+    <div class="sec-head"><span class="tag water">2</span><h2>Fractions ↔ decimals</h2></div>
+    <div class="card">
+      <p class="big">Make the bottom <b>10, 100 or 1000</b>.</p>
+      <div class="tbl-wrap"><table class="jobs">
+        <tr><td style="--part:var(--water)">[[28/100]]</td><td>0.28</td></tr>
+        <tr><td style="--part:var(--water)">[[3/4]]</td><td>[[75/100]] = 0.75</td></tr>
+        <tr><td style="--part:var(--water)">[[6 7/20]]</td><td>[[7/20]] = [[35/100]] → 6.35</td></tr>
+        <tr><td style="--part:var(--water)">[[2/5]]</td><td>[[4/10]] = 0.4</td></tr>
+        <tr><td style="--part:var(--water)">[[1/8]]</td><td>[[125/1000]] = 0.125</td></tr>
+      </table></div>
+      <p>Must-know: [[1/2]] = 0.5 · [[1/4]] = 0.25 · [[3/4]] = 0.75 · [[1/5]] = 0.2</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-convert" data-sec="convert"> I got this</label>
+  </section>
+
+  <section id="order">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Comparing and ordering</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Line up the decimal points</span><span class="to">→</span><span class="box">Fill empty places with 0</span><span class="to">→</span><span class="box">Compare from the left</span></div>
+      <p>0.607, 0.706, 0.067 → tenths digits 6, 7, 0 → smallest to greatest: <b class="f">0.067, 0.607, 0.706</b>.</p>
+      <p>0.5 vs 0.45 → 0.50 vs 0.45 → <b>0.5 is bigger</b> (more digits does not mean bigger).</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-order" data-sec="order"> I got this</label>
+  </section>
+
+  <section id="round">
+    <div class="sec-head"><span class="tag food">4</span><h2>Rounding</h2></div>
+    <div class="card">
+      <p>Same rule as whole numbers: look at the digit on the <b>right</b>. 7.46 → 1 decimal place → <b>7.5</b>. 3.149 → 2 decimal places → <b>3.15</b>.</p>
+      <div class="ex"><span class="exq">A number has 2 decimal places. It is 4.0 when rounded to the nearest tenth. What is the greatest possible number?</span>
+        <div class="stp"><b>range</b><span>3.95 to 4.04 round to 4.0</span></div>
+        <span class="ans">4.04</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-round" data-sec="round"> I got this</label>
+  </section>
+
+  <section id="ops">
+    <div class="sec-head"><span class="tag sun">5</span><h2>Calculating with decimals</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">0.4 + 81.23</span><div class="stp"><b>line up</b><span>81.23 + 0.40</span></div><span class="ans">81.63</span></div>
+      <div class="ex"><span class="exq">6.3 − 0.81</span><div class="stp"><b>fill zeros</b><span>6.30 − 0.81</span></div><span class="ans">5.49</span></div>
+      <div class="ex"><span class="exq">10.76 × 8</span><div class="stp"><b>ignore the point</b><span>1076 × 8 = 8608</span><b>put it back</b><span>2 decimal places</span></div><span class="ans">86.08</span></div>
+      <div class="ex"><span class="exq">8.15 ÷ 5</span><div class="stp"><b>divide</b><span>keep the point in line</span></div><span class="ans">1.63</span></div>
+    </div>
+    <div class="card"><p><b>Estimate to check:</b> 10.76 × 8 ≈ 11 × 8 = 88. So 86.08 makes sense, 8.608 does not.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-ops" data-sec="ops"> I got this</label>
+  </section>
+
+  <section id="money">
+    <div class="sec-head"><span class="tag food">6</span><h2>Money word problems</h2></div>
+    <div class="ex"><span class="exq">Mrs Toh had $33.60. After paying $7.80 for chocolate chip cookies, she had just enough to buy 4 packets of butter cookies. Cost of 1 packet?</span>
+      <div class="bm"><div class="bmrow"><div class="seg" style="width:56px">BC</div><div class="seg" style="width:56px">BC</div><div class="seg" style="width:56px">BC</div><div class="seg" style="width:56px">BC</div><div class="seg o" style="width:90px">$7.80</div><span class="tot">$33.60</span></div></div>
+      <div class="stp"><b>4 units</b><span>$33.60 − $7.80 = $25.80</span><b>1 unit</b><span>$25.80 ÷ 4</span></div>
+      <span class="ans">$6.45</span></div>
+    <div class="card"><p>Write money with <b>2 decimal places</b>: $7.4 → <b>$7.40</b>. $1.85 × 4 = $7.40.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-money" data-sec="money"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">7</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>39 thousandths = 0.39</span></div><div class="row"><span class="ok">✓</span><span>Thousandths = 3 decimal places: <b>0.039</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>0.45 &gt; 0.5 because 45 &gt; 5</span></div><div class="row"><span class="ok">✓</span><span>0.5 = 0.50 &gt; 0.45.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>6.3 − 0.81 = 6.51 (not lining up)</span></div><div class="row"><span class="ok">✓</span><span>6.30 − 0.81 = <b>5.49</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>[[7/20]] = 0.7</span></div><div class="row"><span class="ok">✓</span><span>[[7/20]] = [[35/100]] = <b>0.35</b>.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Tenths, hundredths, thousandths = 1, 2, 3 decimal places.</div>
+        <div>Fraction → decimal: make the bottom 10, 100 or 1000.</div>
+        <div>Add/subtract: line up the points. Multiply: count decimal places. Always estimate.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'In which number does the digit 5 stand for 5 tenths?',o:['27.53','35.84','49.25','56.82'],a:0,e:'In 27.53 the 5 is right after the decimal point → tenths.'},
+    {q:'Express [[6 7/20]] as a decimal.',o:['6.07','6.35','6.70','6.72'],a:1,e:'[[7/20]] = [[35/100]] = 0.35.'},
+    {q:'Express [[28/100]] as a decimal.',o:['0.208','0.028','0.28','2.08'],a:2,e:'28 hundredths = 0.28.'},
+    {q:'Find the sum of 0.4 and 81.23.',o:['85.23','81.63','81.27','80.83'],a:1,e:'81.23 + 0.40 = 81.63.'},
+    {q:'10.76 × 8 = ___',o:['18.76','80.76','86.08','94.08'],a:2,e:'1076 × 8 = 8608 → 86.08.'},
+    {q:'Which shows 0.607, 0.706, 0.067 from smallest to greatest?',o:['0.607, 0.067, 0.706','0.067, 0.607, 0.706','0.706, 0.607, 0.067','0.067, 0.706, 0.607'],a:1,e:'Compare tenths: 0, 6, 7.'},
+    {q:'Round 7.46 to 1 decimal place.',o:['7.4','7.5','7.0','8.0'],a:1,e:'The hundredths digit is 6 → round up.'}
+  ];
+  var SA=[
+    {q:'Write 39 thousandths as a decimal.',a:['0.039'],e:'Thousandths have 3 decimal places.'},
+    {q:'Express [[3/4]] as a decimal.',a:['0.75'],e:'[[3/4]] = [[75/100]].'},
+    {q:'Find the difference between 6.3 and 0.81.',a:['5.49'],e:'6.30 − 0.81 = 5.49.'},
+    {q:'Find the value of 6.37 × 8.',a:['50.96'],e:'637 × 8 = 5096 → 50.96.'},
+    {q:'Asher gave $7 equally to 4 children. How much did each child get?',a:['1.75'],pre:'$',e:'$7 ÷ 4 = $1.75.'},
+    {q:'A number has 2 decimal places. It is 4.0 when rounded to the nearest tenth. What is the greatest possible value?',a:['4.04'],e:'3.95 to 4.04 round to 4.0.'},
+    {q:'A number line from 0.4 to 0.5 is split into 10 equal parts. Point A is on the 8th mark after 0.4. What decimal is A?',a:['0.48'],e:'Each mark is 0.01. 0.4 + 0.08 = 0.48.'}
+  ];
+  var PS=[
+    {q:'A tank and 2 buckets contain 8.15 ℓ of water altogether. The tank holds 3 times as much water as each bucket.',
+     parts:[{p:'(a) How much water is in each bucket?',a:['1.63'],unit:'ℓ',m:2},{p:'(b) How much water is in the tank?',a:['4.89'],unit:'ℓ',m:1}],
+     sol:'<div class="ln">Tank 3 units + 2 buckets 2 units = 5 units = 8.15 ℓ.</div><div class="ln">(a) 1 unit = 8.15 ÷ 5 = <b class="f">1.63 ℓ</b>. (b) 3 × 1.63 = <b class="f">4.89 ℓ</b>.</div>'},
+    {q:'Joseph is 3 times as heavy as Alice. Alice weighs 35.5 kg. What is their total mass?',
+     parts:[{a:['142'],unit:'kg',m:2}],
+     sol:'<div class="ln">Total = 4 units = 4 × 35.5 = <b class="f">142 kg</b>.</div>'},
+    {q:'Aini had 6 ten-dollar notes and 3 five-dollar notes. She spent $18.65 on food and $6.35 on a notebook and saved the rest.',
+     parts:[{p:'(a) How much money did she save?',a:['50'],pre:'$',m:2},{p:'(b) What fraction of her money did she save? Give your answer in the simplest form.',a:['2/3'],exact:true,m:2}],
+     sol:'<div class="ln">She had 6 × $10 + 3 × $5 = $75. Spent $18.65 + $6.35 = $25.</div><div class="ln">(a) $75 − $25 = <b class="f">$50</b>. (b) [[50/75]] = <b class="f">[[2/3]]</b>.</div>'},
+    {q:'Mrs Toh had $33.60. After paying $7.80 for a packet of chocolate chip cookies, she had just enough money to buy 4 packets of butter cookies. How much did 1 packet of butter cookies cost?',
+     parts:[{a:['6.45'],pre:'$',m:3}],
+     sol:'<div class="ln">$33.60 − $7.80 = $25.80 for 4 packets.</div><div class="ln">$25.80 ÷ 4 = <b class="f">$6.45</b>.</div>'}
+  ];

@@ -1,0 +1,580 @@
+<title>Light Quick Notes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = water/cold, orange = food/heat, green = living/correct, brown = soil/solid, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">P4 Science · Chapter 4</span>
+    <h1>Light</h1>
+    <p class="lead">The key points about light sources, how we see, and how much light passes through things. <span class="f">Yellow-orange arrows</span> show where light travels.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#sources">Sources</a>
+      <a href="#seeing">How we see</a>
+      <a href="#straight">Straight lines</a>
+      <a href="#reflect">Reflection</a>
+      <a href="#through">Light through things</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="sources">
+    <div class="sec-head"><span class="tag sun">1</span><h2>Sources of light</h2></div>
+    <div class="card">
+      <p class="big">A <b>source of light</b> gives off its <b>own</b> light. Light is a form of <b>energy</b>; it is not matter.</p>
+    </div>
+    <div class="sort">
+      <div class="mini sun"><h3>Sources ✓</h3><ul><li>Sun and <b>stars</b></li><li>fire, <b>candle flame</b></li><li>lit lamp, torch, bulb</li><li>firefly, lightning</li></ul></div>
+      <div class="mini water"><h3>NOT sources ✗</h3><ul><li>the <b>Moon</b> (reflects the Sun's light)</li><li><b>mirror</b></li><li><b>eyes</b></li><li>shiny things, reflective strips</li></ul></div>
+    </div>
+    <p class="hint">A torch or lamp is only a source when it is switched on.</p>
+    <label class="gotit"><input type="checkbox" id="done-sources" data-sec="sources"> I got this</label>
+  </section>
+
+  <section id="seeing">
+    <div class="sec-head"><span class="tag food">2</span><h2>How we see things</h2></div>
+    <figure>
+      <svg viewBox="0 0 440 200" role="img" aria-labelledby="seeT">
+        <title id="seeT">Light travels from a lamp to a book, is reflected off the book, and enters the eye.</title>
+        <defs><marker id="al" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--food)"/></marker></defs>
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="14" fill="var(--fg)">
+          <path d="M300 18 h50 l14 26 h-78 z" fill="var(--sun)"/>
+          <circle cx="325" cy="50" r="8" fill="var(--sun-soft)" stroke="var(--sun)" stroke-width="2"/>
+          <text x="372" y="36">lamp</text>
+          <rect x="250" y="150" width="90" height="14" rx="3" fill="var(--water)"/>
+          <text x="262" y="186">book</text>
+          <line x1="320" y1="62" x2="300" y2="142" stroke="var(--food)" stroke-width="4" marker-end="url(#al)"/>
+          <line x1="292" y1="146" x2="98" y2="96" stroke="var(--food)" stroke-width="4" marker-end="url(#al)"/>
+          <ellipse cx="70" cy="90" rx="26" ry="16" fill="var(--card)" stroke="var(--fg)" stroke-width="3"/>
+          <circle cx="78" cy="90" r="8" fill="var(--fg)"/>
+          <text x="46" y="128">eye</text>
+          <text x="330" y="105" fill="var(--food)" font-size="13">1. light from source</text>
+          <text x="140" y="148" fill="var(--food)" font-size="13">2. reflected into the eye</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="card">
+      <ul>
+        <li>We see an object when <b>light from a source</b> falls on it, is <b>reflected</b> off it, and <b>enters our eyes</b>.</li>
+        <li>We see a light source when its light goes <b>straight into our eyes</b>.</li>
+        <li>Arrows always go <b>from the light source</b> and <b>into the eye</b>. Light never comes out of the eye.</li>
+        <li>In a <b>completely dark</b> room we see nothing, not even a mirror. There is no light to reflect.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-seeing" data-sec="seeing"> I got this</label>
+  </section>
+
+  <section id="straight">
+    <div class="sec-head"><span class="tag sun">3</span><h2>Light travels in straight lines</h2></div>
+    <div class="grid2">
+      <div class="mini leaf"><h3>Straight tube</h3><p>We <b>can</b> see a flame through it. Light goes straight through and enters the eye.</p></div>
+      <div class="mini food"><h3>Bent tube</h3><p>We <b>cannot</b> see the flame. Light cannot go round the bend.</p></div>
+      <div class="mini sun"><h3>Other proof</h3><p>Torch beams are straight. <b>Shadows</b> form because light cannot bend around objects.</p></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-straight" data-sec="straight"> I got this</label>
+  </section>
+
+  <section id="reflect">
+    <div class="sec-head"><span class="tag water">4</span><h2>Reflection</h2></div>
+    <div class="grid2">
+      <div class="mini sun"><h3>Reflect MORE light</h3><p><b>Smooth, shiny, light-coloured</b>: mirror, aluminium foil, white paper.</p></div>
+      <div class="mini water"><h3>Reflect LESS light</h3><p><b>Dark, dull, rough</b>: black cloth, tree bark.</p></div>
+    </div>
+    <div class="card">
+      <ul>
+        <li>Reflective strips on vests and helmets help drivers <b>see cyclists at night</b>. Choose the material that can be seen from the <b>furthest distance</b>.</li>
+        <li>To measure light accurately, use a <b>light sensor connected to a datalogger</b>, not your eyes.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-reflect" data-sec="reflect"> I got this</label>
+  </section>
+
+  <section id="through">
+    <div class="sec-head"><span class="tag leaf">5</span><h2>How much light passes through?</h2></div>
+    <div class="card">
+      <div class="bars">
+        <div class="barrow"><span>Transparent</span><div class="b" style="width:92%;background:var(--sun);color:#2a2205">most light</div></div>
+        <div class="barrow"><span>Translucent</span><div class="b" style="width:45%;background:var(--food)">some</div></div>
+        <div class="barrow"><span>Opaque</span><div class="b" style="width:4%;background:var(--muted)"></div></div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--sun)">Transparent</td><td><b>Most</b> light passes through. We can see clearly through it.<br><span class="hint">clear glass, clear plastic, clean water, air</span></td></tr>
+        <tr><td style="--part:var(--food)">Translucent</td><td><b>Some</b> light passes through. We cannot see clearly through it.<br><span class="hint">frosted glass, tissue paper, tracing paper, cooking oil</span></td></tr>
+        <tr><td style="--part:var(--muted)">Opaque</td><td><b>No</b> light passes through.<br><span class="hint">wood, metal, cardboard, rubber, brick</span></td></tr>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="mini sun"><h3>Uses</h3><p>Window: transparent. Bathroom window: <b>frosted glass</b> lets light in but gives privacy. Curtains: opaque.</p></div>
+      <div class="mini food"><h3>Sunglasses</h3><p>Choose a material that <b>blocks some light</b> (protects the eyes) but <b>lets some light through</b> (so you can see).</p></div>
+    </div>
+    <div class="card">
+      <h3>Light-sensor experiments</h3>
+      <ul>
+        <li><b>More light detected</b> = the material lets <b>more light through</b>.</li>
+        <li>Keep the same: <b>torch</b>, <b>distance</b>, <b>type of light sensor</b>, <b>size and thickness</b> of the object, <b>type of container</b>.</li>
+        <li>Never tick the <b>result</b> (amount of light measured) as a variable to keep the same.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-through" data-sec="through"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The Moon is a source of light.</span></div><div class="row"><span class="ok">✓</span><span>The Moon <b>reflects</b> light from the Sun.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Light goes from the eye to the object.</span></div><div class="row"><span class="ok">✓</span><span>Light goes <b>from the source → object → into the eye</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Translucent materials let all light through.</span></div><div class="row"><span class="ok">✓</span><span>Translucent lets <b>some</b> light through.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A mirror can be seen in a totally dark room.</span></div><div class="row"><span class="ok">✓</span><span>No light means nothing to reflect, so we see <b>nothing</b>.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Source gives off its own light. Moon and mirror do NOT.</div>
+        <div><span class="f">Light source</span> <span class="arrow">→</span> object <span class="arrow">→</span> reflected <span class="arrow">→</span> eye</div>
+        <div>Transparent: most · Translucent: some · Opaque: none</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Answer every question, then press <b>Check my answers</b>. For written answers, the marks come from the <b>keywords</b> you used, just like in the real exam.</p>
+
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: True or false?</h3><div id="tfq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Write your answer</h3><div id="oeq" class="qpart"></div></div>
+
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var KEY='p4-light-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ ---------- */
+(function(){
+  var MCQ=[
+    {q:'Which one is a source of light?',o:['a flower','a star in the sky','the Moon','an apple'],a:1,e:'Stars give off their own light. The Moon only reflects the Sun\'s light.'},
+    {q:'Which one is a source of light?',o:['a mirror','a candle flame','a pear','the Moon'],a:1,e:'A candle flame gives off its own light. A mirror only reflects light.'},
+    {q:'How does Sue see a book on a table under a lamp?',o:['Light goes from her eyes to the book.','Light from the lamp is reflected off the book into her eyes.','Light from the book goes to the lamp.','Light from the lamp goes straight into the book and stops.'],a:1,
+     e:'Light travels from the source (lamp) to the book, is reflected, and enters her eyes.'},
+    {q:'Anna can see a flame through a straight hollow tube. Which two statements explain this?<br>A: Light travels in a straight line.<br>B: Light from the flame enters her eyes.<br>C: Light is reflected away from her eyes.<br>D: Light from her eyes reflects off the flame.',o:['A and B','A and D','B and C','C and D'],a:0,
+     e:'Light travels in a straight line through the tube and enters her eyes. Light never comes out of the eyes.'},
+    {q:'A frosted glass jar is put over a lit torch. The room becomes dimmer. Why?',o:['Light is reflected into Ally\'s eyes.','No light is reflected from the torch.','The jar blocks all the light.','The jar blocks some of the light.'],a:3,
+     e:'Frosted glass is translucent. It lets some light through and blocks some.'},
+    {q:'Objects A, B and C are the same size and thickness but made of different materials. A light sensor reads A: 400, B: 150, C: 0. What was the aim?',o:['How the light detected affects the material','How the size affects the light passing through','How the material affects the amount of light passing through','How the thickness affects the light passing through'],a:2,
+     e:'Only the material was changed. The light passing through was measured.'},
+    {q:'In the last question, which object is opaque?',o:['A','B','C','None of them'],a:2,e:'C let no light through (0 units), so it is opaque.'},
+    {q:'Which material is best for the lens of sunglasses?',o:['lets all light through','lets some light through','lets no light through','reflects all light'],a:1,
+     e:'It must block some light to protect the eyes but let some through so you can still see.'},
+    {q:'Which is the best way to measure the amount of light reflected by a material?',o:['use our eyes','use a thermometer','use a light sensor and datalogger','use a measuring cylinder'],a:2,
+     e:'A light sensor with a datalogger measures light accurately.'}
+  ];
+  var TF=[
+    {s:'A mirror is a source of light.',a:false,e:'False. A mirror only reflects light.'},
+    {s:'Light travels in straight lines.',a:true,e:'True.'},
+    {s:'Clear glass is transparent.',a:true,e:'True. Most light passes through it.'},
+    {s:'We can see a white ball in a completely dark room.',a:false,e:'False. With no light, nothing is reflected into our eyes.'},
+    {s:'Light is a form of energy.',a:true,e:'True. It is not matter.'}
+  ];
+  var OE=[
+    {q:'Explain why the Moon is not a source of light.',
+     model:'It does not give off its own light. It reflects light from the Sun.',
+     k:[{l:'does not give off its own light',all:[/own|give|produce|make/]},{l:'reflects the Sun\'s light',all:[/reflect/,/sun/]}]},
+    {q:'Fill in and explain: how does Lucian see a ball under a lamp?',
+     model:'The light from the lamp is reflected by the ball and enters Lucian\'s eyes.',
+     k:[{l:'light from the lamp',all:[/light/,/lamp/]},{l:'reflected by the ball into the eye',all:[/reflect/,/eye/]}]},
+    {q:'Anna bends the hollow tube. Can she still see the flame? Explain.',
+     model:'No. Light travels in straight lines, so it cannot go round the bend to reach her eyes.',
+     k:[{l:'no, cannot see it',all:[/^\s*no\b|cannot|can't|unable|not be able|not see|won't/]},{l:'light travels in straight lines',all:[/straight/]}]},
+    {q:'Materials X, Y and Z were shone with a torch. X could be seen clearly from 300 cm, Y from 330 cm, Z from 360 cm. Which is best for a cyclist\'s helmet at night? Explain.',
+     model:'Z. It could be seen clearly from the furthest distance, so it reflects the most light.',
+     k:[{l:'Z',all:[/\bz\b/]},{l:'furthest distance / reflects the most light',all:[/furthest|farthest|further|most|best|360/]}]},
+    {q:'Water, milk and cooking oil were put in identical beakers over light sensors. The sensors read different amounts of light. State a property of light shown.',
+     model:'Light can pass through some materials. Different materials let different amounts of light pass through.',
+     k:[{l:'light passes through (different amounts)',all:[/light/,/pass|go(es)? through|through/]}]},
+    {q:'Why are bathroom windows often made of frosted glass?',
+     model:'Frosted glass is translucent. It lets some light in, but people outside cannot see clearly inside, which gives privacy.',
+     k:[{l:'lets some light in',all:[/light/,/some|let|pass|allow/]},{l:'cannot see clearly inside / privacy',all:[/privacy|private|cannot see|can't see|not see|clearly/]}]}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+  var mcqBox=document.getElementById('mcq'),tfBox=document.getElementById('tfq'),oeBox=document.getElementById('oeq');
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){
+      var lab=el('label','opt');
+      var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;
+      lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));
+      opts.appendChild(lab);
+    });
+    card.appendChild(opts);
+    mcqBox.appendChild(card);
+  });
+  var tfCard=el('div','q');tfCard.id='tfcard';
+  var tfHead=el('div','qhead');tfHead.appendChild(el('span','qnum','Q'+(n+1)));tfHead.appendChild(el('span','qmarks',TF.length+' marks'));
+  tfCard.appendChild(tfHead);
+  tfCard.appendChild(el('p','qtext','Is each statement about light true or false?'));
+  var tfList=el('div','tf');
+  TF.forEach(function(item,i){
+    var row=el('div','tfrow');row.id='tfrow'+i;
+    row.appendChild(el('span',null,item.s));
+    var b=el('div','tfbtns');
+    ['True','False'].forEach(function(lbl){
+      var lab=el('label');var inp=document.createElement('input');inp.type='radio';inp.name='tf'+i;inp.id='tf'+i+lbl;inp.value=lbl==='True'?'1':'0';
+      lab.appendChild(inp);lab.appendChild(document.createTextNode(lbl));b.appendChild(lab);
+    });
+    row.appendChild(b);tfList.appendChild(row);
+  });
+  tfCard.appendChild(tfList);tfBox.appendChild(tfCard);
+  n++;
+  OE.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='oe'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',item.k.length+(item.k.length>1?' marks':' mark')));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var ta=document.createElement('textarea');ta.id='oeans'+i;ta.placeholder='Write your answer here…';ta.setAttribute('aria-label','Answer for question '+n);
+    card.appendChild(ta);
+    oeBox.appendChild(card);
+  });
+
+  function clearFeedback(card){var f=card.querySelector('.feedback');if(f)f.remove();card.classList.remove('right','wrong','partial');}
+  function setState(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+
+  var oeGot=[];
+  function renderScore(){
+    var mcqS=0,tfS=0,oeS=0,max=MCQ.length+TF.length;
+    MCQ.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)mcqS++;});
+    TF.forEach(function(item,i){var c=document.querySelector('input[name="tf'+i+'"]:checked');if(c&&(c.value==='1')===item.a)tfS++;});
+    OE.forEach(function(item,i){max+=item.k.length;oeS+=oeGot[i]?oeGot[i].filter(Boolean).length:0;});
+    var total=mcqS+tfS+oeS;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+mcqS+'/'+MCQ.length+'</span><span>True/false: '+tfS+'/'+TF.length+'</span><span>Written: '+oeS+'/'+(max-MCQ.length-TF.length)+'</span>';
+    var pct=total/max,msg;
+    if(pct>=0.9)msg='Excellent! You know this chapter well.';
+    else if(pct>=0.7)msg='Good work. Read the explanations for the ones you missed.';
+    else if(pct>=0.5)msg='Getting there. Go back over the sections above, then try again.';
+    else msg='Read the learning points again, then have another go.';
+    document.getElementById('scoremsg').textContent=msg;
+    try{localStorage.setItem('p4-light-best',String(Math.max(total,+(localStorage.getItem('p4-light-best')||0))));localStorage.setItem('p4-light-max',String(max));}catch(e){}
+  }
+
+  function check(){
+    var blanks=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFeedback(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      card.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      var labels=card.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');
+      var ok=c&&+c.value===item.a;
+      if(c&&!ok)labels[+c.value].classList.add('is-picked-wrong');
+      setState(card,ok?1:0,1);
+      var fb=el('div','feedback');
+      fb.appendChild(el('span','verdict',ok?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('p',null,item.e));
+      card.appendChild(fb);
+    });
+    var tfOk=0;
+    TF.forEach(function(item,i){
+      var row=document.getElementById('tfrow'+i);row.classList.remove('is-right','is-wrong');
+      var c=document.querySelector('input[name="tf'+i+'"]:checked');if(!c)blanks++;
+      var ok=c&&(c.value==='1')===item.a;if(ok)tfOk++;
+      row.classList.add(ok?'is-right':'is-wrong');
+    });
+    var tfCard=document.getElementById('tfcard');clearFeedback(tfCard);setState(tfCard,tfOk,TF.length);
+    var fb=el('div','feedback');fb.appendChild(el('span','verdict',tfOk+' of '+TF.length+' correct'));
+    var ul=el('ul');TF.forEach(function(item){ul.appendChild(el('li',null,item.e));});fb.appendChild(ul);tfCard.appendChild(fb);
+
+    OE.forEach(function(item,i){
+      var card=document.getElementById('oe'+i);clearFeedback(card);
+      var txt=(document.getElementById('oeans'+i).value||'').toLowerCase();
+      if(!txt.trim())blanks++;
+      oeGot[i]=item.k.map(function(g){return txt.trim()!==''&&g.all.every(function(r){return r.test(txt);});});
+      var fb=el('div','feedback');
+      var verdict=el('span','verdict');fb.appendChild(verdict);
+      fb.appendChild(el('p',null,'<b>Model answer:</b> '+item.model));
+      var kw=el('div','kw');
+      item.k.forEach(function(g,j){
+        var b=el('button',null,(oeGot[i][j]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+        b.addEventListener('click',function(){
+          oeGot[i][j]=!oeGot[i][j];
+          b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+          b.textContent=(oeGot[i][j]?'✓ ':'✗ ')+g.l;
+          paint();renderScore();
+        });
+        kw.appendChild(b);
+      });
+      fb.appendChild(el('p','hint','Keywords needed (1 mark each). Green means found in your answer. If you said the same idea in other words, tap it to give yourself the mark.'));
+      fb.appendChild(kw);
+      function paint(){
+        var got=oeGot[i].filter(Boolean).length;
+        card.classList.remove('right','wrong','partial');setState(card,got,item.k.length);
+        verdict.textContent=got+' of '+item.k.length+(item.k.length>1?' marks':' mark');
+      }
+      paint();
+      card.appendChild(fb);
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    renderScore();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+
+  function reset(){
+    document.querySelectorAll('#quiz input[type=radio]').forEach(function(r){r.checked=false;});
+    document.querySelectorAll('#quiz textarea').forEach(function(t){t.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFeedback);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .tfrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    oeGot=[];
+    document.getElementById('scorebox').hidden=true;
+    document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>

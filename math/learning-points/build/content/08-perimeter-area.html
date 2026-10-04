@@ -1,0 +1,142 @@
+<!--meta
+title: Perimeter and Area Notes
+eyebrow: P4 Math · Measurement
+h1: Perimeter and Area
+lead: Perimeter and area of squares and rectangles, finding a missing side, composite figures, paths and borders, and bent wire.
+key: p4m-area
+chips: formulas=Formulas|missing=Missing side|composite=Composite figures|border=Paths & borders|wire=Wire & squares|traps=Watch out
+-->
+<!--body-->
+  <section id="formulas">
+    <div class="sec-head"><span class="tag water">1</span><h2>The formulas</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Perimeter = distance around</h3>
+        <p>Rectangle: <b>2 × (length + breadth)</b></p>
+        <p>Square: <b>4 × side</b></p>
+        <p class="hint">Units: cm, m</p>
+      </div>
+      <div class="card">
+        <h3>Area = space inside</h3>
+        <p>Rectangle: <b>length × breadth</b></p>
+        <p>Square: <b>side × side</b></p>
+        <p class="hint">Units: cm², m²</p>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Square numbers to know (for "area → side")</h3>
+      <div class="steps"><span class="box">36 → 6</span><span class="box">49 → 7</span><span class="box">64 → 8</span><span class="box">81 → 9</span><span class="box">100 → 10</span><span class="box">144 → 12</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-formulas" data-sec="formulas"> I got this</label>
+  </section>
+
+  <section id="missing">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Finding a missing side</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">Perimeter 42 m, breadth 6 m. Length?</span><div class="stp"><b>half the perimeter</b><span>42 ÷ 2 = 21 (= length + breadth)</span><b>length</b><span>21 − 6</span></div><span class="ans">15 m</span></div>
+      <div class="ex"><span class="exq">Square area 64 cm². Side?</span><div class="stp"><b>? × ? = 64</b><span>8 × 8</span></div><span class="ans">8 cm</span></div>
+      <div class="ex"><span class="exq">4 identical squares in a row, area 144 cm². Side?</span><div class="stp"><b>1 square</b><span>144 ÷ 4 = 36</span><b>side</b><span>6 × 6 = 36</span></div><span class="ans">6 cm</span></div>
+      <div class="ex"><span class="exq">Rectangle area 72 cm², length 9 cm. Breadth?</span><div class="stp"><b>72 ÷ 9</b><span></span></div><span class="ans">8 cm</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-missing" data-sec="missing"> I got this</label>
+  </section>
+
+  <section id="composite">
+    <div class="sec-head"><span class="tag food">3</span><h2>Composite figures</h2></div>
+    <div class="grid2">
+      <div class="mini water"><h3>Area: split or subtract</h3><p><b>Split</b> into rectangles and add, or take the <b>big rectangle minus the cut-outs</b>.</p></div>
+      <div class="mini food"><h3>Perimeter: go round once</h3><p>Steps that go in and out like stairs give the same perimeter as the big rectangle. A <b>notch</b> cut into a side adds its two inner sides.</p></div>
+    </div>
+    <div class="ex"><span class="exq">A 36 cm × 17 cm paper has a 6 cm square and a 3 cm square cut from two corners. Area left?</span>
+      <div class="stp"><b>big rectangle</b><span>36 × 17 = 612 cm²</span><b>cut-outs</b><span>6 × 6 + 3 × 3 = 45 cm²</span><b>left</b><span>612 − 45</span></div>
+      <span class="ans">567 cm²</span></div>
+    <div class="ex"><span class="exq">An 18 cm × 8 cm rectangle has a notch 4 cm deep cut into its bottom edge. Perimeter?</span>
+      <div class="chart">
+        <svg viewBox="0 0 300 140" role="img" aria-labelledby="notchT">
+          <title id="notchT">A rectangle 18 by 8 with a notch 4 deep cut into the bottom. The perimeter is the rectangle's perimeter plus the two 4 centimetre sides of the notch.</title>
+          <path d="M20 20 H280 V120 H230 V70 H190 V120 H20 Z" fill="var(--water-soft)" stroke="var(--water)" stroke-width="3"/>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)">
+            <text x="135" y="14">18 cm</text><text x="0" y="74" text-anchor="start">8</text>
+            <text x="236" y="98" fill="var(--food)">4</text><text x="172" y="98" fill="var(--food)">4</text>
+          </g>
+        </svg>
+      </div>
+      <div class="stp"><b>rectangle</b><span>18 + 18 + 8 + 8 = 52</span><b>notch sides</b><span>4 + 4 = 8</span></div>
+      <span class="ans">60 cm</span></div>
+    <label class="gotit"><input type="checkbox" id="done-composite" data-sec="composite"> I got this</label>
+  </section>
+
+  <section id="border">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Paths and borders</h2></div>
+    <div class="ex"><span class="exq">A plot of land is 75 m × 36 m. Inside it is a field with a 2 m path all round. Area of the path?</span>
+      <div class="chart">
+        <svg viewBox="0 0 320 150" role="img" aria-labelledby="pathT">
+          <title id="pathT">A big rectangle 75 by 36 with a smaller field inside. The path is 2 metres wide on every side, so the field is 71 by 32.</title>
+          <rect x="20" y="15" width="280" height="120" fill="var(--sun-soft)" stroke="var(--sun)" stroke-width="3"/>
+          <rect x="34" y="29" width="252" height="92" fill="var(--leaf-soft)" stroke="var(--leaf)" stroke-width="2"/>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)" text-anchor="middle">
+            <text x="160" y="80">field 71 m × 32 m</text><text x="160" y="148">75 m</text><text x="300" y="12">36 m</text>
+          </g>
+        </svg>
+      </div>
+      <div class="stp"><b>inner length</b><span>75 − 2 − 2 = 71 m</span><b>inner breadth</b><span>36 − 2 − 2 = 32 m</span><b>outer − inner</b><span>75 × 36 − 71 × 32 = 2700 − 2272</span></div>
+      <span class="ans">428 m²</span></div>
+    <div class="card"><p>The path is on <b>both</b> sides, so subtract the width <b>twice</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-border" data-sec="border"> I got this</label>
+  </section>
+
+  <section id="wire">
+    <div class="sec-head"><span class="tag water">5</span><h2>Bent wire and squares in a row</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">116 cm of wire is bent into a rectangle with breadth 12 cm. Length?</span><div class="stp"><b>perimeter</b><span>= 116</span><b>2 lengths</b><span>116 − 12 − 12 = 92</span></div><span class="ans">46 cm</span></div>
+      <div class="ex"><span class="exq">The same wire makes 4 squares of different sizes along a straight line PQ. Length of PQ?</span><div class="stp"><b>each square</b><span>perimeter = 4 × its side</span><b>all 4 squares</b><span>4 × (sum of sides) = 116</span><b>PQ</b><span>= sum of sides = 116 ÷ 4</span></div><span class="ans">29 cm</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-wire" data-sec="wire"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Perimeter 42 m, breadth 6 m → length = 42 − 6 = 36 m</span></div><div class="row"><span class="ok">✓</span><span>Halve first: 21 − 6 = <b>15 m</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Area of a square of side 8 = 32 cm² (8 × 4)</span></div><div class="row"><span class="ok">✓</span><span>8 × 8 = <b>64 cm²</b>. 8 × 4 is the perimeter.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Path 2 m wide: inner = 75 − 2</span></div><div class="row"><span class="ok">✓</span><span>Both sides: 75 − 4 = <b>71</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Writing cm for area</span></div><div class="row"><span class="ok">✓</span><span>Area is in <b>cm²</b> or <b>m²</b>.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Perimeter: add all sides. Area: length × breadth (cm²).</div>
+        <div>Missing side from perimeter: halve first, then subtract.</div>
+        <div>Composite: split or subtract. Paths: outer area − inner area.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'The perimeter of a rectangular garden is 42 m. Its breadth is 6 m. What is its length?',o:['7 m','15 m','18 m','30 m'],a:1,e:'42 ÷ 2 = 21. 21 − 6 = 15 m.'},
+    {q:'ABCD is a square with an area of 64 cm². How long is one side?',o:['32 cm','16 cm','8 cm','4 cm'],a:2,e:'8 × 8 = 64.'},
+    {q:'The breadth of a rectangular piece of paper is 8 cm. Its perimeter is 96 cm. What is its length?',o:['12 cm','40 cm','80 cm','88 cm'],a:1,e:'96 ÷ 2 = 48. 48 − 8 = 40 cm.'},
+    {q:'4 identical squares are placed side by side. The area of the figure is 144 cm². How long is one side of a square?',o:['6 cm','9 cm','24 cm','36 cm'],a:0,e:'144 ÷ 4 = 36 cm² each. 6 × 6 = 36.'},
+    {q:'Square A has an area of 81 cm². Rectangle C has a breadth equal to the side of square A, and its length is twice its breadth. What is the length of C?',o:['9 cm','18 cm','27 cm','36 cm'],a:1,e:'Side of A = 9 cm. Length of C = 2 × 9 = 18 cm.'},
+    {q:'A square has a perimeter of 36 cm. What is its area?',o:['9 cm²','36 cm²','81 cm²','144 cm²'],a:2,e:'Side = 36 ÷ 4 = 9 cm. Area = 9 × 9 = 81 cm².'}
+  ];
+  var SA=[
+    {q:'A rectangular paper measures 36 cm by 17 cm. A 6 cm square is cut from one corner and a 3 cm square from another corner. Find the area of the remaining paper.',a:['567'],unit:'cm²',u:'cm2',e:'612 − 36 − 9 = 567 cm².'},
+    {q:'A square has sides of 9 cm. What is its perimeter?',a:['36'],unit:'cm',e:'4 × 9 = 36 cm.'},
+    {q:'A rectangle has an area of 72 cm² and a length of 9 cm. What is its breadth?',a:['8'],unit:'cm',e:'72 ÷ 9 = 8 cm.'},
+    {q:'A 116 cm wire is bent into a rectangle with a breadth of 12 cm. What is its length?',a:['46'],unit:'cm',e:'(116 − 24) ÷ 2 = 46 cm.'},
+    {q:'An 18 cm by 8 cm rectangle has a notch 4 cm deep and 3 cm wide cut into its bottom edge (all corners are right angles). What is the perimeter of the new figure?',a:['60'],unit:'cm',e:'Rectangle perimeter 52 cm + the two 4 cm sides of the notch = 60 cm.'}
+  ];
+  var PS=[
+    {q:'A field is on a rectangular plot of land measuring 75 m by 36 m. There is a 2 m wide footpath all round the field, inside the plot. What is the area of the footpath?',
+     parts:[{a:['428'],unit:'m²',u:'m2',m:4}],
+     sol:'<div class="ln">Plot: 75 × 36 = 2700 m².</div><div class="ln">Field: (75 − 4) × (36 − 4) = 71 × 32 = 2272 m².</div><div class="ln">Footpath = 2700 − 2272 = <b class="f">428 m²</b>.</div>'},
+    {q:'4 identical rectangular carpets are laid on a floor measuring 16 m by 10 m, leaving a 2 m border all round. Two carpets stand upright at the left and right ends; the other two lie flat, one above the other, between them.',
+     parts:[{p:'(a) Find the area of the floor NOT covered by the carpets.',a:['88'],unit:'m²',u:'m2',m:3},{p:'(b) Find the breadth of one carpet.',a:['3'],unit:'m',m:1}],
+     sol:'<div class="ln">Inside the border: (16 − 4) × (10 − 4) = 12 × 6 = 72 m² is covered.</div><div class="ln">(a) 16 × 10 − 72 = 160 − 72 = <b class="f">88 m²</b>.</div><div class="ln">(b) An upright carpet is 6 m long, so each carpet is 6 m long. The two flat carpets stack to 6 m high → breadth = 6 ÷ 2 = <b class="f">3 m</b>. Check: 3 + 6 + 3 = 12 ✓.</div>'},
+    {q:'A piece of wire 116 cm long is bent into 4 squares of different sizes, placed side by side along a straight line PQ. What is the length of PQ?',
+     parts:[{a:['29'],unit:'cm',m:2}],
+     sol:'<div class="ln">All 4 perimeters together = 116 cm = 4 × (sum of the sides).</div><div class="ln">PQ = sum of the sides = 116 ÷ 4 = <b class="f">29 cm</b>.</div>'}
+  ];

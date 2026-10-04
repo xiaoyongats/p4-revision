@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Magnets Quick Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = water/cold, orange = food/heat, green = living/correct, brown = soil/solid, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+<style>
+.appnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0;font-weight:800;font-size:.95rem}
+.appnav a{color:var(--water);text-decoration:none}
+.appnav a:hover,.appnav a:focus-visible{text-decoration:underline}
+.appnav .subj{color:var(--muted);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:24px 8px}
+.pager a{display:grid;gap:2px;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
+.pager a:hover,.pager a:focus-visible{border-color:var(--water);outline:none}
+.pager a.next{text-align:right;grid-column:2}
+.pager small{color:var(--muted);font-weight:800;font-size:.8rem}
+.pager b{font-family:var(--font-display);font-size:1.05rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="appnav" aria-label="App"><a href="../index.html#science">← All topics</a><span class="subj">Science</span></nav>
+  <header class="top">
+    <span class="eyebrow">P3 Review · Tested in P4 exams</span>
+    <h1>Magnets</h1>
+    <p class="lead">The key points about magnets, poles, making magnets and electromagnets. This topic came up about 18 times in 3 exam papers. <span class="w">Blue is N</span> and <span class="f">orange is S</span>.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#materials">Magnetic or not</a>
+      <a href="#poles">Poles</a>
+      <a href="#test">Is it a magnet?</a>
+      <a href="#compass">Compass</a>
+      <a href="#making">Making magnets</a>
+      <a href="#electro">Electromagnets</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="materials">
+    <div class="sec-head"><span class="tag soil">1</span><h2>Magnetic or not?</h2></div>
+    <div class="sort">
+      <div class="mini leaf"><h3>Magnetic ✓</h3><ul><li><b>iron</b></li><li><b>steel</b></li><li><b>nickel</b></li><li><b>cobalt</b></li></ul></div>
+      <div class="mini food"><h3>Not magnetic ✗</h3><ul><li>wood, plastic, glass, rubber, paper</li><li><b>aluminium, copper</b>, brass, gold, silver</li></ul></div>
+    </div>
+    <div class="card"><p class="big"><b>Not all metals are magnetic.</b> Aluminium cans and copper wire are not attracted.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-materials" data-sec="materials"> I got this</label>
+  </section>
+
+  <section id="poles">
+    <div class="sec-head"><span class="tag water">2</span><h2>Poles: attract and repel</h2></div>
+    <figure>
+      <svg viewBox="0 0 440 150" role="img" aria-labelledby="poleT">
+        <title id="poleT">Two magnets with N facing S attract. Two magnets with N facing N repel. Two magnets with S facing S repel.</title>
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="14" text-anchor="middle">
+          <rect x="10" y="20" width="50" height="28" fill="var(--water)"/><rect x="60" y="20" width="50" height="28" fill="var(--food)"/>
+          <text x="35" y="39" fill="var(--bg)">N</text><text x="85" y="39" fill="var(--bg)">S</text>
+          <rect x="118" y="20" width="50" height="28" fill="var(--water)"/><rect x="168" y="20" width="50" height="28" fill="var(--food)"/>
+          <text x="143" y="39" fill="var(--bg)">N</text><text x="193" y="39" fill="var(--bg)">S</text>
+          <text x="114" y="72" fill="var(--leaf)">S + N → attract</text>
+          <rect x="250" y="20" width="50" height="28" fill="var(--food)"/><rect x="300" y="20" width="50" height="28" fill="var(--water)"/>
+          <text x="275" y="39" fill="var(--bg)">S</text><text x="325" y="39" fill="var(--bg)">N</text>
+          <rect x="370" y="20" width="50" height="28" fill="var(--water)"/>
+          <text x="395" y="39" fill="var(--bg)">N</text>
+          <text x="360" y="72" fill="var(--warn)">N + N → repel</text>
+          <text x="220" y="112" fill="var(--fg)">Unlike poles attract. Like poles repel.</text>
+          <text x="220" y="136" fill="var(--muted)" font-size="12">(N–S attract · N–N repel · S–S repel)</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="grid2">
+      <div class="mini sun"><h3>Strongest at the poles</h3><p>Most paper clips stick to the <b>two ends</b>.</p></div>
+      <div class="mini water"><h3>Points North–South</h3><p>A magnet hanging or floating freely stops with <b>N pointing north</b>.</p></div>
+      <div class="mini leaf"><h3>Works through things</h3><p>Magnetism acts <b>through</b> paper, plastic, glass and water, without touching.</p></div>
+      <div class="mini food"><h3>Floating magnets</h3><p>A ring magnet floats above another because <b>like poles face each other and repel</b>. A maglev train floats the same way.</p></div>
+    </div>
+    <div class="card">
+      <h3>Floating train bars (AB above CD)</h3>
+      <p>A must be the <b>same pole</b> as C, and B the same as D. N–S over N–S ✓. S–N over S–N ✓. N–S over S–N ✗ (they attract).</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-poles" data-sec="poles"> I got this</label>
+  </section>
+
+  <section id="test">
+    <div class="sec-head"><span class="tag warn">3</span><h2>Is it a magnet?</h2></div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--leaf)">Attracted</td><td>Could be a <b>magnetic material</b> OR a <b>magnet</b>. You cannot be sure.</td></tr>
+        <tr><td style="--part:var(--warn)">Repelled</td><td><b>Must be a magnet.</b> Repelling is the only sure test.</td></tr>
+        <tr><td style="--part:var(--muted)">No movement</td><td><b>Non-magnetic</b> material.</td></tr>
+        <tr><td style="--part:var(--sun)">Tested from much further away</td><td><b>Not possible to tell</b>. It was not a fair test.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Which magnet is stronger?</h3>
+      <p>It attracts <b>more</b> paper clips, or attracts a nail from a <b>greater distance</b>.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-test" data-sec="test"> I got this</label>
+  </section>
+
+  <section id="compass">
+    <div class="sec-head"><span class="tag water">4</span><h2>Compass</h2></div>
+    <div class="card">
+      <ul>
+        <li>The needle is a tiny <b>magnet</b>. Its N end points to the north.</li>
+        <li>Near a magnet, the needle's <b>N end points to the magnet's S pole</b> (unlike poles attract).</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-compass" data-sec="compass"> I got this</label>
+  </section>
+
+  <section id="making">
+    <div class="sec-head"><span class="tag sun">5</span><h2>Making a magnet</h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Stroke method</h3>
+        <figure>
+          <svg viewBox="0 0 240 120" role="img" aria-labelledby="strokeT">
+            <title id="strokeT">Stroking an iron bar from X to Y with the N pole of a magnet. Y, where the stroke ends, becomes an S pole; X becomes an N pole.</title>
+            <defs><marker id="as" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--muted)"/></marker></defs>
+            <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="14" text-anchor="middle">
+              <rect x="30" y="70" width="180" height="26" rx="4" fill="var(--soil-soft)" stroke="var(--soil)" stroke-width="2"/>
+              <text x="50" y="88" fill="var(--water)">X = N</text><text x="186" y="88" fill="var(--food)">Y = S</text>
+              <path d="M50 58 Q120 20 190 58" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#as)"/>
+              <rect x="38" y="20" width="24" height="18" fill="var(--water)"/><text x="50" y="34" fill="var(--bg)" font-size="12">N</text>
+              <text x="120" y="114" fill="var(--muted)" font-size="12">stroke one way, many times</text>
+            </g>
+          </svg>
+        </figure>
+        <p>Stroke with <b>one pole</b>, <b>one direction</b>, many times. The end where the stroke <b>finishes</b> becomes the <b>opposite</b> pole.</p>
+      </div>
+      <div class="card">
+        <h3>Electrical method</h3>
+        <p>Coil wire around an iron or steel bar and connect it to a <b>battery</b>. This makes an <b>electromagnet</b>.</p>
+        <div class="grid2">
+          <div class="mini sun"><h3>Iron</h3><p><b>Temporary</b> magnet</p></div>
+          <div class="mini water"><h3>Steel</h3><p><b>Permanent</b> magnet</p></div>
+        </div>
+        <p class="hint">Magnets lose magnetism if dropped, hammered or heated.</p>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-making" data-sec="making"> I got this</label>
+  </section>
+
+  <section id="electro">
+    <div class="sec-head"><span class="tag food">6</span><h2>Electromagnets</h2></div>
+    <div class="grid2">
+      <div class="mini leaf"><h3>Stronger with</h3><p><b>more batteries</b><br><b>more coils</b> of wire</p></div>
+      <div class="mini warn" style="background:var(--warn-soft)"><h3>Weaker with</h3><p>fewer batteries<br>fewer coils</p></div>
+    </div>
+    <div class="card">
+      <ul>
+        <li><b>Battery removed</b> → no current → the iron <b>loses its magnetism</b> → it attracts nothing.</li>
+        <li>The core must be <b>iron</b> (magnetic). A wooden core does not work.</li>
+        <li>It attracts only <b>magnetic</b> things: paper clips yes, a wooden toothpick no.</li>
+        <li>To attract more pins without changing batteries or coils: use <b>lighter / smaller pins</b>.</li>
+        <li>Uses: <b>scrapyard cranes</b> (switch off to drop the metal), electric bells, maglev trains.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Picking set-ups for a fair test</h3>
+      <div class="tbl-wrap">
+        <table class="jobs">
+          <tr><td style="--part:var(--muted)">A</td><td>2 batteries · 20 coils</td></tr>
+          <tr><td style="--part:var(--muted)">B</td><td>3 batteries · 20 coils</td></tr>
+          <tr><td style="--part:var(--muted)">C</td><td>2 batteries · 10 coils</td></tr>
+        </table>
+      </div>
+      <p>Testing <b>batteries</b>? Pick <b>A and B</b> (same coils). Testing <b>coils</b>? Pick <b>A and C</b> (same batteries). Only <b>one</b> thing may be different.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-electro" data-sec="electro"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">7</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>All metals are magnetic.</span></div><div class="row"><span class="ok">✓</span><span>Only <b>iron, steel, nickel, cobalt</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>It was attracted, so it is a magnet.</span></div><div class="row"><span class="ok">✓</span><span>Only <b>repelling</b> proves it is a magnet.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Picking set-ups where two things change.</span></div><div class="row"><span class="ok">✓</span><span>Only the variable being tested may change.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>An electromagnet works without a battery.</span></div><div class="row"><span class="ok">✓</span><span>No current, no magnet.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Stroke with N → the end you finish at is N.</span></div><div class="row"><span class="ok">✓</span><span>It becomes the <b>opposite</b> pole: S.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Iron, steel, nickel, cobalt are magnetic. Aluminium and copper are not.</div>
+        <div>Unlike poles attract, like poles repel. Only repelling proves a magnet.</div>
+        <div>Electromagnet: more batteries + more coils = stronger. No battery = no magnet.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Answer every question, then press <b>Check my answers</b>. For written answers, the marks come from the <b>keywords</b> you used, just like in the real exam.</p>
+
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: True or false?</h3><div id="tfq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Write your answer</h3><div id="oeq" class="qpart"></div></div>
+
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+
+<div class="wrap"><nav class="pager" aria-label="Topics"><a class="prev" href="10-p3-life-cycles.html"><small>← Previous</small><b>Life Cycles</b></a></nav></div>
+<script>
+(function(){
+  var KEY='p3-magnets-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ ---------- */
+(function(){
+  var MCQ=[
+    {q:'A magnet is brought near a plastic block. What happens to the block?',o:['It moves up.','It does not move.','It moves to the left.','It moves to the right.'],a:1,e:'Plastic is not magnetic.'},
+    {q:'Which can be attracted by a magnet?',o:['iron rod','glass rod','plastic rod','wooden rod'],a:0,e:'Iron is a magnetic material.'},
+    {q:'Hanging object A swings TOWARDS magnet X. Hanging object B swings AWAY from it. Which is correct?',o:['A magnetic material, B non-magnetic','A magnetic material, B magnet','A magnet, B non-magnetic','A non-magnetic, B magnet'],a:1,
+     e:'Only a magnet can be repelled, so B is a magnet. A is attracted, so it is at least a magnetic material.'},
+    {q:'Rods near a magnet: P attracted, Q repelled, R no movement, S attracted. Which can be concluded?<br>A: Q is a magnet. B: S is wood. C: R is magnetic. D: P, Q and S are magnetic materials.',o:['B only','A and D only','B and C only','A, C and D only'],a:1,
+     e:'Q was repelled, so it is a magnet. P and S were attracted and Q is a magnet, so all three are magnetic. R did not move, so it is non-magnetic.'},
+    {q:'A magnet is held 5 cm above W (attracted), 5 cm above Y (not attracted) and 15 cm above Z (not attracted). Which is correct?',o:['W magnetic, Y non-magnetic, Z cannot tell','Y magnetic, W non-magnetic, Z cannot tell','Z magnetic, Y non-magnetic, W cannot tell','Y magnetic, Z non-magnetic, W cannot tell'],a:0,
+     e:'Z was tested from much further away, so we cannot tell. That was not a fair test.'},
+    {q:'To test if the NUMBER OF BATTERIES affects an electromagnet: A (2 batteries, 20 coils), B (3 batteries, 20 coils), C (2 batteries, 10 coils), D (2 batteries, 10 coils, no iron). Which two?',o:['A and B','A and C','B and C','C and D'],a:0,
+     e:'Only the number of batteries is different between A and B.'},
+    {q:'Which action REDUCES the number of steel clips an electromagnet attracts?',o:['move it nearer the tray','add more clips to the tray','connect another battery','coil fewer turns of wire'],a:3,e:'Fewer coils make a weaker electromagnet.'},
+    {q:'Magnets X, Y and Z attracted a nail from 10 cm, 5 cm and 15 cm. Which is strongest?',o:['X','Y','Z','all the same'],a:2,e:'Z attracted the nail from the greatest distance.'},
+    {q:'Two ring magnets on a glass rod: B floats above A. Why?',o:['B is attracting A.','B is repelling A.','Glass is magnetic.','B is lighter than air.'],a:1,e:'Like poles are facing each other, so they repel.'},
+    {q:'An iron nail is stroked from V to W with the N pole of a magnet. What pole is W?',o:['N','S','both','neither'],a:1,e:'The end where the stroke finishes becomes the opposite pole: S.'}
+  ];
+  var TF=[
+    {s:'Aluminium is a magnetic material.',a:false,e:'False. Aluminium is not attracted.'},
+    {s:'A magnet is strongest at its poles.',a:true,e:'True.'},
+    {s:'Like poles attract.',a:false,e:'False. Like poles repel; unlike poles attract.'},
+    {s:'Magnetic force can act through paper.',a:true,e:'True.'},
+    {s:'An iron electromagnet still works after the battery is removed.',a:false,e:'False. It loses its magnetism.'}
+  ];
+  var OE=[
+    {q:'Magnet B floats above magnet A on a glass holder. Why is B floating?',
+     model:'B is repelling A, because like poles are facing each other.',
+     k:[{l:'repelling',all:[/repel|push/]},{l:'like poles facing',all:[/like|same/]}]},
+    {q:'Iron bar L is stroked from X to Y with the N pole of a magnet. End Y is then brought near the N pole of a hanging magnet Z. How will they interact? Explain.',
+     model:'They attract. Y becomes an S pole, and unlike poles attract.',
+     k:[{l:'attract',all:[/attract/]},{l:'Y becomes S; unlike poles attract',all:[/\bs\b|south|unlike|opposite|different/]}]},
+    {q:'A magnet lifted from a tray of clips has most clips at its two ends. What does this show?',
+     model:'The magnet is strongest at its poles (ends).',
+     k:[{l:'strongest at the poles',all:[/strong/,/pole|end/]}]},
+    {q:'Set-up A (few coils) attracted 3 pins. Set-up B (more coils, same nail and batteries) attracted 5 pins. State the aim.',
+     model:'To find out if the number of coils of wire affects the number of steel pins attracted.',
+     k:[{l:'number of coils',all:[/coil/]},{l:'affects the number of pins attracted',all:[/pin|clip|strength|strong|attract/]}]},
+    {q:'The iron nail was taken out of an electromagnet set-up. It could not attract any pins. Why?',
+     model:'There was no battery/current, so the iron nail was no longer an electromagnet (iron is a temporary magnet).',
+     k:[{l:'no battery / no current',all:[/batter|current|electric|circuit/]},{l:'not a magnet any more',all:[/magnet/]}]},
+    {q:'Why can a scrapyard crane use an electromagnet to drop metal where it wants?',
+     model:'When the electricity is switched off, the electromagnet loses its magnetism, so the metal drops.',
+     k:[{l:'switch off the electricity',all:[/off|stop|remove|cut/]},{l:'loses magnetism, metal drops',all:[/lose|lost|no longer|not a magnet|drop|fall|release/]}]}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+  var mcqBox=document.getElementById('mcq'),tfBox=document.getElementById('tfq'),oeBox=document.getElementById('oeq');
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){
+      var lab=el('label','opt');
+      var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;
+      lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));
+      opts.appendChild(lab);
+    });
+    card.appendChild(opts);
+    mcqBox.appendChild(card);
+  });
+  var tfCard=el('div','q');tfCard.id='tfcard';
+  var tfHead=el('div','qhead');tfHead.appendChild(el('span','qnum','Q'+(n+1)));tfHead.appendChild(el('span','qmarks',TF.length+' marks'));
+  tfCard.appendChild(tfHead);
+  tfCard.appendChild(el('p','qtext','Is each statement about magnets true or false?'));
+  var tfList=el('div','tf');
+  TF.forEach(function(item,i){
+    var row=el('div','tfrow');row.id='tfrow'+i;
+    row.appendChild(el('span',null,item.s));
+    var b=el('div','tfbtns');
+    ['True','False'].forEach(function(lbl){
+      var lab=el('label');var inp=document.createElement('input');inp.type='radio';inp.name='tf'+i;inp.id='tf'+i+lbl;inp.value=lbl==='True'?'1':'0';
+      lab.appendChild(inp);lab.appendChild(document.createTextNode(lbl));b.appendChild(lab);
+    });
+    row.appendChild(b);tfList.appendChild(row);
+  });
+  tfCard.appendChild(tfList);tfBox.appendChild(tfCard);
+  n++;
+  OE.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='oe'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',item.k.length+(item.k.length>1?' marks':' mark')));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var ta=document.createElement('textarea');ta.id='oeans'+i;ta.placeholder='Write your answer here…';ta.setAttribute('aria-label','Answer for question '+n);
+    card.appendChild(ta);
+    oeBox.appendChild(card);
+  });
+
+  function clearFeedback(card){var f=card.querySelector('.feedback');if(f)f.remove();card.classList.remove('right','wrong','partial');}
+  function setState(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+
+  var oeGot=[];
+  function renderScore(){
+    var mcqS=0,tfS=0,oeS=0,max=MCQ.length+TF.length;
+    MCQ.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)mcqS++;});
+    TF.forEach(function(item,i){var c=document.querySelector('input[name="tf'+i+'"]:checked');if(c&&(c.value==='1')===item.a)tfS++;});
+    OE.forEach(function(item,i){max+=item.k.length;oeS+=oeGot[i]?oeGot[i].filter(Boolean).length:0;});
+    var total=mcqS+tfS+oeS;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+mcqS+'/'+MCQ.length+'</span><span>True/false: '+tfS+'/'+TF.length+'</span><span>Written: '+oeS+'/'+(max-MCQ.length-TF.length)+'</span>';
+    var pct=total/max,msg;
+    if(pct>=0.9)msg='Excellent! You know this chapter well.';
+    else if(pct>=0.7)msg='Good work. Read the explanations for the ones you missed.';
+    else if(pct>=0.5)msg='Getting there. Go back over the sections above, then try again.';
+    else msg='Read the learning points again, then have another go.';
+    document.getElementById('scoremsg').textContent=msg;
+    try{localStorage.setItem('p3-magnets-best',String(Math.max(total,+(localStorage.getItem('p3-magnets-best')||0))));localStorage.setItem('p3-magnets-max',String(max));}catch(e){}
+  }
+
+  function check(){
+    var blanks=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFeedback(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      card.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      var labels=card.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');
+      var ok=c&&+c.value===item.a;
+      if(c&&!ok)labels[+c.value].classList.add('is-picked-wrong');
+      setState(card,ok?1:0,1);
+      var fb=el('div','feedback');
+      fb.appendChild(el('span','verdict',ok?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('p',null,item.e));
+      card.appendChild(fb);
+    });
+    var tfOk=0;
+    TF.forEach(function(item,i){
+      var row=document.getElementById('tfrow'+i);row.classList.remove('is-right','is-wrong');
+      var c=document.querySelector('input[name="tf'+i+'"]:checked');if(!c)blanks++;
+      var ok=c&&(c.value==='1')===item.a;if(ok)tfOk++;
+      row.classList.add(ok?'is-right':'is-wrong');
+    });
+    var tfCard=document.getElementById('tfcard');clearFeedback(tfCard);setState(tfCard,tfOk,TF.length);
+    var fb=el('div','feedback');fb.appendChild(el('span','verdict',tfOk+' of '+TF.length+' correct'));
+    var ul=el('ul');TF.forEach(function(item){ul.appendChild(el('li',null,item.e));});fb.appendChild(ul);tfCard.appendChild(fb);
+
+    OE.forEach(function(item,i){
+      var card=document.getElementById('oe'+i);clearFeedback(card);
+      var txt=(document.getElementById('oeans'+i).value||'').toLowerCase();
+      if(!txt.trim())blanks++;
+      oeGot[i]=item.k.map(function(g){return txt.trim()!==''&&g.all.every(function(r){return r.test(txt);});});
+      var fb=el('div','feedback');
+      var verdict=el('span','verdict');fb.appendChild(verdict);
+      fb.appendChild(el('p',null,'<b>Model answer:</b> '+item.model));
+      var kw=el('div','kw');
+      item.k.forEach(function(g,j){
+        var b=el('button',null,(oeGot[i][j]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+        b.addEventListener('click',function(){
+          oeGot[i][j]=!oeGot[i][j];
+          b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+          b.textContent=(oeGot[i][j]?'✓ ':'✗ ')+g.l;
+          paint();renderScore();
+        });
+        kw.appendChild(b);
+      });
+      fb.appendChild(el('p','hint','Keywords needed (1 mark each). Green means found in your answer. If you said the same idea in other words, tap it to give yourself the mark.'));
+      fb.appendChild(kw);
+      function paint(){
+        var got=oeGot[i].filter(Boolean).length;
+        card.classList.remove('right','wrong','partial');setState(card,got,item.k.length);
+        verdict.textContent=got+' of '+item.k.length+(item.k.length>1?' marks':' mark');
+      }
+      paint();
+      card.appendChild(fb);
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    renderScore();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+
+  function reset(){
+    document.querySelectorAll('#quiz input[type=radio]').forEach(function(r){r.checked=false;});
+    document.querySelectorAll('#quiz textarea').forEach(function(t){t.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFeedback);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .tfrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    oeGot=[];
+    document.getElementById('scorebox').hidden=true;
+    document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>
+</body>
+</html>

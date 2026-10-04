@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>P4 Exam Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one column; subject tabs, a "next up" card, then a grid of topic cards with progress. Same tokens as the topic pages. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3; --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd; --sun:#e8b417; --sun-soft:#fdf5d6; --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627; --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816; --sun:#f5cf55; --sun-soft:#3a3218; --warn:#f07c7c; --warn-soft:#3d1f1f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627; --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816; --sun:#f5cf55; --sun-soft:#3a3218; --warn:#f07c7c; --warn-soft:#3d1f1f;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.5;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:20px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;margin:0;text-wrap:balance}
+header{padding-block:32px 0;display:grid;gap:6px}
+h1{font-size:2.4rem;font-weight:800}
+.lead{color:var(--muted);margin:0;max-width:60ch}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{font:inherit;font-family:var(--font-display);font-weight:800;font-size:1.15rem;cursor:pointer;border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 20px}
+.tabs button[aria-selected="true"]{background:var(--leaf);border-color:var(--leaf);color:var(--bg)}
+.tabs button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:2px}
+.stat .n{font-family:var(--font-display);font-weight:800;font-size:1.8rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat .l{color:var(--muted);font-weight:800;font-size:.85rem}
+.next{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--sun-soft);border:2px solid var(--sun);border-radius:18px;padding:14px 18px;text-decoration:none;color:var(--fg)}
+.next:hover,.next:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.next small{display:block;color:var(--muted);font-weight:800;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase}
+.next b{font-family:var(--font-display);font-size:1.3rem}
+.go{font-family:var(--font-display);font-weight:800;background:var(--leaf);color:var(--bg);border-radius:12px;padding:6px 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.card{display:grid;gap:8px;align-content:start;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0}
+.card:hover,.card:focus-visible{border-color:var(--water);outline:none}
+.card .eb{color:var(--muted);font-weight:800;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.card h3{font-size:1.2rem}
+.card .num{color:var(--muted);font-family:var(--font-display)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.85rem;font-weight:800;color:var(--muted);font-variant-numeric:tabular-nums}
+.pill{border-radius:999px;padding:1px 10px;font-size:.8rem;font-weight:800}
+.pill.new{background:var(--line);color:var(--muted)}
+.pill.going{background:var(--sun-soft);color:var(--fg);border:1px solid var(--sun)}
+.pill.done{background:var(--leaf);color:var(--bg)}
+.blurb{color:var(--muted);margin:0}
+footer{display:flex;gap:12px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:.85rem;padding-top:8px;border-top:1px solid var(--line)}
+footer button{font:inherit;font-weight:800;cursor:pointer;border:2px solid var(--line);background:var(--card);color:var(--fg);border-radius:999px;padding:4px 14px}
+footer button.danger{border-color:var(--warn);color:var(--warn)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>P4 Exam Revision</h1>
+    <p class="lead">Pick a subject, read the learning points, tick <b>I got this</b>, then take the quiz. Your progress is saved on this device.</p>
+  </header>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <p class="blurb" id="blurb"></p>
+  <div class="summary" id="summary"></div>
+  <a class="next" id="next" href="#"><span><small id="nextlabel">Next up</small><b id="nexttitle"></b></span><span class="go">Start →</span></a>
+  <div class="grid" id="grid"></div>
+  <footer>
+    <span id="foot">Mastered = all sections ticked and quiz 90% or more. Progress is stored in this browser only.</span>
+    <button type="button" id="reset">Clear my progress</button>
+    <button type="button" id="resetyes" class="danger" hidden>Yes, clear everything</button>
+    <button type="button" id="resetno" hidden>Keep it</button>
+  </footer>
+</div>
+<script>
+var DATA=[{"id": "science", "name": "Science", "blurb": "P4 topics plus the P3 topics that are tested in the P4 exam.", "topics": [{"file": "01-plant-systems.html", "h1": "Plant Systems", "eyebrow": "P4 Science · Chapter 1", "key": "p4-plant", "sections": 7}, {"file": "02-human-systems.html", "h1": "Human Systems", "eyebrow": "P4 Science · Chapter 2", "key": "p4-human", "sections": 6}, {"file": "03-matter.html", "h1": "Matter", "eyebrow": "P4 Science · Chapter 3", "key": "p4-matter", "sections": 6}, {"file": "04-light.html", "h1": "Light", "eyebrow": "P4 Science · Chapter 4", "key": "p4-light", "sections": 6}, {"file": "05-shadows.html", "h1": "Shadows", "eyebrow": "P4 Science · Chapter 5", "key": "p4-shadows", "sections": 6}, {"file": "06-heat.html", "h1": "Heat", "eyebrow": "P4 Science · Chapter 6", "key": "p4-heat", "sections": 6}, {"file": "07-effects-of-heat.html", "h1": "Effects of Heat", "eyebrow": "P4 Science · Chapter 7", "key": "p4-effects-heat", "sections": 7}, {"file": "08-p3-diversity.html", "h1": "Diversity of Living Things", "eyebrow": "P3 Review · Tested in P4 exams", "key": "p3-diversity", "sections": 7}, {"file": "09-p3-materials.html", "h1": "Materials", "eyebrow": "P3 Review · Tested in P4 exams", "key": "p3-materials", "sections": 5}, {"file": "10-p3-life-cycles.html", "h1": "Life Cycles", "eyebrow": "P3 Review · Tested in P4 exams", "key": "p3-lifecycles", "sections": 6}, {"file": "11-p3-magnets.html", "h1": "Magnets", "eyebrow": "P3 Review · Tested in P4 exams", "key": "p3-magnets", "sections": 7}]}, {"id": "math", "name": "Math", "blurb": "Numbers, fractions, decimals, measurement, geometry, data and problem sums.", "topics": [{"file": "01-whole-numbers.html", "h1": "Whole Numbers", "eyebrow": "P4 Math · Numbers", "key": "p4m-whole", "sections": 6}, {"file": "02-factors-multiples.html", "h1": "Factors and Multiples", "eyebrow": "P4 Math · Numbers", "key": "p4m-factors", "sections": 6}, {"file": "03-four-operations.html", "h1": "Four Operations", "eyebrow": "P4 Math · Numbers", "key": "p4m-ops", "sections": 6}, {"file": "04-fractions.html", "h1": "Fractions", "eyebrow": "P4 Math · Fractions", "key": "p4m-fractions", "sections": 7}, {"file": "05-decimals.html", "h1": "Decimals", "eyebrow": "P4 Math · Decimals", "key": "p4m-decimals", "sections": 7}, {"file": "06-time.html", "h1": "Time", "eyebrow": "P4 Math · Measurement", "key": "p4m-time", "sections": 5}, {"file": "07-angles-lines.html", "h1": "Angles and Lines", "eyebrow": "P4 Math · Geometry", "key": "p4m-angles", "sections": 6}, {"file": "08-perimeter-area.html", "h1": "Perimeter and Area", "eyebrow": "P4 Math · Measurement", "key": "p4m-area", "sections": 6}, {"file": "09-symmetry.html", "h1": "Symmetry", "eyebrow": "P4 Math · Geometry", "key": "p4m-symmetry", "sections": 5}, {"file": "10-nets-solids.html", "h1": "Nets and Solids", "eyebrow": "P4 Math · Geometry", "key": "p4m-nets", "sections": 5}, {"file": "11-data.html", "h1": "Tables, Graphs and Pie Charts", "eyebrow": "P4 Math · Data", "key": "p4m-data", "sections": 5}, {"file": "12-problem-solving.html", "h1": "Problem Sums Toolkit", "eyebrow": "P4 Math · Problem solving", "key": "p4m-heuristics", "sections": 7}]}];
+function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function progress(t){
+  var done=0;try{var o=JSON.parse(get(t.key+'-done')||'{}');for(var k in o)if(o[k])done++;}catch(e){}
+  var best=get(t.key+'-best'),max=get(t.key+'-max');
+  best=best==null?null:+best;max=max==null?null:+max;
+  var pct=best!=null&&max?best/max:null;
+  var state=(done>=t.sections&&pct!=null&&pct>=0.9)?'done':(done>0||best!=null)?'going':'new';
+  return {done:done,best:best,max:max,pct:pct,state:state};
+}
+function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+var current=null;
+function show(id){
+  var s=DATA.filter(function(x){return x.id===id;})[0]||DATA[0];current=s.id;
+  document.querySelectorAll('#tabs button').forEach(function(b){b.setAttribute('aria-selected',b.dataset.id===s.id?'true':'false');});
+  document.getElementById('blurb').textContent=s.blurb;
+  var grid=document.getElementById('grid');grid.innerHTML='';
+  var studied=0,complete=0,pcts=[],next=null;
+  s.topics.forEach(function(t,i){
+    var p=progress(t);
+    if(p.state!=='new')studied++;if(p.state==='done')complete++;if(p.pct!=null)pcts.push(p.pct);
+    if(!next&&p.state!=='done')next=t;
+    var a=el('a','card');a.href=s.id+'/'+t.file;
+    a.appendChild(el('span','eb',t.eyebrow));
+    var h=el('h3');h.appendChild(el('span','num',(i+1)+'. '));h.appendChild(document.createTextNode(t.h1));a.appendChild(h);
+    var bar=el('div','bar');var fill=el('i');fill.style.width=(Math.min(p.done,t.sections)/t.sections*100)+'%';bar.appendChild(fill);a.appendChild(bar);
+    var meta=el('div','meta');
+    meta.appendChild(el('span',null,Math.min(p.done,t.sections)+' / '+t.sections+' sections'));
+    meta.appendChild(el('span',null,p.best!=null&&p.max?'Quiz best '+p.best+' / '+p.max:'Quiz not tried'));
+    a.appendChild(meta);
+    a.appendChild(el('span','pill '+p.state,p.state==='done'?'Mastered':p.state==='going'?'In progress':'Not started'));
+    grid.appendChild(a);
+  });
+  var sum=document.getElementById('summary');sum.innerHTML='';
+  [[studied+' / '+s.topics.length,'started'],[complete+' / '+s.topics.length,'mastered'],[pcts.length?Math.round(pcts.reduce(function(a,b){return a+b;},0)/pcts.length*100)+'%':'–','avg quiz']].forEach(function(x){
+    var d=el('div','stat');d.appendChild(el('span','n',x[0]));d.appendChild(el('span','l',x[1]));sum.appendChild(d);
+  });
+  var nx=document.getElementById('next');
+  if(next){nx.hidden=false;nx.href=s.id+'/'+next.file;document.getElementById('nexttitle').textContent=next.h1;document.getElementById('nextlabel').textContent=studied?'Continue with':'Start here';}
+  else{nx.hidden=true;}
+  try{localStorage.setItem('p4-home-tab',s.id);}catch(e){}
+  if(location.hash!=='#'+s.id)history.replaceState(null,'','#'+s.id);
+}
+DATA.forEach(function(s){
+  var b=el('button',null,s.name);b.type='button';b.setAttribute('role','tab');b.dataset.id=s.id;
+  b.addEventListener('click',function(){show(s.id);});document.getElementById('tabs').appendChild(b);
+});
+show((location.hash||'').slice(1)||get('p4-home-tab')||DATA[0].id);
+window.addEventListener('hashchange',function(){show(location.hash.slice(1));});
+window.addEventListener('pageshow',function(){if(current)show(current);});
+var r=document.getElementById('reset'),ry=document.getElementById('resetyes'),rn=document.getElementById('resetno');
+r.addEventListener('click',function(){r.hidden=true;ry.hidden=false;rn.hidden=false;});
+rn.addEventListener('click',function(){r.hidden=false;ry.hidden=true;rn.hidden=true;});
+ry.addEventListener('click',function(){
+  DATA.forEach(function(s){s.topics.forEach(function(t){['-done','-best','-max'].forEach(function(x){try{localStorage.removeItem(t.key+x);}catch(e){}});});});
+  r.hidden=false;ry.hidden=true;rn.hidden=true;show(current);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!--meta
+title: Materials Quick Notes
+eyebrow: P3 Review · Tested in P4 exams
+h1: Materials
+lead: The key points about what things are made of and why we choose each material.
+key: p3-materials
+tf_intro: Is each statement about materials true or false?
+chips: list=Materials|properties=Properties|choose=Choosing|tests=Material tests|traps=Watch out
+-->
+<!--body-->
+  <section id="list">
+    <div class="sec-head"><span class="tag sun">1</span><h2>Common materials</h2></div>
+    <div class="steps">
+      <span class="box">wood</span><span class="box">metal</span><span class="box">plastic</span><span class="box">glass</span>
+      <span class="box">rubber</span><span class="box">cloth</span><span class="box">ceramic</span><span class="box">paper</span>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-list" data-sec="list"> I got this</label>
+  </section>
+
+  <section id="properties">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Properties</h2></div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--soil)">Strong</td><td>Holds a heavy load <b>without breaking</b>.<br><span class="hint">steel, iron, wood</span></td></tr>
+        <tr><td style="--part:var(--muted)">Hard</td><td>Cannot be <b>scratched</b> easily.<br><span class="hint">metal, glass</span></td></tr>
+        <tr><td style="--part:var(--leaf)">Flexible</td><td>Can <b>bend without breaking</b>.<br><span class="hint">rubber, cloth, plastic sheet</span></td></tr>
+        <tr><td style="--part:var(--water)">Waterproof</td><td>Does <b>not let water through</b>.<br><span class="hint">plastic, rubber, glass, metal</span></td></tr>
+        <tr><td style="--part:var(--water)">Absorbent</td><td>Can <b>soak up</b> water.<br><span class="hint">cloth (towel), sponge, tissue, paper</span></td></tr>
+        <tr><td style="--part:var(--sun)">Floats</td><td>Stays on top of water.<br><span class="hint">wood, cork, styrofoam</span></td></tr>
+        <tr><td style="--part:var(--sun)">Transparent</td><td>Lets light through.<br><span class="hint">clear glass, clear plastic</span></td></tr>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="mini soil"><h3>Strong ≠ hard</h3><p>Strong: does not <b>break</b>. Hard: does not <b>scratch</b>.</p></div>
+      <div class="mini leaf"><h3>Flexible</h3><p>Means it <b>bends</b>. It does not have to stretch.</p></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-properties" data-sec="properties"> I got this</label>
+  </section>
+
+  <section id="choose">
+    <div class="sec-head"><span class="tag food">3</span><h2>Choosing the right material</h2></div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--sun)">Window</td><td><b>Glass</b>: transparent, so we can see out. But it <b>breaks easily</b>.</td></tr>
+        <tr><td style="--part:var(--water)">Umbrella</td><td><b>Flexible + waterproof</b>.</td></tr>
+        <tr><td style="--part:var(--leaf)">Shirt</td><td><b>Flexible + absorbent</b> (not waterproof, so it soaks up sweat).</td></tr>
+        <tr><td style="--part:var(--water)">Towel</td><td><b>Absorbent</b>.</td></tr>
+        <tr><td style="--part:var(--soil)">Nail, hammer head</td><td><b>Steel</b>: <b>strong</b> and hard, <b>not flexible</b>.</td></tr>
+        <tr><td style="--part:var(--soil)">Bookshelf, chair</td><td><b>Strong</b>.</td></tr>
+        <tr><td style="--part:var(--water)">Raincoat</td><td><b>Waterproof + flexible</b>: plastic or rubber.</td></tr>
+        <tr><td style="--part:var(--sun)">Life jacket</td><td><b>Floats</b>: styrofoam, cork.</td></tr>
+        <tr><td style="--part:var(--food)">Pot handle</td><td>Plastic or wood: <b>poor conductor of heat</b>.</td></tr>
+      </table>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-choose" data-sec="choose"> I got this</label>
+  </section>
+
+  <section id="tests">
+    <div class="sec-head"><span class="tag water">4</span><h2>Testing materials</h2></div>
+    <div class="card">
+      <h3>Bending test: masses added to a strip across two tables</h3>
+      <div class="chart">
+        <svg viewBox="0 0 380 210" role="img" aria-labelledby="bendT">
+          <title id="bendT">Graph of distance from floor against mass added. Material A drops from 10 to 4 centimetres; material B only drops from 10 to 9 centimetres. A bends more, so A is more flexible.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)">
+            <line x1="50" y1="15" x2="50" y2="175" stroke="var(--muted)" stroke-width="2"/>
+            <line x1="50" y1="175" x2="350" y2="175" stroke="var(--muted)" stroke-width="2"/>
+            <text x="16" y="29">10 cm</text><text x="22" y="125">4 cm</text>
+            <text x="44" y="193">0 g</text><text x="140" y="193">10 g</text><text x="234" y="193">20 g</text><text x="326" y="193">30 g</text>
+            <polyline points="50,25 145,57 240,89 335,121" fill="none" stroke="var(--leaf)" stroke-width="4"/>
+            <polyline points="50,25 145,25 240,41 335,41" fill="none" stroke="var(--soil)" stroke-width="4"/>
+            <text x="270" y="140" fill="var(--leaf)">A bends a lot</text>
+            <text x="250" y="32" fill="var(--soil)">B hardly bends</text>
+          </g>
+        </svg>
+      </div>
+      <ul>
+        <li>Property tested: <b>flexibility</b> (bending without breaking).</li>
+        <li>The more mass added, the <b>shorter the distance</b> to the floor.</li>
+        <li><b>A bends more → A is more flexible</b> → better for an umbrella canopy.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Strength test: weights on chairs (3 trials)</h3>
+      <div class="bars">
+        <div class="barrow"><span>A: 4, 5, 3</span><div class="b" style="width:45%;background:var(--sun);color:#2a2205"></div></div>
+        <div class="barrow"><span>B: 7, 9, 7</span><div class="b" style="width:85%;background:var(--leaf)">strongest</div></div>
+        <div class="barrow"><span>C: 2, 1, 1</span><div class="b" style="width:15%;background:var(--warn)"></div></div>
+      </div>
+      <ul>
+        <li><b>More weights held before breaking = stronger.</b> B is best for a bookshelf.</li>
+        <li>Changed variable: <b>type of material</b>.</li>
+        <li>Why 3 trials? To make the results <b>more reliable</b>.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-tests" data-sec="tests"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Strong means hard to scratch.</span></div><div class="row"><span class="ok">✓</span><span>Strong = does not <b>break</b>. Hard = does not <b>scratch</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The strip that bends least is the most flexible.</span></div><div class="row"><span class="ok">✓</span><span>The strip that bends <b>most</b> is the most flexible.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A shirt should be waterproof.</span></div><div class="row"><span class="ok">✓</span><span>A shirt should be <b>absorbent</b> to soak up sweat.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Strong · hard · flexible · waterproof · absorbent · floats · transparent</div>
+        <div>Choose by the job: umbrella = flexible + waterproof; nail = strong.</div>
+        <div>In tests, quote the numbers. Repeat trials for reliable results.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'Which object is NOT made of a waterproof material?',o:['a sheet of glass','an umbrella','a towel','a plastic fork'],a:2,e:'A towel is absorbent. It soaks up water.'},
+    {q:'Material A: waterproof. B: waterproof, floats. C: flexible. D: flexible, floats. Which is best for a shirt?',o:['A','B','C','D'],a:2,
+     e:'A shirt must be flexible and should not be waterproof, so it can soak up sweat.'},
+    {q:'Steel is used to make nails because it ___.',o:['is shiny','is strong','is magnetic','sinks in water'],a:1,e:'A nail must not break or bend when it is hammered.'},
+    {q:'What properties should a hammer head have?',o:['not strong, not flexible','not strong, flexible','strong, flexible','strong, not flexible'],a:3,
+     e:'It must be strong so it does not break, and not flexible so it does not bend.'},
+    {q:'Which property means a material can bend without breaking?',o:['strength','hardness','flexibility','absorbency'],a:2,e:'Flexibility is bending without breaking.'},
+    {q:'Which pair of properties is best for an umbrella canopy?',o:['strong and transparent','flexible and waterproof','hard and absorbent','floats and hard'],a:1,
+     e:'It must fold (flexible) and keep the rain out (waterproof).'},
+    {q:'Chairs held these numbers of weights before breaking: A 4, B 8, C 1. Which material is strongest?',o:['A','B','C','All the same'],a:1,e:'B held the most weights before it broke.'},
+    {q:'Why is a life jacket made of styrofoam?',o:['It is transparent.','It floats.','It is magnetic.','It is hard.'],a:1,e:'Styrofoam floats on water.'}
+  ];
+  var TF=[
+    {s:'Glass is transparent but breaks easily.',a:true,e:'True.'},
+    {s:'Cloth is waterproof.',a:false,e:'False. Most cloth is absorbent.'},
+    {s:'A strong material can hold a heavy load without breaking.',a:true,e:'True.'},
+    {s:'Repeating an experiment 3 times makes the results more reliable.',a:true,e:'True.'},
+    {s:'Rubber is flexible.',a:true,e:'True. It bends without breaking.'}
+  ];
+  var OE=[
+    {q:'Fill in: "A window is made of ____ because it allows ____ to pass through. However, it ____ easily when dropped."',
+     model:'glass; light; breaks',
+     k:[{l:'glass',all:[/glass/]},{l:'light',all:[/light/]},{l:'breaks',all:[/break|broke|crack|shatter/]}]},
+    {q:'Masses were added to strips of materials A and B across two tables. A bent down much more than B. Name the property tested and say what it means.',
+     model:'Flexibility: the ability to bend without breaking.',
+     k:[{l:'flexibility',all:[/flexib/]},{l:'bend without breaking',all:[/bend/]}]},
+    {q:'In the last question, which material is better for an umbrella canopy? Explain.',
+     model:'A. It bent more, so it is more flexible.',
+     k:[{l:'A',all:[/^\s*(material )?a\b|material a\b/]},{l:'more flexible / bends more',all:[/flexib|bend|bent/]}]},
+    {q:'Chair B held 7–9 weights before breaking, more than A and C. Which material is best for a bookshelf? Explain.',
+     model:'B. It held the most weights before breaking, so it is the strongest and can hold the most books.',
+     k:[{l:'B',all:[/^\s*(material )?b\b|material b\b/]},{l:'strongest / held the most weights',all:[/strong|most|heav/]}]},
+    {q:'Why did Goldilocks test each chair 3 times?',
+     model:'To make the results more reliable.',
+     k:[{l:'more reliable',all:[/reliab|accura|fair|sure|correct/]}]},
+    {q:'Why is a raincoat made of plastic and not cloth?',
+     model:'Plastic is waterproof, so it does not let water through.',
+     k:[{l:'waterproof',all:[/waterproof|not let water|doesn't let water|does not let water|water cannot/]}]}
+  ];

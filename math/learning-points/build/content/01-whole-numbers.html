@@ -1,0 +1,143 @@
+<!--meta
+title: Whole Numbers Quick Notes
+eyebrow: P4 Math · Numbers
+h1: Whole Numbers
+lead: Numbers up to 100 000: place value, words, comparing, rounding and number patterns. <span class="w">Blue is the method</span>, <span class="f">orange is the answer</span>.
+key: p4m-whole
+chips: place=Place value|words=Words & numerals|compare=Comparing|round=Rounding|patterns=Patterns|traps=Watch out
+-->
+<!--body-->
+  <section id="place">
+    <div class="sec-head"><span class="tag water">1</span><h2>Place value</h2></div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table class="pv">
+          <tr><th>Ten thousands</th><th>Thousands</th><th>Hundreds</th><th>Tens</th><th>Ones</th></tr>
+          <tr><td>4</td><td>2</td><td><b class="f">7</b></td><td>5</td><td>3</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li>In <b>42 753</b>, the digit 7 is in the <b>hundreds</b> place. Its <b>value</b> is <b class="f">700</b>.</li>
+        <li>42 753 = 40 000 + 2000 + 700 + 50 + 3</li>
+        <li>"Which digit is in the tens place of 56 780?" → <b class="f">8</b>. Read the question: <b>digit</b> or <b>value</b>?</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-place" data-sec="place"> I got this</label>
+  </section>
+
+  <section id="words">
+    <div class="sec-head"><span class="tag water">2</span><h2>Words and numerals</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">Fifty-eight thousand and thirty-nine</span><div class="stp"><b>thousands</b><span>58</span><b>rest</b><span>039 (no hundreds → write 0)</span></div><span class="ans">58 039</span></div>
+      <div class="ex"><span class="exq">Forty thousand and eleven</span><div class="stp"><b>thousands</b><span>40</span><b>rest</b><span>011</span></div><span class="ans">40 011</span></div>
+    </div>
+    <div class="card"><p>After the word <b>thousand</b> there must always be <b>3 digits</b>. Fill empty places with <b>0</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-words" data-sec="words"> I got this</label>
+  </section>
+
+  <section id="compare">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Comparing and ordering</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Count the digits</span><span class="to">→</span><span class="box">Compare from the left</span><span class="to">→</span><span class="box">First different digit decides</span></div>
+      <p>Order 1053, 1305, 1035 from smallest: look at the hundreds digit (0, 3, 0), then the tens digit.</p>
+      <p class="ans">1035, 1053, 1305</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-compare" data-sec="compare"> I got this</label>
+  </section>
+
+  <section id="round">
+    <div class="sec-head"><span class="tag food">4</span><h2>Rounding</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Find the place you round to</span><span class="to">→</span><span class="box">Look at the digit on its RIGHT</span><span class="to">→</span><span class="box">0–4: stay · 5–9: go up</span></div>
+      <div class="grid2">
+        <div class="ex"><span class="exq">Round 39 520 to the nearest hundred</span><div class="stp"><b>hundreds digit</b><span>5</span><b>digit on right</b><span>2 → stay</span></div><span class="ans">39 500</span></div>
+        <div class="ex"><span class="exq">Round 46 381 to the nearest thousand</span><div class="stp"><b>thousands digit</b><span>6</span><b>digit on right</b><span>3 → stay</span></div><span class="ans">46 000</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Range questions (very common)</h3>
+      <p>A number is <b>2900</b> when rounded to the nearest ten. Numbers that round to 2900 go from <b>2895</b> to <b>2904</b>.</p>
+      <div class="chart">
+        <svg viewBox="0 0 420 70" role="img" aria-labelledby="rngT">
+          <title id="rngT">Number line from 2890 to 2910. Numbers from 2895 to 2904 round to 2900.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)" text-anchor="middle">
+            <line x1="20" y1="30" x2="400" y2="30" stroke="var(--muted)" stroke-width="2"/>
+            <rect x="115" y="22" width="171" height="16" rx="8" fill="var(--food-soft)" stroke="var(--food)" stroke-width="2"/>
+            <text x="20" y="60">2890</text><text x="124" y="60" fill="var(--food)">2895</text><text x="210" y="60">2900</text><text x="276" y="60" fill="var(--food)">2904</text><text x="400" y="60">2910</text>
+          </g>
+        </svg>
+      </div>
+      <p><b>Smallest</b> = 2895 · <b>Greatest</b> = 2904. For the nearest hundred, 72 000 comes from <b>71 950 to 72 049</b>.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-round" data-sec="round"> I got this</label>
+  </section>
+
+  <section id="patterns">
+    <div class="sec-head"><span class="tag sun">5</span><h2>Number patterns</h2></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">34 456, 34 756, ___, 35 356</span><div class="stp"><b>rule</b><span>+300 each time</span></div><span class="ans">35 056</span></div>
+      <div class="ex"><span class="exq">2628, 2828, 2808, 3008, ___, 3188</span><div class="stp"><b>rule</b><span>+200, −20, +200, −20 …</span><b>next</b><span>3008 − 20</span></div><span class="ans">2988</span></div>
+    </div>
+    <div class="card">
+      <h3>Figure patterns</h3>
+      <p>Make a table. Look for a rule that links the <b>figure number</b> to the count.</p>
+      <div class="tbl-wrap"><table class="pv">
+        <tr><th>Figure</th><th>1</th><th>2</th><th>3</th><th>4</th><th>n</th></tr>
+        <tr><td>Squares on each side</td><td>3</td><td>4</td><td>5</td><td>6</td><td>n + 2</td></tr>
+        <tr><td>Total squares</td><td>9</td><td>16</td><td>25</td><td>36</td><td>(n + 2) × (n + 2)</td></tr>
+      </table></div>
+      <p>Figure 9 → 11 × 11 = <b class="f">121</b> squares.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-patterns" data-sec="patterns"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>"Value of 7 in 42 753" → 7</span></div><div class="row"><span class="ok">✓</span><span>The <b>value</b> is <b>700</b>. The <b>digit</b> is 7.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Fifty-eight thousand and thirty-nine → 5839</span></div><div class="row"><span class="ok">✓</span><span>3 digits after the thousands: <b>58 039</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>72 050 rounds to 72 000 (nearest hundred)</span></div><div class="row"><span class="ok">✓</span><span>Tens digit is 5 → round up to <b>72 100</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Smallest number that rounds to 2900 is 2850.</span></div><div class="row"><span class="ok">✓</span><span>Nearest <b>ten</b> → only ±5: <b>2895</b>.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Digit ≠ value. 7 in the hundreds place has value 700.</div>
+        <div>Rounding: look one place to the right. 5 or more → go up.</div>
+        <div>Patterns: find the rule between terms, check it works for all of them.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'Fifty-eight thousand and thirty-nine in numerals is ___.',o:['58 390','58 309','58 039','50 839'],a:2,e:'58 thousand, then 039 (0 hundreds, 3 tens, 9 ones).'},
+    {q:'Which number becomes 72 000 when rounded to the nearest hundred?',o:['71 839','71 952','72 050','72 499'],a:1,e:'Numbers from 71 950 to 72 049 round to 72 000. 72 050 rounds to 72 100.'},
+    {q:'In which number does the digit 6 stand for 600?',o:['6790','7690','7906','9760'],a:1,e:'In 7690, the 6 is in the hundreds place.'},
+    {q:'In the number 56 780, which digit is in the tens place?',o:['5','6','7','8'],a:3,e:'Ones = 0, tens = 8.'},
+    {q:'Which shows 4890, 4809 and 4089 from the smallest to the greatest?',o:['4890, 4809, 4089','4089, 4890, 4809','4809, 4089, 4890','4089, 4809, 4890'],a:3,e:'All start with 4. Compare hundreds: 0, 8, 8. Then tens: 4809 has 0 tens, 4890 has 9 tens.'},
+    {q:'What is the value of the digit 4 in 34 109?',o:['4','40','400','4000'],a:3,e:'The 4 is in the thousands place, so its value is 4000.'},
+    {q:'What comes next? 12 450, 12 750, 13 050, ___',o:['13 150','13 350','13 550','14 050'],a:1,e:'The rule is +300.'},
+    {q:'30 000 + 5000 + 70 + 2 = ___',o:['3572','35 702','35 072','30 572'],a:2,e:'3 ten thousands, 5 thousands, 0 hundreds, 7 tens, 2 ones.'}
+  ];
+  var SA=[
+    {q:'What is the value of the digit 7 in 42 753?',a:['700'],e:'7 is in the hundreds place → 700.'},
+    {q:'Write forty thousand and eleven in numerals.',a:['40011'],e:'40 thousand, then 011.'},
+    {q:'Round 39 520 to the nearest hundred.',a:['39500'],e:'Hundreds digit 5, the digit on its right is 2 → stay → 39 500.'},
+    {q:'Find the missing number: 34 456, 34 756, ___, 35 356, 35 656',a:['35056'],e:'Rule +300: 34 756 + 300 = 35 056.'},
+    {q:'A number is 2900 when rounded to the nearest ten. What is the smallest possible number?',a:['2895'],e:'Numbers 2895 to 2904 round to 2900.'},
+    {q:'Find the missing number: 2628, 2828, 2808, 3008, ___, 3188',a:['2988'],e:'Rule: +200, −20 in turn. 3008 − 20 = 2988, then 2988 + 200 = 3188 ✓.'},
+    {q:'Round 46 381 to the nearest thousand.',a:['46000'],e:'Thousands digit 6, the digit on its right is 3 → stay.'}
+  ];
+  var PS=[
+    {q:'A square pattern has shaded squares around the outside and unshaded squares inside. Figure 1 is 3 × 3 (1 unshaded), Figure 2 is 4 × 4 (4 unshaded), Figure 3 is 5 × 5 (9 unshaded).',
+     parts:[{p:'(a) How many shaded squares are there in Figure 4?',a:['20'],m:2},{p:'(b) What is the total number of squares in Figure 9?',a:['121'],m:2}],
+     sol:'<div class="ln">Figure n has (n + 2) squares on each side and n × n unshaded squares.</div><div class="ln">(a) Figure 4: 6 × 6 = 36 squares, 4 × 4 = 16 unshaded → 36 − 16 = <b class="f">20</b> shaded.</div><div class="ln">(b) Figure 9: 11 × 11 = <b class="f">121</b>.</div>'},
+    {q:'Use each of the digits 3, 0, 8, 1, 6 once to make 5-digit numbers.',
+     parts:[{p:'(a) What is the greatest number?',a:['86310'],m:1},{p:'(b) What is the smallest number?',a:['10368'],m:2}],
+     sol:'<div class="ln">(a) Biggest digits first: <b class="f">86 310</b>.</div><div class="ln">(b) Smallest digits first, but a number cannot start with 0. Put 1 first, then 0: <b class="f">10 368</b>.</div>'},
+    {q:'A whole number is 5600 when rounded to the nearest hundred.',
+     parts:[{p:'(a) What is the greatest possible number?',a:['5649'],m:1},{p:'(b) What is the smallest possible number?',a:['5550'],m:1}],
+     sol:'<div class="ln">Numbers from 5550 to 5649 round to 5600.</div><div class="ln">(a) <b class="f">5649</b> (5650 would round to 5700). (b) <b class="f">5550</b>.</div>'}
+  ];

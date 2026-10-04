@@ -1,0 +1,7 @@
+# Downloaded school exam papers and photos: keep them local, do not publish
+*.pdf
+*.jpg
+
+# Local tooling
+.claude/
+__pycache__/

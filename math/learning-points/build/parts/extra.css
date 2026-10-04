@@ -1,0 +1,30 @@
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}

@@ -1,0 +1,374 @@
+<!--meta
+title: Plant Systems Quick Notes
+eyebrow: P4 Science · Chapter 1
+h1: Plant Systems
+lead: The key points to know about leaves, stems and roots. Look out for the colours: <span class="w">blue means water</span> and <span class="f">orange means food</span>.
+key: p4-plant
+tf_intro: Chandra watched a seedling grow. Is each statement true or false?
+chips: system=System|parts=Parts &amp; jobs|leaves=Leaves|stem=Stem|roots=Roots|experiments=Experiment clues|traps=Watch out
+-->
+<!--body-->
+  <!-- 1 SYSTEM -->
+  <section id="system">
+    <div class="sec-head"><span class="tag sun">1</span><h2>What is a system?</h2></div>
+    <div class="card">
+      <p class="big">A system is made of <b>parts that work together</b> to do a job.</p>
+      <ul>
+        <li>If one part stops working, the whole system may not work properly.</li>
+        <li>A <b>plant is a system</b>. Its leaves, stem, roots, flowers and fruits work together to keep it alive.</li>
+        <li>A bicycle is a system too: the pedals, chain and wheels work together to move it.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-system" data-sec="system"> I got this</label>
+  </section>
+
+  <!-- 2 PARTS -->
+  <section id="parts">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Plant parts and their jobs</h2></div>
+
+    <figure>
+      <svg viewBox="0 0 440 430" role="img" aria-labelledby="plantTitle">
+        <title id="plantTitle">A plant with labelled parts. Blue arrows show water moving up from the roots to the leaves. Orange arrows show food moving from the leaves to all parts.</title>
+        <!-- soil -->
+        <rect x="0" y="270" width="440" height="160" fill="var(--soil-soft)"/>
+        <line x1="0" y1="270" x2="440" y2="270" stroke="var(--soil)" stroke-width="3"/>
+        <!-- roots -->
+        <g stroke="var(--soil)" stroke-width="5" fill="none" stroke-linecap="round">
+          <path d="M220 270 C220 310 214 340 212 390"/>
+          <path d="M219 300 C200 312 182 318 160 336"/>
+          <path d="M219 300 C240 312 260 320 282 340"/>
+          <path d="M214 345 C198 356 186 366 176 384"/>
+          <path d="M214 345 C232 356 246 368 254 386"/>
+        </g>
+        <!-- stem -->
+        <rect x="213" y="70" width="14" height="202" rx="6" fill="var(--leaf)"/>
+        <!-- leaves -->
+        <g fill="var(--leaf)">
+          <ellipse cx="170" cy="200" rx="46" ry="18" transform="rotate(-20 170 200)"/>
+          <ellipse cx="270" cy="160" rx="46" ry="18" transform="rotate(20 270 160)"/>
+          <ellipse cx="172" cy="122" rx="40" ry="16" transform="rotate(-25 172 122)"/>
+        </g>
+        <g stroke="var(--bg)" stroke-width="2" fill="none" opacity=".7">
+          <line x1="130" y1="214" x2="212" y2="186"/>
+          <line x1="310" y1="174" x2="228" y2="146"/>
+          <line x1="137" y1="138" x2="212" y2="106"/>
+        </g>
+        <!-- flower -->
+        <g>
+          <circle cx="220" cy="48" r="13" fill="var(--sun)"/>
+          <circle cx="220" cy="26" r="12" fill="var(--food)" opacity=".85"/>
+          <circle cx="241" cy="44" r="12" fill="var(--food)" opacity=".85"/>
+          <circle cx="199" cy="44" r="12" fill="var(--food)" opacity=".85"/>
+          <circle cx="232" cy="66" r="11" fill="var(--food)" opacity=".85"/>
+          <circle cx="208" cy="66" r="11" fill="var(--food)" opacity=".85"/>
+          <circle cx="220" cy="48" r="9" fill="var(--sun)"/>
+        </g>
+        <!-- water arrows (up) -->
+        <defs>
+          <marker id="aw" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--water)"/></marker>
+          <marker id="af" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--food)"/></marker>
+        </defs>
+        <line x1="203" y1="380" x2="203" y2="98" stroke="var(--water)" stroke-width="4" stroke-dasharray="10 6" marker-end="url(#aw)"/>
+        <!-- food arrows (both ways) -->
+        <line x1="237" y1="150" x2="237" y2="84" stroke="var(--food)" stroke-width="4" stroke-dasharray="10 6" marker-end="url(#af)"/>
+        <line x1="237" y1="170" x2="237" y2="370" stroke="var(--food)" stroke-width="4" stroke-dasharray="10 6" marker-end="url(#af)"/>
+        <!-- labels -->
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="16" fill="var(--fg)">
+          <text x="300" y="42">Flower</text>
+          <line x1="296" y1="38" x2="256" y2="44" stroke="var(--muted)" stroke-width="1.5"/>
+          <text x="330" y="120">Leaf</text>
+          <line x1="326" y1="116" x2="300" y2="146" stroke="var(--muted)" stroke-width="1.5"/>
+          <text x="300" y="232">Stem</text>
+          <line x1="296" y1="228" x2="230" y2="228" stroke="var(--muted)" stroke-width="1.5"/>
+          <text x="306" y="372">Roots</text>
+          <line x1="302" y1="368" x2="262" y2="360" stroke="var(--muted)" stroke-width="1.5"/>
+          <text x="18" y="300" fill="var(--soil)" font-size="14">soil</text>
+          <text x="16" y="400" fill="var(--water)" font-size="14">water goes UP</text>
+          <text x="16" y="420" fill="var(--food)" font-size="14">food goes EVERYWHERE</text>
+        </g>
+      </svg>
+      <div class="legend">
+        <span><i style="background:var(--water)"></i><span class="w">Water + mineral salts: roots → stem → leaves (up only)</span></span>
+        <span><i style="background:var(--food)"></i><span class="f">Food: leaves → all parts (up and down)</span></span>
+      </div>
+    </figure>
+
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--leaf)">Leaf</td><td><b class="f">Makes food</b> for the plant. Lets the plant <b>take in and give out gases</b>.</td></tr>
+        <tr><td style="--part:var(--leaf)">Stem</td><td><b>Holds the plant upright</b> and holds the leaves up to the light. <b class="w">Carries water</b> up and <b class="f">carries food</b> to all parts.</td></tr>
+        <tr><td style="--part:var(--soil)">Roots</td><td><b class="w">Absorb water and mineral salts</b> from the soil. <b>Hold the plant firmly</b> in the ground.</td></tr>
+        <tr><td style="--part:var(--food)">Flower</td><td>Grows into a fruit.</td></tr>
+        <tr><td style="--part:var(--food)">Fruit</td><td>Protects the seeds and helps spread them.</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3>Which part is not working?</h3>
+      <div class="grid3">
+        <div class="mini water"><h3>Leaves wilt</h3><p>Not enough <span class="w">water</span> reaches the leaves. The roots or the water-carrying tubes are damaged.</p></div>
+        <div class="mini soil"><h3>Plant falls over</h3><p>The stem or roots are not giving support.</p></div>
+        <div class="mini food"><h3>Plant slowly dies</h3><p>Its leaves are gone, so <span class="f">no food</span> is made.</p></div>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-parts" data-sec="parts"> I got this</label>
+  </section>
+
+  <!-- 3 LEAVES -->
+  <section id="leaves">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Leaves: the food factory</h2></div>
+
+    <div class="card">
+      <h3>A leaf's recipe for food</h3>
+      <div class="recipe">
+        <span class="pill" style="color:var(--sun)">light</span><span class="op">+</span>
+        <span class="pill" style="color:var(--water)">water</span><span class="op">+</span>
+        <span class="pill" style="color:var(--muted)">carbon dioxide</span><span class="op">→</span>
+        <span class="pill" style="color:var(--food)">food</span><span class="op">+</span>
+        <span class="pill" style="color:var(--leaf)">oxygen</span>
+      </div>
+      <p>The leaf takes in carbon dioxide from the air and gives out oxygen.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="mini leaf"><h3>Why green?</h3><p>Leaves have <b class="g">chlorophyll</b>, which traps light. Only the <b>green parts</b> can make food.</p></div>
+      <div class="mini sun"><h3>Why flat and thin?</h3><p>A <b>larger surface area</b> traps <b>more light</b> to make more food.</p></div>
+      <div class="mini leaf"><h3>Parts of a leaf</h3><p><b>Leaf blade</b>, <b>leaf stalk</b> and <b>veins</b>. Veins carry <span class="w">water</span> in and <span class="f">food</span> out.</p></div>
+      <div class="mini sun"><h3>Special leaves</h3><p><b>Cactus</b>: leaves are spines that cut water loss, and the green stem makes food. <b>Pitcher plant</b>: leaves trap insects. <b>Water lily</b>: large leaves float on water.</p></div>
+    </div>
+
+    <div class="card">
+      <h3>Iodine test: is there food (starch)?</h3>
+      <div class="iodine">
+        <span class="swatch"><span class="dot" style="background:var(--brown-iodine)"></span>stays brown = <b>no starch</b></span>
+        <span class="swatch"><span class="dot" style="background:var(--blueblack)"></span>turns blue-black = <b>starch</b></span>
+      </div>
+      <ul>
+        <li><b>Green and white leaf</b>: only the <b class="g">green</b> part turns blue-black.</li>
+        <li><b>Part covered with black paper</b>: the covered part stays brown, so <b>light is needed</b> to make food.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-leaves" data-sec="leaves"> I got this</label>
+  </section>
+
+  <!-- 4 STEM -->
+  <section id="stem">
+    <div class="sec-head"><span class="tag water">4</span><h2>Stem: support and transport</h2></div>
+
+    <div class="grid2">
+      <div class="mini leaf"><h3>Support</h3><p>Holds the plant <b>upright</b> and the leaves up towards the <b>light</b>.</p></div>
+      <div class="mini water"><h3>Transport</h3><p><span class="w">Water and mineral salts go up.</span> <span class="f">Food goes to all parts.</span></p></div>
+    </div>
+
+    <div class="card">
+      <h3>Kinds of stems</h3>
+      <div class="grid2">
+        <div><b>Woody</b>: hard and strong (mango tree)</div>
+        <div><b>Non-woody</b>: soft and green (balsam)</div>
+        <div><b>Climbing</b>: twines around a support or uses tendrils to reach <b>more light</b></div>
+        <div><b>Creeping</b>: grows along the ground (sweet potato plant)</div>
+        <div><b class="f">Stores food</b>: potato, sugar cane, ginger</div>
+        <div><b class="g">Makes food</b>: green stems (cactus)</div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Red-water experiment</h3>
+        <p>Put a plant in red water. Red lines appear in the stem and leaves.</p>
+        <p>This shows that water travels <b class="w">up the stem</b> in <b class="w">water-carrying tubes</b>.</p>
+      </div>
+      <div class="card">
+        <h3>Ring experiment</h3>
+        <figure>
+          <svg viewBox="0 0 260 220" role="img" aria-labelledby="ringTitle">
+            <title id="ringTitle">A tree trunk with a ring of outer layer removed. Food coming down from the leaves stops at the ring, so the trunk swells above the ring. Water still goes up through the inside.</title>
+            <rect x="70" y="10" width="44" height="200" rx="6" fill="var(--soil)"/>
+            <ellipse cx="92" cy="98" rx="30" ry="14" fill="var(--soil)"/>
+            <rect x="80" y="112" width="24" height="16" fill="var(--soil-soft)"/>
+            <rect x="80" y="112" width="24" height="16" fill="none" stroke="var(--warn)" stroke-width="2" stroke-dasharray="4 3"/>
+            <line x1="56" y1="20" x2="56" y2="92" stroke="var(--food)" stroke-width="4" marker-end="url(#af)"/>
+            <line x1="92" y1="200" x2="92" y2="24" stroke="var(--water)" stroke-width="4" stroke-dasharray="8 5" marker-end="url(#aw)"/>
+            <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)">
+              <text x="128" y="96">swells here</text>
+              <text x="128" y="111" fill="var(--muted)" font-size="12">(food piles up)</text>
+              <text x="128" y="128" fill="var(--warn)">ring removed</text>
+              <text x="4" y="16" fill="var(--food)">food</text>
+              <text x="128" y="190" fill="var(--water)">water still</text>
+              <text x="128" y="205" fill="var(--water)">goes up</text>
+            </g>
+          </svg>
+        </figure>
+        <p>The <b class="f">food-carrying tubes</b> are in the outer layer, so food from the leaves cannot pass the ring.</p>
+        <p>The leaves <b>do not wilt</b> at first because the <b class="w">water-carrying tubes</b> inside are still there.</p>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-stem" data-sec="stem"> I got this</label>
+  </section>
+
+  <!-- 5 ROOTS -->
+  <section id="roots">
+    <div class="sec-head"><span class="tag soil">5</span><h2>Roots: drink and hold</h2></div>
+
+    <div class="grid3">
+      <div class="mini water"><h3>Absorb</h3><p><span class="w">water and mineral salts</span> from the soil</p></div>
+      <div class="mini soil"><h3>Anchor</h3><p>hold the plant <b>firmly</b> in the ground</p></div>
+      <div class="mini food"><h3>Store</h3><p>some roots store <span class="f">food</span></p></div>
+    </div>
+
+    <div class="card">
+      <p><b>Root hairs</b> give a <b>larger surface area</b>, so the root absorbs <b class="w">more water</b>.</p>
+    </div>
+
+    <div class="card">
+      <h3>Kinds of roots</h3>
+      <div class="grid2">
+        <div><b>Tap root</b>: one main root (balsam, mango)</div>
+        <div><b>Fibrous roots</b>: many thin roots (grass, rice)</div>
+        <div><b class="f">Storage roots</b>: carrot, radish, sweet potato</div>
+        <div><b>Prop roots</b>: extra support (maize, mangrove)</div>
+        <div><b>Breathing roots</b>: grow up out of the mud to take in air (mangrove)</div>
+        <div><b>Clinging roots</b>: hold on to walls (money plant)</div>
+        <div><b>Aerial roots</b>: hang in the air (orchid)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Tricky sort: stem or root?</h3>
+      <div class="sort">
+        <div class="mini leaf"><h3>Stem</h3><ul><li>potato</li><li>ginger</li><li>sugar cane</li></ul></div>
+        <div class="mini soil"><h3>Root</h3><ul><li>carrot</li><li>sweet potato</li><li>radish</li></ul></div>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-roots" data-sec="roots"> I got this</label>
+  </section>
+
+  <!-- 6 EXPERIMENT CLUES -->
+  <section id="experiments">
+    <div class="sec-head"><span class="tag water">6</span><h2>Experiment clues</h2></div>
+    <p class="lead">These set-ups often come up in exams. Learn what each clue is for.</p>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--water)">Layer of oil on the water</td><td>Stops the water from <b>evaporating</b>. Then any drop in the water level is because the <b>plant took in the water</b>.</td></tr>
+        <tr><td style="--part:var(--soil)">Roots in a plastic bag</td><td>The roots <b>cannot touch the water</b>, so the plant cannot absorb any.</td></tr>
+        <tr><td style="--part:var(--leaf)">Different number of leaves</td><td>Tests how the number of leaves affects <b>how much water</b> the plant takes in.</td></tr>
+        <tr><td style="--part:var(--sun)">Plant kept in the dark</td><td>Tests whether <b>light</b> is needed to make food.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Seedling facts</h3>
+      <ul>
+        <li>The <b>root grows out first</b>, then the shoot.</li>
+        <li><b>Seed leaves shrink</b> because the seedling <b class="f">uses up the food stored</b> in them.</li>
+        <li>If all its leaves are cut off, the seedling <b>dies</b>. It cannot <b class="f">make food</b>.</li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-experiments" data-sec="experiments"> I got this</label>
+  </section>
+
+  <!-- 7 TRAPS -->
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">7</span><h2>Watch out!</h2></div>
+    <div class="warn-card">
+      <div class="row"><span class="x">✗</span><span>Roots take in food from the soil.</span></div>
+      <div class="row"><span class="ok">✓</span><span>Roots take in <b class="w">water and mineral salts</b>. <b class="g">Leaves make the food.</b></span></div>
+    </div>
+    <div class="warn-card">
+      <div class="row"><span class="x">✗</span><span>The shoot grows out of the seed first.</span></div>
+      <div class="row"><span class="ok">✓</span><span>The <b>root</b> grows out first.</span></div>
+    </div>
+    <div class="warn-card">
+      <div class="row"><span class="x">✗</span><span>A potato is a root.</span></div>
+      <div class="row"><span class="ok">✓</span><span>A potato is a <b>stem</b>. A carrot is a root.</span></div>
+    </div>
+    <div class="warn-card">
+      <div class="row"><span class="x">✗</span><span>The plant needs sunlight to grow.</span></div>
+      <div class="row"><span class="ok">✓</span><span>The leaves need <b>light</b> to <b class="f">make food</b>.</span></div>
+    </div>
+    <div class="warn-card">
+      <div class="row"><span class="x">✗</span><span>In the ring experiment, the water tubes were cut.</span></div>
+      <div class="row"><span class="ok">✓</span><span>The <b class="f">food-carrying tubes</b> (outer layer) were removed.</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <!-- SUMMARY -->
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div><span class="pill" style="color:var(--sun)">light</span> + <span class="pill" style="color:var(--water)">water</span> + <span class="pill" style="color:var(--muted)">carbon dioxide</span><span class="arrow">→</span><span class="g">LEAF makes</span> <span class="pill" style="color:var(--food)">food</span></div>
+        <div><span class="w">Water:</span> roots <span class="arrow">→</span> stem <span class="arrow">→</span> leaves <span class="w">(up only)</span></div>
+        <div><span class="f">Food:</span> leaves <span class="arrow">→</span> stem <span class="arrow">→</span> all parts <span class="f">(up and down)</span></div>
+      </div>
+    </div>
+  </section>
+
+<!--quiz-->
+  var MCQ=[
+    {q:'A substance moves in a plant in this direction: roots → stem → leaves. What is the substance?',
+     o:['soil','food','water','seeds'],a:2,
+     e:'Water (with mineral salts) is absorbed by the roots and moves UP the stem to the leaves. Food moves the other way: from the leaves to all parts.'},
+    {q:'Which part of a plant holds it upright?',
+     o:['flower','leaf','stem','roots'],a:2,
+     e:'The stem holds the plant upright and holds the leaves up to the light. The roots hold the plant firmly in the soil, which is a different job.'},
+    {q:'Which of these stores food in its ROOTS?',
+     o:['potato','carrot','sugar cane','ginger'],a:1,
+     e:'A carrot is a storage root. Potato, sugar cane and ginger store food in their STEMS.'},
+    {q:'Part of a leaf was covered with black paper for 3 days. Then the leaf was tested with iodine. Which part turned blue-black?',
+     o:['Only the covered part','Only the uncovered part','The whole leaf','No part of the leaf'],a:1,
+     e:'Only the uncovered part got light, so only it could make food (starch). Iodine turns blue-black where there is starch.'},
+    {q:'A leaf is green with white patches. It is tested with iodine. Which part turns blue-black?',
+     o:['Only the white part','Only the green part','The whole leaf','No part'],a:1,
+     e:'Only the green part has chlorophyll to trap light and make food. The white part cannot make food.'},
+    {q:'A ring of the outer layer of a tree trunk is removed. After some weeks, which part swells?',
+     o:['The part just above the ring','The part just below the ring','The roots','The leaves'],a:0,
+     e:'The food-carrying tubes in the outer layer were removed. Food from the leaves cannot move down past the ring, so it piles up just above the ring.'},
+    {q:'In a plant experiment, a layer of oil is poured on top of the water in a jar. Why?',
+     o:['To give the plant food','To stop the water from evaporating','To keep the roots warm','To block the light'],a:1,
+     e:'The oil stops water from evaporating. Then any drop in the water level is only because the plant took in the water.'},
+    {q:'Jar A: roots in water. Jar B: roots in water, no oil. Jar C: roots wrapped in a plastic bag. Jar D: fewer leaves. (A, C and D have a layer of oil.) Which two jars show that roots absorb water?',
+     o:['A and B','A and C','B and D','C and D'],a:1,
+     e:'In A and C, the only difference is whether the roots touch the water. Everything else is the same.'},
+    {q:'Why does a plant with a weak stem twine around a pole?',
+     o:['To get more light','To get more water','To store food','To hold the soil together'],a:0,
+     e:'Climbing up the pole lets the plant grow upwards to get more light to make food.'},
+    {q:'All the roots of a plant were cut off. Soon its leaves wilted. Why?',
+     o:['The leaves could not get light','The plant could not absorb water','The stem could not make food','The flowers used up the water'],a:1,
+     e:'Roots absorb water from the soil. Without roots, not enough water reaches the leaves, so they wilt.'}
+  ];
+  var TF=[
+    {s:'The leaves allow a seedling to take in and give out gases.',a:true,e:'True. Leaves take in carbon dioxide and give out oxygen.'},
+    {s:'When a seed germinates, the shoot grows out before the root.',a:false,e:'False. The ROOT grows out first, then the shoot.'},
+    {s:'The roots absorb water for the seedling.',a:true,e:'True. Roots absorb water and mineral salts.'},
+    {s:'Water moves down from the leaves to the roots.',a:false,e:'False. Water moves UP only: roots → stem → leaves.'},
+    {s:'A potato is a stem.',a:true,e:'True. A potato is a storage stem. A carrot is a root.'}
+  ];
+  /* each keyword group = 1 mark; a group is matched when ALL its patterns appear */
+  var OE=[
+    {q:'As a seedling grew, its seed leaves became smaller. Explain why.',
+     model:'The food stored in the seed leaves was used up by the seedling to grow.',
+     k:[{l:'stored food is used up',all:[/food|starch/,/\bus(e|ed|ing)\b|finish|less food|no more food|run(s)? out/]}]},
+    {q:'A seedling died after all its leaves were cut off. Explain why.',
+     model:'Without leaves, the seedling could not make food, so it had no food to grow and stay alive.',
+     k:[{l:'cannot make food',all:[/food/,/make|made|making|produce/]}]},
+    {q:'Why are most leaves flat and thin?',
+     model:'They have a larger surface area to trap more light to make food.',
+     k:[{l:'larger surface area',all:[/surface area/]},{l:'trap more light',all:[/trap|absorb|\bget|receive|catch|take in|more light/,/light/]}]},
+    {q:'A balsam plant was put in red water. After 2 hours, there were red lines in the leaves. Explain.',
+     model:'The red water was absorbed by the roots and carried up the stem through the water-carrying tubes to the leaves.',
+     k:[{l:'absorbed by the roots',all:[/root/,/absorb|took in|take in|taken in/]},{l:'up the stem in water-carrying tubes',all:[/stem/,/water[- ]?carrying|tube/]}]},
+    {q:'A ring of the outer layer of a tree trunk was removed. The part just above the ring swelled. Explain.',
+     model:'The food-carrying tubes in the outer layer were removed. Food made in the leaves could not move down past the ring, so it collected above the ring.',
+     k:[{l:'food-carrying tubes removed',all:[/food[- ]?carrying|food tube/]},{l:'food collects above the ring',all:[/food/,/collect|pile|gather|accumulat|build|stuck|trapped|cannot|can't|could not|couldn't|unable/]}]},
+    {q:'Mangroves grow in soft mud. How do their prop roots and breathing roots help them?',
+     model:'Prop roots give extra support to hold the plant firmly in the soft mud. Breathing roots grow above the mud to take in air.',
+     k:[{l:'prop roots give support',all:[/support|hold|anchor|firm/]},{l:'breathing roots take in air',all:[/\bair\b|oxygen|breathe/]}]},
+    {q:'Many root hairs of a plant were damaged when it was moved. Its leaves wilted. Explain.',
+     model:'Root hairs increase the surface area for absorbing water. With fewer root hairs, less water was absorbed, so the leaves did not get enough water.',
+     k:[{l:'root hairs give a larger surface area',all:[/surface area/]},{l:'less water absorbed',all:[/less|fewer|not enough|lesser|cannot|can't|could not/,/water/]}]},
+    {q:'Jar A had a plant with many leaves. Jar D had a plant with fewer leaves. Everything else was the same. What was John trying to find out?',
+     model:'To find out how the number of leaves affects the amount of water taken in by the plant.',
+     k:[{l:'number of leaves affects amount of water taken in',all:[/leaf|leaves/,/water/,/number|amount|how many|more|fewer|less/]}]}
+  ];
+

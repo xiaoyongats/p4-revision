@@ -1,0 +1,672 @@
+<title>Effects of Heat Quick Notes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = water/cold, orange = food/heat, green = living/correct, brown = soil/solid, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">P4 Science · Chapter 7</span>
+    <h1>Effects of Heat</h1>
+    <p class="lead">The key points about heat transfer, conductors, expansion and changes of state. This topic appears the most in exams. <span class="f">Orange is hot</span> and <span class="w">blue is cold</span>.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#transfer">Heat transfer</a>
+      <a href="#sources">Sources</a>
+      <a href="#conductors">Conductors</a>
+      <a href="#expand">Expand & contract</a>
+      <a href="#states">Changes of state</a>
+      <a href="#droplets">Water droplets</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="transfer">
+    <div class="sec-head"><span class="tag food">1</span><h2>Who gains heat? Who loses heat?</h2></div>
+    <div class="card">
+      <p class="big">The <b class="f">hotter</b> thing <b>loses</b> heat. Everything <b class="w">colder</b> that it touches <b>gains</b> heat.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--water)">Ice cream out of the freezer</td><td>The ice cream <b>gains heat from the surrounding air</b> and melts.</td></tr>
+        <tr><td style="--part:var(--water)">Eating ice cream</td><td>Ice cream <b>gains</b> heat. The cup and your mouth <b>lose</b> heat.</td></tr>
+        <tr><td style="--part:var(--food)">Spoon in hot coffee</td><td>The spoon <b>gains heat from the coffee</b>.</td></tr>
+        <tr><td style="--part:var(--food)">Glass of ice in a basin of hot water</td><td>Hot water <b>loses</b> heat. The basin, glass and ice <b>gain</b> heat.</td></tr>
+        <tr><td style="--part:var(--water)">Holding ice</td><td>Your hand <b>loses heat</b> to the ice, so it feels cold.</td></tr>
+      </table>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-transfer" data-sec="transfer"> I got this</label>
+  </section>
+
+  <section id="sources">
+    <div class="sec-head"><span class="tag sun">2</span><h2>Sources of heat</h2></div>
+    <div class="sort">
+      <div class="mini food"><h3>Sources ✓</h3><ul><li><b>the Sun</b> (main source)</li><li>fire, candle flame</li><li>lit lamp, iron, oven</li><li><b>friction</b> (rubbing hands)</li><li>our bodies</li></ul></div>
+      <div class="mini water"><h3>NOT sources ✗</h3><ul><li><b>woollen jacket</b> (it only slows down heat loss)</li><li>ice</li><li>a mirror</li></ul></div>
+    </div>
+    <p class="hint">In an experiment, the boiling water or the burner is the source of heat.</p>
+    <label class="gotit"><input type="checkbox" id="done-sources" data-sec="sources"> I got this</label>
+  </section>
+
+  <section id="conductors">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Good and poor conductors of heat</h2></div>
+    <div class="grid2">
+      <div class="mini food"><h3>Good conductors</h3><p>Heat flows through <b>quickly</b>.<br><b>Metals</b>: copper, iron, steel, aluminium (and foil).</p></div>
+      <div class="mini water"><h3>Poor conductors</h3><p>Heat flows through <b>slowly</b>.<br>wood, plastic, rubber, glass, cloth, wool, styrofoam, <b>air</b>.</p></div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--food)">Pot / pan</td><td><b>Metal</b>: heat flows quickly to the food.</td></tr>
+        <tr><td style="--part:var(--water)">Handle</td><td><b>Plastic or wood</b>: heat flows slowly to the hand.</td></tr>
+        <tr><td style="--part:var(--water)">Cooler box / lunch box</td><td><b>Styrofoam</b>: keeps cold drinks cold <b>and</b> hot food hot.</td></tr>
+        <tr><td style="--part:var(--water)">Wool, feathers</td><td><b>Trap air</b>. Air is a poor conductor, so less heat is lost from the body.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Wax on rods experiment</h3>
+      <div class="bars">
+        <div class="barrow"><span>Rod A: 20 s</span><div class="b" style="width:30%;background:var(--food)">best</div></div>
+        <div class="barrow"><span>Rod C: 35 s</span><div class="b" style="width:55%;background:var(--sun);color:#2a2205"></div></div>
+        <div class="barrow"><span>Rod B: 45 s</span><div class="b" style="width:72%;background:var(--water)">poorest</div></div>
+      </div>
+      <ul>
+        <li><b>Shortest time</b> for the wax to melt → <b class="f">best conductor</b>.</li>
+        <li><b>Longest time</b> → <b class="w">poorest conductor</b> → best for a <b>handle</b>.</li>
+        <li>Wax pieces along one rod: the one that drops <b>first</b> is <b>closest to the heat source</b>.</li>
+        <li>Keep the same: rod length and thickness, amount of wax, distance from the hot water. (The <b>material</b> is what you change.)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Wrapped flasks: cooling graph</h3>
+      <p>The line that <b>drops fastest</b> → best conductor (aluminium foil). The line that <b>drops slowest</b> → poorest conductor (cloth) → best to keep food hot <b>and</b> drinks cold.</p>
+    </div>
+    <div class="card">
+      <h3>Metal feels colder than wood</h3>
+      <p>They are at the <b>same temperature</b>. Metal <b>conducts heat away from your hand faster</b>, so it feels colder.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-conductors" data-sec="conductors"> I got this</label>
+  </section>
+
+  <section id="expand">
+    <div class="sec-head"><span class="tag food">4</span><h2>Expansion and contraction</h2></div>
+    <div class="card">
+      <div class="recipe">
+        <span class="pill" style="color:var(--food)">gains heat</span><span class="op">→</span><span class="pill" style="color:var(--food)">expands</span>
+        <span class="op">&nbsp;&nbsp;</span>
+        <span class="pill" style="color:var(--water)">loses heat</span><span class="op">→</span><span class="pill" style="color:var(--water)">contracts</span>
+      </div>
+      <p><b>Mass stays the same.</b> Only the volume changes. Gases expand the most.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--food)">Dented ping-pong ball</td><td>In hot water, the <b>air inside expands</b> and pushes the dent out.</td></tr>
+        <tr><td style="--part:var(--food)">Stopper pops out</td><td>Near a fire, the <b>air in the bottle</b> gains heat and expands.</td></tr>
+        <tr><td style="--part:var(--food)">Tight metal lid</td><td>Run hot water over it. The <b>metal lid expands more</b> than the glass and loosens.</td></tr>
+        <tr><td style="--part:var(--food)">Gaps between tiles / rails</td><td>Room to expand. On a <b>hot day</b> the tiles expand, so the <b>gaps get narrower</b>.</td></tr>
+        <tr><td style="--part:var(--food)">Cables sag</td><td>On hot days the cables expand and get longer.</td></tr>
+        <tr><td style="--part:var(--water)">Two stuck glasses</td><td><b class="w">Ice in the inner glass</b>: it contracts. <b class="f">Hot water around the outer glass</b>: it expands. They come apart.</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>3-step answer</h3>
+      <div class="steps"><span class="box">What gains or loses heat?</span><span class="to">→</span><span class="box">Expands or contracts</span><span class="to">→</span><span class="box">What happens</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-expand" data-sec="expand"> I got this</label>
+  </section>
+
+  <section id="states">
+    <div class="sec-head"><span class="tag water">5</span><h2>Changes of state</h2></div>
+    <figure>
+      <svg viewBox="0 0 480 190" role="img" aria-labelledby="stT">
+        <title id="stT">Solid changes to liquid by melting (gains heat); liquid changes to gas by boiling or evaporation (gains heat). Gas changes to liquid by condensation (loses heat); liquid changes to solid by freezing (loses heat).</title>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--food)"/></marker>
+          <marker id="ac" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--water)"/></marker>
+        </defs>
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="14" fill="var(--fg)" text-anchor="middle">
+          <rect x="10" y="70" width="100" height="50" rx="12" fill="var(--soil-soft)" stroke="var(--soil)" stroke-width="2"/><text x="60" y="100">SOLID</text>
+          <rect x="190" y="70" width="100" height="50" rx="12" fill="var(--water-soft)" stroke="var(--water)" stroke-width="2"/><text x="240" y="100">LIQUID</text>
+          <rect x="370" y="70" width="100" height="50" rx="12" fill="var(--card)" stroke="var(--muted)" stroke-width="2"/><text x="420" y="100">GAS</text>
+          <path d="M80 66 Q150 20 220 66" fill="none" stroke="var(--food)" stroke-width="3" marker-end="url(#ah)"/>
+          <text x="150" y="28" fill="var(--food)">melting</text>
+          <path d="M260 66 Q330 20 400 66" fill="none" stroke="var(--food)" stroke-width="3" marker-end="url(#ah)"/>
+          <text x="330" y="28" fill="var(--food)">boiling / evaporation</text>
+          <path d="M220 124 Q150 170 80 124" fill="none" stroke="var(--water)" stroke-width="3" marker-end="url(#ac)"/>
+          <text x="150" y="182" fill="var(--water)">freezing</text>
+          <path d="M400 124 Q330 170 260 124" fill="none" stroke="var(--water)" stroke-width="3" marker-end="url(#ac)"/>
+          <text x="330" y="182" fill="var(--water)">condensation</text>
+        </g>
+      </svg>
+      <div class="legend"><span><i style="background:var(--food)"></i><span class="f">gains heat</span></span><span><i style="background:var(--water)"></i><span class="w">loses heat</span></span></div>
+    </figure>
+    <div class="card">
+      <h3>Heating ice: the temperature graph</h3>
+      <div class="chart">
+        <svg viewBox="0 0 400 220" role="img" aria-labelledby="hcT">
+          <title id="hcT">Heating ice from minus 10 degrees. Temperature rises to 0, stays flat at 0 while melting, rises to 100, stays flat at 100 while boiling.</title>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)">
+            <line x1="50" y1="15" x2="50" y2="195" stroke="var(--muted)" stroke-width="2"/>
+            <line x1="50" y1="195" x2="390" y2="195" stroke="var(--muted)" stroke-width="2"/>
+            <text x="10" y="40">100 °C</text><text x="22" y="166">0 °C</text>
+            <polyline points="50,185 85,162 165,162 245,36 360,36" fill="none" stroke="var(--food)" stroke-width="4" stroke-linejoin="round"/>
+            <text x="125" y="152" text-anchor="middle" fill="var(--water)">melting</text>
+            <text x="125" y="182" text-anchor="middle" fill="var(--muted)">(flat)</text>
+            <text x="302" y="28" text-anchor="middle" fill="var(--food)">boiling (flat)</text>
+            <text x="340" y="213" fill="var(--muted)">time →</text>
+          </g>
+        </svg>
+      </div>
+      <p>While melting or boiling, the temperature <b>stays the same</b> until the change is complete.</p>
+    </div>
+    <div class="grid2">
+      <div class="mini water"><h3>Boiling</h3><p>At <b>100 °C</b>, fast, bubbles all through the liquid.</p></div>
+      <div class="mini sun"><h3>Evaporation</h3><p>At <b>any temperature</b>, slow, only at the <b>surface</b>.</p></div>
+    </div>
+    <div class="card">
+      <h3>Faster evaporation (drying clothes)</h3>
+      <div class="grid2">
+        <div><b class="f">Higher temperature</b> (sunny day)</div>
+        <div><b>Wind</b> (fan, windy place)</div>
+        <div><b>Larger exposed surface area</b> (spread out)</div>
+        <div><b>Drier air</b></div>
+      </div>
+      <p>Sweat evaporates by <b>taking heat from our skin</b>, so we feel cooler.</p>
+    </div>
+    <div class="card">
+      <p>Other things change state too: liquid wax <b>loses heat and freezes</b> into solid wax; ice on frozen food <b>gains heat and melts</b>.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-states" data-sec="states"> I got this</label>
+  </section>
+
+  <section id="droplets">
+    <div class="sec-head"><span class="tag water">6</span><h2>Where do water droplets come from?</h2></div>
+    <div class="card">
+      <div class="steps">
+        <span class="box">Water vapour in the warmer air</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--water)">touches a cooler surface</span><span class="to">→</span>
+        <span class="box" style="border-color:var(--water)">loses heat, condenses</span><span class="to">→</span>
+        <span class="box">water droplets</span>
+      </div>
+      <p class="hint">Use these 3 steps for 3 marks.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table class="jobs">
+        <tr><td style="--part:var(--water)">Glass of ice water</td><td>Droplets on the <b>outside</b>.</td></tr>
+        <tr><td style="--part:var(--water)">Air-con car window</td><td>Droplets on the <b>outside</b> (warm air is outside).</td></tr>
+        <tr><td style="--part:var(--food)">Mirror after a hot shower</td><td>Droplets on the <b>room side</b> (warm air is inside).</td></tr>
+      </table>
+    </div>
+    <p class="card"><span><b>Water vapour is invisible.</b> The white "steam" above a kettle is tiny <b>water droplets</b>.</span></p>
+    <label class="gotit"><input type="checkbox" id="done-droplets" data-sec="droplets"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">7</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A woollen jacket gives off heat.</span></div><div class="row"><span class="ok">✓</span><span>It <b>slows down heat loss</b>. It is not a source.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The gaps between tiles expand on a hot day.</span></div><div class="row"><span class="ok">✓</span><span>The <b>tiles</b> expand, so the gaps get <b>narrower</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Longest time for wax to melt = best conductor.</span></div><div class="row"><span class="ok">✓</span><span><b>Shortest</b> time = best conductor.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Use aluminium foil to keep food hot.</span></div><div class="row"><span class="ok">✓</span><span>Foil is a <b>good</b> conductor. Use a <b>poor</b> conductor such as cloth.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Stuck glasses: put hot water inside.</span></div><div class="row"><span class="ok">✓</span><span><b>Inner glass cold, outer glass hot.</b></span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Droplets on a cold glass came through the glass.</span></div><div class="row"><span class="ok">✓</span><span>They came from <b>water vapour in the air</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The temperature keeps rising while ice melts.</span></div><div class="row"><span class="ok">✓</span><span>It <b>stays at 0 °C</b> until all the ice has melted.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Metals are good conductors. Plastic, wood, cloth, air are poor conductors.</div>
+        <div><span class="f">Gain heat → expand</span>. <span class="w">Lose heat → contract</span>. Mass stays the same.</div>
+        <div>Melting / boiling / evaporation gain heat. Freezing / condensation lose heat.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Answer every question, then press <b>Check my answers</b>. For written answers, the marks come from the <b>keywords</b> you used, just like in the real exam.</p>
+
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: True or false?</h3><div id="tfq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Write your answer</h3><div id="oeq" class="qpart"></div></div>
+
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var KEY='p4-effects-heat-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ ---------- */
+(function(){
+  var MCQ=[
+    {q:'Which is NOT a source of heat?',o:['the Sun','a lighted lamp','a candle flame','a woollen jacket'],a:3,e:'A woollen jacket only slows down heat loss from the body. It does not give off heat.'},
+    {q:'A cup of ice cream melts after it is taken out of the freezer. Why?',o:['The cup lost heat to the air.','The cup gained heat from the ice cream.','The ice cream lost heat to the air.','The ice cream gained heat from the surrounding air.'],a:3,
+     e:'The ice cream is colder than the air, so it gains heat from the air and melts.'},
+    {q:'A glass of ice cubes stands in a basin of hot water. Which gain heat?<br>A: basin &nbsp; B: glass &nbsp; C: hot water &nbsp; D: ice cubes',o:['A and D only','B and C only','A, B and D only','A, B, C and D'],a:2,
+     e:'The hot water is the hottest, so it loses heat. The basin, glass and ice all gain heat.'},
+    {q:'Wax on rods X, Y and Z dropped off after 2, 5 and 3 minutes. Which statements are correct?<br>A: X is a better conductor than Y.<br>B: X is a better conductor than Z.<br>C: Y is a better conductor than Z.',o:['C only','A and B only','A and C only','B and C only'],a:1,
+     e:'The shortest time means the best conductor. X (2 min) is best, then Z (3 min), then Y (5 min).'},
+    {q:'Wax pieces K, L, M and N on one metal rod fell after 40, 28, 17 and 63 seconds. Where was the heat source?',o:['under K','under L','under M','under N'],a:2,
+     e:'M fell first, so M was closest to the heat source.'},
+    {q:'Which is the best conductor of heat?',o:['metal cup','paper cup','plastic cup','ceramic cup'],a:0,e:'Metals are good conductors of heat.'},
+    {q:'What happens to the gaps between pavement tiles on a hot day?',o:['They become larger.','They become narrower.','They expand more than the tiles.','They gain heat.'],a:1,
+     e:'The tiles gain heat and expand into the gaps, so the gaps get narrower.'},
+    {q:'An empty glass bottle with a stopper is put near a fire. The stopper pops out because the ___.',o:['air in the bottle gains heat and expands','air in the bottle loses heat and contracts','glass gains heat and expands','glass loses heat and contracts'],a:0,
+     e:'The air inside gains heat and expands, pushing the stopper out.'},
+    {q:'Flasks of boiling water were wrapped in cloth, plastic and foil. Which wrap keeps a drink COLD the longest?',o:['aluminium foil','plastic','cloth (the slowest to cool)','none of them'],a:2,
+     e:'The poorest conductor slows heat flow both ways. Cloth cooled slowest, so it also keeps cold drinks cold longest.'},
+    {q:'Which change GAINS heat?',o:['freezing','condensation','evaporation','water vapour turning into droplets'],a:2,
+     e:'Melting, boiling and evaporation gain heat. Freezing and condensation lose heat.'},
+    {q:'Which one shows evaporation?',o:['butter melting in a pan','a puddle drying in the sun','droplets on a cold can','water turning into ice'],a:1,
+     e:'The puddle\'s water turns into water vapour. The others are melting, condensation and freezing.'}
+  ];
+  var TF=[
+    {s:'Air is a poor conductor of heat.',a:true,e:'True. That is why things that trap air keep us warm.'},
+    {s:'When something expands, its mass increases.',a:false,e:'False. Only the volume changes; the mass stays the same.'},
+    {s:'Water can evaporate at room temperature.',a:true,e:'True. Evaporation happens at any temperature.'},
+    {s:'The temperature of melting ice keeps rising until it is all water.',a:false,e:'False. It stays at 0 °C while the ice is melting.'},
+    {s:'At room temperature, a metal spoon is colder than a wooden spoon.',a:false,e:'False. They are the same temperature. Metal only feels colder because it conducts heat from your hand faster.'}
+  ];
+  var OE=[
+    {q:'Pea fell from rods P, Q, R and S after 30, 65, 100 and 80 seconds. Which material is best for a frying-pan handle? Explain.',
+     model:'R. It is the poorest conductor of heat (the pea took the longest time to fall), so heat flows slowly from the pan to the hand.',
+     k:[{l:'R',all:[/\br\b/]},{l:'poorest conductor / heat flows slowly',all:[/poor|slow|longest|bad|insulator/]}]},
+    {q:'A dented ping-pong ball was put into hot water. The dent disappeared. Explain.',
+     model:'The air inside the ball gained heat from the hot water and expanded, pushing the dent out.',
+     k:[{l:'air inside gains heat',all:[/\bair\b/,/gain|absorb/]},{l:'expands and pushes the dent out',all:[/expand/]}]},
+    {q:'Glass P is stuck inside glass Q. Where should Jun Kai put ice cubes and hot water? Explain.',
+     model:'Ice cubes in the inner glass P: it loses heat and contracts. Hot water around the outer glass Q: it gains heat and expands. Then they separate.',
+     k:[{l:'ice in P / P contracts',all:[/ice/,/\bp\b|inner|inside/]},{l:'hot water around Q / Q expands',all:[/hot/,/\bq\b|outer|outside/]}]},
+    {q:'Water droplets formed on the outside of a glass of ice water. Explain where they came from.',
+     model:'Water vapour in the surrounding air touched the cooler outer surface of the glass, lost heat and condensed into water droplets.',
+     k:[{l:'water vapour in the air',all:[/vapour|vapor/]},{l:'touched the cooler glass',all:[/cool|cold/]},{l:'lost heat and condensed',all:[/condens/]}]},
+    {q:'Liquid wax in a candle became solid 2 hours after the flame was put out. Explain.',
+     model:'The liquid wax lost heat to the surrounding air and froze (became solid).',
+     k:[{l:'lost heat to the air',all:[/lose|lost/,/heat/]},{l:'froze / solidified',all:[/freez|froze|solid/]}]},
+    {q:'Two wet towels: A is spread out and B is folded. Which dries faster? Explain.',
+     model:'A. It has a larger exposed surface area, so the water evaporates faster.',
+     k:[{l:'towel A',all:[/^\s*(towel )?a\b|towel a\b/]},{l:'larger exposed surface area',all:[/surface area|spread/]}]},
+    {q:'Why do birds fluff up their feathers on cold days?',
+     model:'Fluffed feathers trap more air. Air is a poor conductor of heat, so less heat is lost from the body.',
+     k:[{l:'trap more air',all:[/\bair\b/,/trap/]},{l:'air is a poor conductor / less heat lost',all:[/poor|less heat|slow|keep/]}]},
+    {q:'In a cold room, a metal chair leg feels colder than the plastic seat. Are they at different temperatures? Explain.',
+     model:'No. Both are at room temperature. Metal is a better conductor, so it conducts heat away from the hand faster.',
+     k:[{l:'no, same temperature',all:[/\bno\b|same/]},{l:'metal conducts heat away from the hand faster',all:[/conduct/,/fast|quick|better|good/]}]}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+  var mcqBox=document.getElementById('mcq'),tfBox=document.getElementById('tfq'),oeBox=document.getElementById('oeq');
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){
+      var lab=el('label','opt');
+      var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;
+      lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));
+      opts.appendChild(lab);
+    });
+    card.appendChild(opts);
+    mcqBox.appendChild(card);
+  });
+  var tfCard=el('div','q');tfCard.id='tfcard';
+  var tfHead=el('div','qhead');tfHead.appendChild(el('span','qnum','Q'+(n+1)));tfHead.appendChild(el('span','qmarks',TF.length+' marks'));
+  tfCard.appendChild(tfHead);
+  tfCard.appendChild(el('p','qtext','Is each statement about the effects of heat true or false?'));
+  var tfList=el('div','tf');
+  TF.forEach(function(item,i){
+    var row=el('div','tfrow');row.id='tfrow'+i;
+    row.appendChild(el('span',null,item.s));
+    var b=el('div','tfbtns');
+    ['True','False'].forEach(function(lbl){
+      var lab=el('label');var inp=document.createElement('input');inp.type='radio';inp.name='tf'+i;inp.id='tf'+i+lbl;inp.value=lbl==='True'?'1':'0';
+      lab.appendChild(inp);lab.appendChild(document.createTextNode(lbl));b.appendChild(lab);
+    });
+    row.appendChild(b);tfList.appendChild(row);
+  });
+  tfCard.appendChild(tfList);tfBox.appendChild(tfCard);
+  n++;
+  OE.forEach(function(item,i){
+    n++;
+    var card=el('div','q');card.id='oe'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',item.k.length+(item.k.length>1?' marks':' mark')));
+    card.appendChild(head);
+    card.appendChild(el('p','qtext',item.q));
+    var ta=document.createElement('textarea');ta.id='oeans'+i;ta.placeholder='Write your answer here…';ta.setAttribute('aria-label','Answer for question '+n);
+    card.appendChild(ta);
+    oeBox.appendChild(card);
+  });
+
+  function clearFeedback(card){var f=card.querySelector('.feedback');if(f)f.remove();card.classList.remove('right','wrong','partial');}
+  function setState(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+
+  var oeGot=[];
+  function renderScore(){
+    var mcqS=0,tfS=0,oeS=0,max=MCQ.length+TF.length;
+    MCQ.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)mcqS++;});
+    TF.forEach(function(item,i){var c=document.querySelector('input[name="tf'+i+'"]:checked');if(c&&(c.value==='1')===item.a)tfS++;});
+    OE.forEach(function(item,i){max+=item.k.length;oeS+=oeGot[i]?oeGot[i].filter(Boolean).length:0;});
+    var total=mcqS+tfS+oeS;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+mcqS+'/'+MCQ.length+'</span><span>True/false: '+tfS+'/'+TF.length+'</span><span>Written: '+oeS+'/'+(max-MCQ.length-TF.length)+'</span>';
+    var pct=total/max,msg;
+    if(pct>=0.9)msg='Excellent! You know this chapter well.';
+    else if(pct>=0.7)msg='Good work. Read the explanations for the ones you missed.';
+    else if(pct>=0.5)msg='Getting there. Go back over the sections above, then try again.';
+    else msg='Read the learning points again, then have another go.';
+    document.getElementById('scoremsg').textContent=msg;
+    try{localStorage.setItem('p4-effects-heat-best',String(Math.max(total,+(localStorage.getItem('p4-effects-heat-best')||0))));localStorage.setItem('p4-effects-heat-max',String(max));}catch(e){}
+  }
+
+  function check(){
+    var blanks=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFeedback(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      card.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      var labels=card.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');
+      var ok=c&&+c.value===item.a;
+      if(c&&!ok)labels[+c.value].classList.add('is-picked-wrong');
+      setState(card,ok?1:0,1);
+      var fb=el('div','feedback');
+      fb.appendChild(el('span','verdict',ok?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('p',null,item.e));
+      card.appendChild(fb);
+    });
+    var tfOk=0;
+    TF.forEach(function(item,i){
+      var row=document.getElementById('tfrow'+i);row.classList.remove('is-right','is-wrong');
+      var c=document.querySelector('input[name="tf'+i+'"]:checked');if(!c)blanks++;
+      var ok=c&&(c.value==='1')===item.a;if(ok)tfOk++;
+      row.classList.add(ok?'is-right':'is-wrong');
+    });
+    var tfCard=document.getElementById('tfcard');clearFeedback(tfCard);setState(tfCard,tfOk,TF.length);
+    var fb=el('div','feedback');fb.appendChild(el('span','verdict',tfOk+' of '+TF.length+' correct'));
+    var ul=el('ul');TF.forEach(function(item){ul.appendChild(el('li',null,item.e));});fb.appendChild(ul);tfCard.appendChild(fb);
+
+    OE.forEach(function(item,i){
+      var card=document.getElementById('oe'+i);clearFeedback(card);
+      var txt=(document.getElementById('oeans'+i).value||'').toLowerCase();
+      if(!txt.trim())blanks++;
+      oeGot[i]=item.k.map(function(g){return txt.trim()!==''&&g.all.every(function(r){return r.test(txt);});});
+      var fb=el('div','feedback');
+      var verdict=el('span','verdict');fb.appendChild(verdict);
+      fb.appendChild(el('p',null,'<b>Model answer:</b> '+item.model));
+      var kw=el('div','kw');
+      item.k.forEach(function(g,j){
+        var b=el('button',null,(oeGot[i][j]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+        b.addEventListener('click',function(){
+          oeGot[i][j]=!oeGot[i][j];
+          b.setAttribute('aria-pressed',oeGot[i][j]?'true':'false');
+          b.textContent=(oeGot[i][j]?'✓ ':'✗ ')+g.l;
+          paint();renderScore();
+        });
+        kw.appendChild(b);
+      });
+      fb.appendChild(el('p','hint','Keywords needed (1 mark each). Green means found in your answer. If you said the same idea in other words, tap it to give yourself the mark.'));
+      fb.appendChild(kw);
+      function paint(){
+        var got=oeGot[i].filter(Boolean).length;
+        card.classList.remove('right','wrong','partial');setState(card,got,item.k.length);
+        verdict.textContent=got+' of '+item.k.length+(item.k.length>1?' marks':' mark');
+      }
+      paint();
+      card.appendChild(fb);
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    renderScore();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+
+  function reset(){
+    document.querySelectorAll('#quiz input[type=radio]').forEach(function(r){r.checked=false;});
+    document.querySelectorAll('#quiz textarea').forEach(function(t){t.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFeedback);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .tfrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    oeGot=[];
+    document.getElementById('scorebox').hidden=true;
+    document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>

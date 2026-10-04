@@ -1,0 +1,107 @@
+<!--meta
+title: Symmetry Quick Notes
+eyebrow: P4 Math · Geometry
+h1: Symmetry
+lead: Lines of symmetry in letters and shapes, and how to complete a symmetric figure on a grid, including with a slanted (diagonal) line.
+key: p4m-symmetry
+chips: what=What it is|shapes=Letters & shapes|complete=Completing figures|diagonal=Diagonal lines|traps=Watch out
+-->
+<!--body-->
+  <section id="what">
+    <div class="sec-head"><span class="tag water">1</span><h2>What is a line of symmetry?</h2></div>
+    <div class="card">
+      <p class="big">If you <b>fold</b> along the line, the two halves <b>match exactly</b>.</p>
+      <p>Each point on one side has a partner on the other side, the <b>same distance</b> from the line.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-what" data-sec="what"> I got this</label>
+  </section>
+
+  <section id="shapes">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Letters and shapes</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--leaf)">Symmetric letters</td><td>A, H, M, T, U, V, W, X, Y (up–down line) · B, C, D, E, K (side-to-side line) · H, X (both)</td></tr>
+      <tr><td style="--part:var(--warn)">No line of symmetry</td><td><b>F, G, J, L, N, P, Q, R, S, Z</b> (N, S and Z only look the same when turned upside down)</td></tr>
+      <tr><td style="--part:var(--water)">Square</td><td><b>4</b> lines (2 straight across, 2 diagonals)</td></tr>
+      <tr><td style="--part:var(--water)">Rectangle</td><td><b>2</b> lines. The diagonals are <b>NOT</b> lines of symmetry.</td></tr>
+      <tr><td style="--part:var(--water)">Equilateral triangle</td><td><b>3</b> lines</td></tr>
+      <tr><td style="--part:var(--water)">Circle</td><td>Every line through the centre</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-shapes" data-sec="shapes"> I got this</label>
+  </section>
+
+  <section id="complete">
+    <div class="sec-head"><span class="tag food">3</span><h2>Completing a figure on a grid</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">Pick a square or corner</span><span class="to">→</span><span class="box">Count squares to the line</span><span class="to">→</span><span class="box">Count the same number on the other side</span></div>
+      <div class="chart">
+        <svg viewBox="0 0 260 150" role="img" aria-labelledby="symT">
+          <title id="symT">A 6 by 4 grid with a vertical dotted line of symmetry in the middle. A shaded square 2 columns left of the line is matched by a shaded square 2 columns right of the line.</title>
+          <g stroke="var(--line)" stroke-width="1.5">
+            <rect x="10" y="10" width="240" height="120" fill="none"/>
+            <line x1="50" y1="10" x2="50" y2="130"/><line x1="90" y1="10" x2="90" y2="130"/><line x1="170" y1="10" x2="170" y2="130"/><line x1="210" y1="10" x2="210" y2="130"/>
+            <line x1="10" y1="40" x2="250" y2="40"/><line x1="10" y1="70" x2="250" y2="70"/><line x1="10" y1="100" x2="250" y2="100"/>
+            <line x1="130" y1="10" x2="130" y2="130" stroke="var(--line)"/>
+          </g>
+          <rect x="50" y="40" width="40" height="30" fill="var(--water)"/>
+          <rect x="170" y="40" width="40" height="30" fill="var(--food)"/>
+          <rect x="90" y="70" width="40" height="30" fill="var(--water)"/>
+          <rect x="130" y="70" width="40" height="30" fill="var(--food)"/>
+          <line x1="130" y1="2" x2="130" y2="138" stroke="var(--warn)" stroke-width="3" stroke-dasharray="6 4"/>
+        </svg>
+      </div>
+      <p><span class="w">Blue</span> squares are given; <span class="f">orange</span> squares are their mirror partners, the same number of squares from the line.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-complete" data-sec="complete"> I got this</label>
+  </section>
+
+  <section id="diagonal">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Diagonal lines of symmetry</h2></div>
+    <div class="card">
+      <p>When the line goes corner to corner, the mirror square is found by moving <b>across the line at right angles</b> (slanting), not straight left or right.</p>
+      <p>For a line from the <b>top-left to the bottom-right</b> corner of a square grid: a square in <b>row 2, column 5</b> has its partner in <b>row 5, column 2</b>. Swap the row and column numbers.</p>
+      <p>Squares that sit <b>on</b> the line are their own partner.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-diagonal" data-sec="diagonal"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A rectangle has 4 lines of symmetry.</span></div><div class="row"><span class="ok">✓</span><span>Only <b>2</b>. Fold along a diagonal and the corners do not match.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>S and N are symmetric.</span></div><div class="row"><span class="ok">✓</span><span>They have <b>no</b> line of symmetry.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Shading "more squares" but forgetting the ones that were asked.</span></div><div class="row"><span class="ok">✓</span><span>Shade <b>exactly</b> the number asked, then check every square has a partner.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Fold on the line → both halves match.</div>
+        <div>Square 4 lines · rectangle 2 · equilateral triangle 3.</div>
+        <div>Mirror partner: same distance from the line, on the other side.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'Which letter is a symmetric figure?',o:['F','N','S','T'],a:3,e:'T has an up–down line of symmetry. F, N and S have none.'},
+    {q:'How many lines of symmetry does a square have?',o:['1','2','4','8'],a:2,e:'2 straight lines and 2 diagonals.'},
+    {q:'How many lines of symmetry does a rectangle (that is not a square) have?',o:['0','2','4','6'],a:1,e:'Only the lines through the middles of the sides.'},
+    {q:'Which statement is true?',o:['A diagonal of a rectangle is a line of symmetry.','A diagonal of a square is a line of symmetry.','The letter Z has 2 lines of symmetry.','A circle has only 1 line of symmetry.'],a:1,e:'Folding a square along a diagonal makes the halves match.'},
+    {q:'Which digit has both an up–down and a side-to-side line of symmetry?',o:['2','4','7','8'],a:3,e:'8 (written with two equal loops) matches both ways.'},
+    {q:'A grid has 6 columns. The line of symmetry is between column 3 and column 4. A shaded square is in column 1. In which column is its partner?',o:['4','5','6','2'],a:2,e:'Column 1 is 3 columns left of the line, so the partner is 3 columns right: column 6.'}
+  ];
+  var SA=[
+    {q:'How many lines of symmetry does an equilateral triangle have?',a:['3'],e:'One from each corner to the middle of the opposite side.'},
+    {q:'How many lines of symmetry does the letter H have?',a:['2'],e:'An up–down line and a side-to-side line.'},
+    {q:'A grid has 10 columns. The line of symmetry is between column 5 and column 6. A shaded square is in column 2. In which column is its partner?',a:['9'],e:'Column 2 is 4 columns left of the line (2, 3, 4, 5), so count 4 to the right: 6, 7, 8, 9.'},
+    {q:'A diagonal line of symmetry runs from the top-left to the bottom-right corner of a square grid. A shaded square is in row 2, column 5. Its partner is in row ?, column ?  (type like: 5, 2)',a:['5 2','row 5 column 2','5 and 2'],exact:true,e:'Swap the row and column numbers: row 5, column 2.'}
+  ];
+  var PS=[
+    {q:'Look at the letters in the word MATHS.',
+     parts:[{p:'(a) How many of the letters have at least one line of symmetry?',a:['4'],m:1},{p:'(b) Which letter has 2 lines of symmetry?',a:['h'],exact:true,m:1}],
+     sol:'<div class="ln">M, A, T, H have a line of symmetry; S does not → <b class="f">4</b>.</div><div class="ln">H has an up–down and a side-to-side line → <b class="f">H</b>.</div>'},
+    {q:'A figure is symmetric about a line. The part on one side of the line has an area of 14 cm² and the line does not pass through any shaded part.',
+     parts:[{p:'What is the area of the whole figure?',a:['28'],unit:'cm²',u:'cm2',m:2}],
+     sol:'<div class="ln">Both halves are the same size: 14 + 14 = <b class="f">28 cm²</b>.</div>'}
+  ];

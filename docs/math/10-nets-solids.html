@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nets and Solids Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = method/working, orange = answer, green = correct, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+<style>
+.appnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0;font-weight:800;font-size:.95rem}
+.appnav a{color:var(--water);text-decoration:none}
+.appnav a:hover,.appnav a:focus-visible{text-decoration:underline}
+.appnav .subj{color:var(--muted);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:24px 8px}
+.pager a{display:grid;gap:2px;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
+.pager a:hover,.pager a:focus-visible{border-color:var(--water);outline:none}
+.pager a.next{text-align:right;grid-column:2}
+.pager small{color:var(--muted);font-weight:800;font-size:.8rem}
+.pager b{font-family:var(--font-display);font-size:1.05rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="appnav" aria-label="App"><a href="../index.html#math">← All topics</a><span class="subj">Math</span></nav>
+  <header class="top">
+    <span class="eyebrow">P4 Math · Geometry</span>
+    <h1>Nets and Solids</h1>
+    <p class="lead">Cubes, cuboids, prisms and pyramids, and how to tell whether a flat net folds into a solid. This is new in the 2025 exams.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#solids">Solids</a>
+      <a href="#cube">Cube nets</a>
+      <a href="#prism">Prism nets</a>
+      <a href="#count">Faces edges vertices</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="solids">
+    <div class="sec-head"><span class="tag water">1</span><h2>The solids</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--water)">Cube</td><td>6 <b>equal square</b> faces</td></tr>
+      <tr><td style="--part:var(--water)">Cuboid</td><td>6 rectangular faces (opposite faces are the same)</td></tr>
+      <tr><td style="--part:var(--leaf)">Prism</td><td>2 <b>identical end faces</b> joined by rectangles. Triangular prism: 2 triangles + 3 rectangles. Same shape all the way along.</td></tr>
+      <tr><td style="--part:var(--food)">Pyramid</td><td>1 base + triangles that <b>meet at one point</b> (the apex). Square pyramid: 1 square + 4 triangles.</td></tr>
+      <tr><td style="--part:var(--muted)">Cone, cylinder</td><td>Have a curved surface. Not prisms or pyramids.</td></tr>
+    </table></div>
+    <div class="card"><p><b>Prism or pyramid?</b> Pointed top → pyramid. Same cross-section all along, two matching ends → prism.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-solids" data-sec="solids"> I got this</label>
+  </section>
+
+  <section id="cube">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Nets of a cube</h2></div>
+    <div class="card">
+      <p class="big">A cube net has <b>6 squares</b>. There are <b>11</b> different cube nets.</p>
+      <div class="grid2">
+        <div class="mini leaf"><h3>Signs it IS a net</h3><p>A row of 4 with <b>one square above and one below</b> (anywhere along the row) · staircase shapes · 3 + 3 rows shifted</p></div>
+        <div class="mini warn" style="background:var(--warn-soft)"><h3>Signs it is NOT</h3><p>A <b>2 × 2 block</b> · a row of <b>5 or 6</b> · two squares on the <b>same side</b> of a row of 4, so they overlap when folded</p></div>
+      </div>
+      <div data-chart="cubenets"></div>
+      <p class="hint">Test it: pick one square as the bottom and fold the others up in your head. Two faces landing on the same place → not a net.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-cube" data-sec="cube"> I got this</label>
+  </section>
+
+  <section id="prism">
+    <div class="sec-head"><span class="tag food">3</span><h2>Nets of a triangular prism</h2></div>
+    <div class="card">
+      <p><b>3 rectangles in a row</b> + <b>2 triangles</b>. The triangles must sit on the <b>long edges</b> of the strip (one above, one below) so they close the two open ends of the tube.</p>
+      <p>If both triangles are stuck on the <b>short ends</b> of the strip, they meet the edge that joins up to close the tube → <b>not a net</b>.</p>
+      <div data-chart="prismnets"></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-prism" data-sec="prism"> I got this</label>
+  </section>
+
+  <section id="count">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Faces, edges and vertices</h2></div>
+    <div class="tbl-wrap"><table class="pv">
+      <tr><th>Solid</th><th>Faces</th><th>Edges</th><th>Vertices (corners)</th></tr>
+      <tr><td>Cube / cuboid</td><td>6</td><td>12</td><td>8</td></tr>
+      <tr><td>Triangular prism</td><td>5</td><td>9</td><td>6</td></tr>
+      <tr><td>Square pyramid</td><td>5</td><td>8</td><td>5</td></tr>
+      <tr><td>Triangular pyramid</td><td>4</td><td>6</td><td>4</td></tr>
+    </table></div>
+    <div class="card"><p>A cube made from a net of 5 cm squares: area of the net = 6 × 25 = <b>150 cm²</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-count" data-sec="count"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Any 6 squares joined together make a cube net.</span></div><div class="row"><span class="ok">✓</span><span>No 2 × 2 block, no row longer than 4, no overlaps.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>A square pyramid is a prism.</span></div><div class="row"><span class="ok">✓</span><span>Triangles meeting at a point → <b>pyramid</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Triangles on the short ends of a prism net.</span></div><div class="row"><span class="ok">✓</span><span>Triangles go on the <b>long edges</b>, one on each side.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Prism: 2 matching ends + rectangles. Pyramid: base + triangles to a point.</div>
+        <div>Cube net: 6 squares, no 2 × 2 block, row of at most 4.</div>
+        <div>Cube: 6 faces, 12 edges, 8 vertices.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Work out each answer on paper first, then type it in. Press <b>Check my answers</b> to see your score and the worked solutions.</p>
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+    <div class="qpart"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part B: Short answers</h3><p class="hint">Type the number only. Write fractions like 2/3 and mixed numbers like 1 2/9 (with a space).</p><div id="saq" class="qpart"></div></div>
+    <div class="qpart"><h3>Part C: Problem sums</h3><p class="hint">Show your working on paper, then type the final answer.</p><div id="psq" class="qpart"></div></div>
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+
+<div class="wrap"><nav class="pager" aria-label="Topics"><a class="prev" href="09-symmetry.html"><small>← Previous</small><b>Symmetry</b></a><a class="next" href="11-data.html"><small>Next →</small><b>Tables, Graphs and Pie Charts</b></a></nav></div>
+<script>
+function frac(h){return String(h).replace(/\[\[(?:(\d+) )?([\d?]+)\/([\d?]+)\]\]/g,function(_,w,a,b){return (w||'')+'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>';});}
+document.querySelectorAll('.wrap > header, .wrap > section:not(#quiz)').forEach(function(s){if(s.innerHTML.indexOf('[[')>-1)s.innerHTML=frac(s.innerHTML);});
+(function(){
+  var KEY='p4m-nets-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ (math) ---------- */
+(function(){
+  /* small net drawings: cells are [column,row] */
+  function net(cells,tri){
+    var s=20,maxc=0,maxr=0;cells.forEach(function(c){maxc=Math.max(maxc,c[0]);maxr=Math.max(maxr,c[1]);});
+    var w=(maxc+1)*s+4,h=(maxr+1)*s+4,out='<svg viewBox="0 0 '+w+' '+h+'" width="'+(w*1.6)+'" height="'+(h*1.6)+'" role="img" aria-label="net">';
+    cells.forEach(function(c){out+='<rect x="'+(c[0]*s+2)+'" y="'+(c[1]*s+2)+'" width="'+s+'" height="'+s+'" fill="var(--water-soft)" stroke="var(--water)" stroke-width="1.5"/>';});
+    (tri||[]).forEach(function(t){out+='<polygon points="'+t+'" fill="var(--food-soft)" stroke="var(--food)" stroke-width="1.5"/>';});
+    return out+'</svg>';
+  }
+  var NETS={
+    cross:net([[1,0],[0,1],[1,1],[2,1],[1,2],[1,3]]),
+    row4:net([[0,0],[0,1],[1,1],[2,1],[3,1],[3,2]]),
+    block:net([[0,0],[1,0],[0,1],[1,1],[2,1],[3,1]]),
+    stairs:net([[0,0],[1,0],[1,1],[2,1],[2,2],[3,2]]),
+    row5:net([[0,1],[1,1],[2,1],[3,1],[4,1],[2,0]])
+  };
+  /* prism nets: strip of 3 rectangles (each 20 wide, 30 tall) */
+  function prism(kind){
+    var r='',w=100,h=80;
+    for(var i=0;i<3;i++)r+='<rect x="'+(20+i*20)+'" y="25" width="20" height="30" fill="var(--water-soft)" stroke="var(--water)" stroke-width="1.5"/>';
+    var t=kind==='good'?['40,25 60,25 50,8','40,55 60,55 50,72']:['20,25 20,55 4,40','80,25 80,55 96,40'];
+    t.forEach(function(p){r+='<polygon points="'+p+'" fill="var(--food-soft)" stroke="var(--food)" stroke-width="1.5"/>';});
+    return '<svg viewBox="0 0 '+w+' '+h+'" width="'+(w*1.6)+'" height="'+(h*1.6)+'" role="img" aria-label="prism net">'+r+'</svg>';
+  }
+  function fill(id,html){document.querySelectorAll('[data-chart="'+id+'"]').forEach(function(d){d.innerHTML=html;});}
+  fill('cubenets','<div class="grid3"><div class="mini leaf"><h3>✓ cross</h3>'+NETS.cross+'</div><div class="mini leaf"><h3>✓ row of 4</h3>'+NETS.row4+'</div><div class="mini leaf"><h3>✓ staircase</h3>'+NETS.stairs+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ 2 × 2 block</h3>'+NETS.block+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ row of 5</h3>'+NETS.row5+'</div></div>');
+  fill('prismnets','<div class="grid2"><div class="mini leaf"><h3>✓ triangles on the long edges</h3>'+prism('good')+'</div><div class="mini warn" style="background:var(--warn-soft)"><h3>✗ triangles on the short ends</h3>'+prism('bad')+'</div></div>');
+  var MCQ=[
+    {q:'Which of these is NOT a net of a cube?',o:[NETS.cross,NETS.row4,NETS.block,NETS.stairs],a:2,e:'It has a 2 × 2 block of squares. When folded, two faces would land on the same place.'},
+    {q:'How many faces does a triangular prism have?',o:['3','4','5','6'],a:2,e:'2 triangles + 3 rectangles = 5.'},
+    {q:'Which solid has exactly 4 faces, all triangles?',o:['triangular prism','square pyramid','triangular pyramid','cube'],a:2,e:'A triangular pyramid has a triangle base and 3 triangle sides.'},
+    {q:'Which of these is NOT a prism?',o:['cube','cuboid','triangular prism','square pyramid'],a:3,e:'A pyramid has triangles meeting at a point.'},
+    {q:'How many edges does a cube have?',o:['6','8','12','24'],a:2,e:'4 on top, 4 on the bottom, 4 upright.'},
+    {q:'Which is a net of a triangular prism?',o:[prism('good'),prism('bad')],a:0,e:'The triangles must be on the long edges of the strip, one on each side.'}
+  ];
+  var SA=[
+    {q:'How many faces does a square pyramid have?',a:['5'],e:'1 square base + 4 triangles.'},
+    {q:'How many vertices (corners) does a cuboid have?',a:['8'],e:'4 on top and 4 at the bottom.'},
+    {q:'How many edges does a triangular prism have?',a:['9'],e:'3 on each triangle (6) + 3 joining them.'},
+    {q:'How many different nets does a cube have?',a:['11'],e:'There are 11 different cube nets.'},
+    {q:'A row of 4 squares is part of a cube net. How many more squares are needed to complete the net?',a:['2'],e:'A cube has 6 faces. 6 − 4 = 2 (one above and one below the row).'}
+  ];
+  var PS=[
+    {q:'A cube is folded from a net made of squares with sides of 5 cm.',
+     parts:[{p:'(a) What is the total area of the net?',a:['150'],unit:'cm²',u:'cm2',m:2},{p:'(b) What is the total length of all the edges of the cube?',a:['60'],unit:'cm',m:2}],
+     sol:'<div class="ln">(a) 6 squares × (5 × 5) = 6 × 25 = <b class="f">150 cm²</b>.</div><div class="ln">(b) 12 edges × 5 cm = <b class="f">60 cm</b>.</div>'}
+  ];
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=frac(html);return e;}
+  /* Answer matching: same text (extra spaces ignored), or the same numeric value unless the item says exact. */
+  function clean(s,u){
+    s=String(s==null?'':s).toLowerCase().replace(/[−–]/g,'-').replace(/,/g,'').replace(/\$/g,'').replace(/°|degrees?/g,'').trim();
+    (u||'').split('|').filter(Boolean).forEach(function(x){x=x.toLowerCase();if(s.length>x.length&&s.slice(-x.length)===x)s=s.slice(0,-x.length).trim();});
+    return s.replace(/\s+/g,' ').trim();
+  }
+  function val(s){
+    var m;
+    if((m=s.match(/^(-?\d*\.?\d+)$/)))return parseFloat(m[1]);
+    if((m=s.match(/^(\d+) (\d+)\/(\d+)$/)))return +m[1]+(+m[2])/(+m[3]);
+    if((m=s.match(/^(\d+)\/(\d+)$/)))return (+m[1])/(+m[2]);
+    return null;
+  }
+  function ok(input,item){
+    var u=(item.unit||'')+'|'+(item.u||'');
+    var a=clean(input,u);if(!a)return false;
+    return item.a.some(function(acc){
+      var b=clean(acc,u);
+      if(a===b)return true;
+      if(!/\//.test(b)&&a.replace(/ /g,'')===b.replace(/ /g,''))return true;
+      if(item.exact)return false;
+      var x=val(a),y=val(b);return x!=null&&y!=null&&Math.abs(x-y)<1e-9;
+    });
+  }
+  function answerInput(id,unit,pre){
+    var w=el('div','ansrow');
+    if(pre)w.appendChild(el('span','unit',pre));
+    var inp=document.createElement('input');inp.type='text';inp.id=id;inp.autocomplete='off';inp.setAttribute('aria-label','Answer');inp.placeholder='answer';
+    w.appendChild(inp);if(unit)w.appendChild(el('span','unit',unit));return w;
+  }
+  function show(item){return (item.pre||'')+item.a[0]+(item.unit?' '+item.unit:'');}
+  var n=0;
+  MCQ.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){var lab=el('label','opt');var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));opts.appendChild(lab);});
+    card.appendChild(opts);document.getElementById('mcq').appendChild(card);
+  });
+  SA.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='sa'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks','1 mark'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    card.appendChild(answerInput('saans'+i,item.unit,item.pre));
+    document.getElementById('saq').appendChild(card);
+  });
+  PS.forEach(function(item,i){
+    n++;var card=el('div','q');card.id='ps'+i;var tot=item.parts.reduce(function(s,p){return s+(p.m||1);},0);
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',tot+' marks'));card.appendChild(head);
+    card.appendChild(el('div','qtext',item.q));
+    item.parts.forEach(function(p,j){
+      var row=el('div','psrow');row.id='ps'+i+'_'+j;
+      if(p.p)row.appendChild(el('div','qtext',p.p));
+      row.appendChild(answerInput('psans'+i+'_'+j,p.unit,p.pre));card.appendChild(row);
+    });
+    document.getElementById('psq').appendChild(card);
+  });
+  function clearFb(card){card.querySelectorAll('.feedback').forEach(function(f){f.remove();});card.classList.remove('right','wrong','partial');}
+  function state(card,got,max){card.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+  function check(){
+    var blanks=0,sA=0,sB=0,sC=0,mC=0;
+    MCQ.forEach(function(item,i){
+      var card=document.getElementById('mcq'+i);clearFb(card);
+      var c=card.querySelector('input:checked');if(!c)blanks++;
+      var labels=card.querySelectorAll('.opt');labels.forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      labels[item.a].classList.add('is-correct');
+      var good=c&&+c.value===item.a;if(good)sA++;
+      if(c&&!good)labels[+c.value].classList.add('is-picked-wrong');
+      state(card,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(c?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('div','work',item.e));card.appendChild(fb);
+    });
+    SA.forEach(function(item,i){
+      var card=document.getElementById('sa'+i);clearFb(card);
+      var v=document.getElementById('saans'+i).value;if(!v.trim())blanks++;
+      var good=ok(v,item);if(good)sB++;state(card,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(v.trim()?'Not quite.':'No answer.')+' Answer: '+show(item)));
+      fb.appendChild(el('div','work',item.e));card.appendChild(fb);
+    });
+    PS.forEach(function(item,i){
+      var card=document.getElementById('ps'+i);clearFb(card);var got=0,max=0;
+      item.parts.forEach(function(p,j){
+        var row=document.getElementById('ps'+i+'_'+j);row.classList.remove('is-right','is-wrong');
+        var v=document.getElementById('psans'+i+'_'+j).value;if(!v.trim())blanks++;
+        var m=p.m||1;max+=m;var good=ok(v,p);if(good)got+=m;
+        row.classList.add(good?'is-right':'is-wrong');
+        row.appendChild(el('div','feedback mini-fb','<span class="verdict">'+(good?'✓ ':'✗ ')+'Answer: '+show(p)+'</span>'));
+      });
+      sC+=got;mC+=max;state(card,got,max);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict','Worked solution'));fb.appendChild(el('div','work',item.sol));card.appendChild(fb);
+    });
+    var max=MCQ.length+SA.length+mC,total=sA+sB+sC;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+sA+'/'+MCQ.length+'</span><span>Short answers: '+sB+'/'+SA.length+'</span><span>Problem sums: '+sC+'/'+mC+'</span>';
+    var pct=total/max;
+    document.getElementById('scoremsg').textContent=pct>=0.9?'Excellent! You know this topic well.':pct>=0.7?'Good work. Study the worked solutions for the ones you missed.':pct>=0.5?'Getting there. Read the notes again, then try again.':'Go through the notes and worked examples, then have another go.';
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    try{localStorage.setItem('p4m-nets-best',String(Math.max(total,+(localStorage.getItem('p4m-nets-best')||0))));localStorage.setItem('p4m-nets-max',String(max));}catch(e){}
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+  function reset(){
+    document.querySelectorAll('#quiz input').forEach(function(r){if(r.type==='radio')r.checked=false;else r.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFb);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    document.querySelectorAll('#quiz .psrow').forEach(function(r){r.classList.remove('is-right','is-wrong');});
+    document.getElementById('scorebox').hidden=true;document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+</script>
+</body>
+</html>

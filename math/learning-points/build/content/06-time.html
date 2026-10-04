@@ -1,0 +1,129 @@
+<!--meta
+title: Time Quick Notes
+eyebrow: P4 Math · Measurement
+h1: Time
+lead: The 24-hour clock, changing between 12-hour and 24-hour time, and finding durations, start times and end times with a timeline.
+key: p4m-time
+chips: clock24=24-hour clock|convert=Converting|duration=Duration|timeline=Timeline method|traps=Watch out
+-->
+<!--body-->
+  <section id="clock24">
+    <div class="sec-head"><span class="tag water">1</span><h2>The 24-hour clock</h2></div>
+    <div class="card">
+      <ul>
+        <li>Always <b>4 digits</b>, no am/pm: 07 05, 13 25, 21 30.</li>
+        <li>A day starts at <b>00 00</b> (midnight) and ends at 23 59.</li>
+        <li>12 noon = <b>12 00</b>. 12 midnight = <b>00 00</b>.</li>
+      </ul>
+    </div>
+    <div class="chart">
+      <svg viewBox="0 0 480 90" role="img" aria-labelledby="dayT">
+        <title id="dayT">A day line from 00 00 to 24 00. Morning hours 00 to 12 are the same as 12-hour time with am; afternoon hours 13 to 23 are 12-hour time plus 12.</title>
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)" text-anchor="middle">
+          <rect x="20" y="20" width="220" height="26" fill="var(--sun-soft)" stroke="var(--sun)"/>
+          <rect x="240" y="20" width="220" height="26" fill="var(--water-soft)" stroke="var(--water)"/>
+          <text x="130" y="38">am: 00 00 – 11 59</text><text x="350" y="38">pm: 12 00 – 23 59</text>
+          <text x="20" y="64">00 00</text><text x="240" y="64">12 00</text><text x="460" y="64">24 00</text>
+          <text x="130" y="84" fill="var(--muted)">9.30 am = 09 30</text><text x="350" y="84" fill="var(--muted)">9.30 pm = 21 30</text>
+        </g>
+      </svg>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-clock24" data-sec="clock24"> I got this</label>
+  </section>
+
+  <section id="convert">
+    <div class="sec-head"><span class="tag water">2</span><h2>Converting</h2></div>
+    <div class="grid2">
+      <div class="mini sun"><h3>pm → 24-hour</h3><p><b>Add 12</b> to the hour: 3.45 pm → 15 45. 7.05 pm → 19 05.</p></div>
+      <div class="mini water"><h3>24-hour → 12-hour</h3><p>Hour above 12? <b>Subtract 12</b> and write pm: 21 30 → 9.30 pm. 16 10 → 4.10 pm.</p></div>
+      <div class="mini sun"><h3>Morning</h3><p>Same hour, add a 0 if needed: 8.15 am → 08 15.</p></div>
+      <div class="mini water"><h3>Just after midnight</h3><p>00 20 → 12.20 am.</p></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-convert" data-sec="convert"> I got this</label>
+  </section>
+
+  <section id="duration">
+    <div class="sec-head"><span class="tag leaf">3</span><h2>Hours and minutes</h2></div>
+    <div class="card">
+      <p class="big">1 h = <b>60 min</b> (not 100!)</p>
+      <ul>
+        <li>2 h 15 min = 120 + 15 = <b>135 min</b></li>
+        <li>85 min = 60 + 25 = <b>1 h 25 min</b></li>
+        <li>1 h 40 min + 2 h 35 min = 3 h 75 min = <b>4 h 15 min</b></li>
+      </ul>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-duration" data-sec="duration"> I got this</label>
+  </section>
+
+  <section id="timeline">
+    <div class="sec-head"><span class="tag food">4</span><h2>The timeline method</h2></div>
+    <div class="card"><p>Draw a line. <b>Jump to the next full hour</b> first, then whole hours, then the minutes left.</p></div>
+    <div class="ex"><span class="exq">Joseph started running at 11 45 and took 1 h 10 min. Kelvin took 30 min longer. When did Kelvin finish?</span>
+      <div class="chart">
+        <svg viewBox="0 0 440 80" role="img" aria-labelledby="tlT">
+          <title id="tlT">Timeline: 11 45, plus 1 hour to 12 45, plus 10 minutes to 12 55, plus 30 minutes to 13 25.</title>
+          <defs><marker id="at" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="var(--water)"/></marker></defs>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="12" fill="var(--fg)" text-anchor="middle">
+            <line x1="20" y1="55" x2="420" y2="55" stroke="var(--muted)" stroke-width="2"/>
+            <path d="M40 50 Q110 10 180 50" fill="none" stroke="var(--water)" stroke-width="2.5" marker-end="url(#at)"/><text x="110" y="22" fill="var(--water)">+1 h</text>
+            <path d="M184 50 Q205 28 226 50" fill="none" stroke="var(--water)" stroke-width="2.5" marker-end="url(#at)"/><text x="205" y="32" fill="var(--water)">+10 min</text>
+            <path d="M230 50 Q310 10 390 50" fill="none" stroke="var(--water)" stroke-width="2.5" marker-end="url(#at)"/><text x="310" y="22" fill="var(--water)">+30 min</text>
+            <text x="40" y="74">11 45</text><text x="182" y="74">12 45</text><text x="228" y="74">12 55</text><text x="390" y="74" fill="var(--food)">13 25</text>
+          </g>
+        </svg>
+      </div>
+      <span class="ans">13 25</span></div>
+    <div class="ex"><span class="exq">Samantha started homework at 15 35, took 1 h 5 min, then swam until 18 10. How long did she swim?</span>
+      <div class="stp"><b>end of homework</b><span>15 35 + 1 h 5 min = 16 40</span><b>16 40 → 17 00</b><span>20 min</span><b>17 00 → 18 00</b><span>1 h</span><b>18 00 → 18 10</b><span>10 min</span></div>
+      <span class="ans">1 h 30 min</span></div>
+    <div class="card"><p><b>Going backwards</b> (start time): jump back to the full hour first. 15 35 − 50 min: 15 35 → 15 00 is 35 min, 15 more → <b>14 45</b>.</p></div>
+    <label class="gotit"><input type="checkbox" id="done-timeline" data-sec="timeline"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>14 45 + 1 h 25 min = 15 70</span></div><div class="row"><span class="ok">✓</span><span>70 min = 1 h 10 min → <b>16 10</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Writing "13 25 pm"</span></div><div class="row"><span class="ok">✓</span><span>24-hour time has <b>no am/pm</b>. 12-hour time <b>needs</b> am/pm.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Subtracting times like normal numbers: 18 10 − 16 40 = 170</span></div><div class="row"><span class="ok">✓</span><span>Use a timeline: <b>1 h 30 min</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Answering in the wrong clock</span></div><div class="row"><span class="ok">✓</span><span>Check: "using the <b>12-hour</b> clock" or "<b>24-hour</b> clock".</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>24-hour: 4 digits, no am/pm. pm → add 12.</div>
+        <div>1 h = 60 min. Change 60 min into 1 h.</div>
+        <div>Timeline: jump to the full hour, then hours, then minutes.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'What is 3.45 pm in the 24-hour clock?',o:['03 45','13 45','15 45','16 45'],a:2,e:'3 + 12 = 15 → 15 45.'},
+    {q:'What is 21 30 in the 12-hour clock?',o:['9.30 am','9.30 pm','11.30 pm','2.130 pm'],a:1,e:'21 − 12 = 9 → 9.30 pm.'},
+    {q:'How long is it from 08 15 to 10 40?',o:['2 h 25 min','2 h 35 min','1 h 25 min','2 h 65 min'],a:0,e:'08 15 → 10 15 is 2 h, then 25 min more.'},
+    {q:'A film starts at 19 40 and lasts 1 h 35 min. When does it end?',o:['20 75','21 05','21 15','21 25'],a:2,e:'19 40 + 1 h = 20 40. +20 min = 21 00. +15 min = 21 15.'},
+    {q:'00 20 in the 12-hour clock is ___',o:['12.20 am','12.20 pm','0.20 pm','20 past noon'],a:0,e:'00 hours is just after midnight → 12.20 am.'},
+    {q:'2 h 15 min = ___ min',o:['215','135','125','75'],a:1,e:'2 × 60 + 15 = 135.'}
+  ];
+  var SA=[
+    {q:'Joseph and Kelvin started running at 11 45. Joseph took 1 h 10 min. Kelvin took 30 min longer. At what time did Kelvin finish? (24-hour clock)',a:['13 25','1325','13:25','13.25'],exact:true,e:'11 45 + 1 h 10 min = 12 55. + 30 min = 13 25.'},
+    {q:'Write 7.05 pm in the 24-hour clock.',a:['19 05','1905','19:05','19.05'],exact:true,e:'7 + 12 = 19 → 19 05.'},
+    {q:'How many minutes are there from 10 50 to 12 15?',a:['85'],unit:'min',e:'10 50 → 11 00 = 10 min, → 12 00 = 60 min, → 12 15 = 15 min. Total 85 min.'},
+    {q:'1 h 40 min + 2 h 35 min = ? (type like 4 h 15 min)',a:['4 h 15 min','4h15min','4 hours 15 minutes','4 hr 15 min','4 h 15 mins','4 hrs 15 mins'],exact:true,e:'3 h 75 min = 4 h 15 min.'},
+    {q:'A bus leaves at 23 50. The trip takes 25 min. At what time does it arrive? (24-hour clock)',a:['00 15','0015','00:15','00.15'],exact:true,e:'23 50 → 00 00 is 10 min, 15 min more → 00 15 (the next day).'}
+  ];
+  var PS=[
+    {q:'Samantha started doing her homework at 15 35. She took 1 h 5 min to complete it. After that, she swam till 18 10.',
+     parts:[{p:'(a) How long did she swim? (type like 1 h 30 min)',a:['1 h 30 min','1h30min','1 hour 30 minutes','1 hr 30 min','90 min','90 minutes','1 h 30 mins'],exact:true,m:2},
+            {p:'(b) Ken started his homework 50 minutes before Samantha. He took 1 h 25 min. What time did he finish? (12-hour clock, e.g. 4.10 pm)',a:['4.10 pm','4:10 pm','4.10pm','4:10pm','4.10 p.m.','4:10 p.m.'],exact:true,m:2}],
+     sol:'<div class="ln">(a) Homework ends at 16 40. 16 40 → 17 00 = 20 min, → 18 00 = 1 h, → 18 10 = 10 min. Swim = <b class="f">1 h 30 min</b>.</div><div class="ln">(b) Ken starts at 15 35 − 50 min = 14 45. 14 45 + 1 h 25 min = 16 10 = <b class="f">4.10 pm</b>.</div>'},
+    {q:'A night train leaves at 21 45 and arrives at 06 20 the next morning. How long is the journey? (type like 8 h 35 min)',
+     parts:[{a:['8 h 35 min','8h35min','8 hours 35 minutes','8 hr 35 min','8 h 35 mins'],exact:true,m:3}],
+     sol:'<div class="ln">21 45 → 22 00 = 15 min. 22 00 → 06 00 = 8 h. 06 00 → 06 20 = 20 min.</div><div class="ln">8 h + 35 min = <b class="f">8 h 35 min</b>.</div>'},
+    {q:'A school has 3 lessons of 45 min each, one after another, with a 10-min break between lessons. The first lesson starts at 08 30. When does the third lesson end? (24-hour clock)',
+     parts:[{a:['11 05','1105','11:05','11.05'],exact:true,m:3}],
+     sol:'<div class="ln">3 × 45 min = 135 min. 2 breaks = 20 min. Total 155 min = 2 h 35 min.</div><div class="ln">08 30 + 2 h = 10 30. + 30 min = 11 00. + 5 min = <b class="f">11 05</b>.</div>'}
+  ];

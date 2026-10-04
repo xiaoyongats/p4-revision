@@ -1,0 +1,134 @@
+<!--meta
+title: Angles and Lines Notes
+eyebrow: P4 Math · Geometry
+h1: Angles and Lines
+lead: Kinds of angles, measuring with a protractor, finding unknown angles in squares and rectangles, and parallel and perpendicular lines.
+key: p4m-angles
+chips: kinds=Kinds of angles|measure=Measuring|unknown=Unknown angles|shapes=Squares & rectangles|lines=Parallel & perpendicular|traps=Watch out
+-->
+<!--body-->
+  <section id="kinds">
+    <div class="sec-head"><span class="tag water">1</span><h2>Kinds of angles</h2></div>
+    <figure>
+      <svg viewBox="0 0 480 130" role="img" aria-labelledby="akT">
+        <title id="akT">Three angles: acute is less than 90 degrees, right is exactly 90 degrees with a square corner mark, obtuse is between 90 and 180 degrees.</title>
+        <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)" text-anchor="middle" stroke-linecap="round">
+          <g stroke="var(--fg)" stroke-width="3"><line x1="30" y1="90" x2="130" y2="90"/><line x1="30" y1="90" x2="105" y2="35"/></g>
+          <path d="M60 90 A30 30 0 0 0 54 72" fill="none" stroke="var(--water)" stroke-width="2.5"/>
+          <text x="80" y="118">acute &lt; 90°</text>
+          <g stroke="var(--fg)" stroke-width="3"><line x1="190" y1="90" x2="290" y2="90"/><line x1="190" y1="90" x2="190" y2="20"/></g>
+          <path d="M190 74 H206 V90" fill="none" stroke="var(--leaf)" stroke-width="2.5"/>
+          <text x="240" y="118">right = 90°</text>
+          <g stroke="var(--fg)" stroke-width="3"><line x1="370" y1="90" x2="460" y2="90"/><line x1="370" y1="90" x2="320" y2="35"/></g>
+          <path d="M395 90 A25 25 0 0 0 353 72" fill="none" stroke="var(--food)" stroke-width="2.5"/>
+          <text x="400" y="118">obtuse 90°–180°</text>
+        </g>
+      </svg>
+    </figure>
+    <div class="card"><p>A <b>straight line</b> is 180°. A <b>right angle</b> is marked with a small square. Name angles as ∠x or ∠ABC (the middle letter is the corner).</p></div>
+    <label class="gotit"><input type="checkbox" id="done-kinds" data-sec="kinds"> I got this</label>
+  </section>
+
+  <section id="measure">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Measuring with a protractor</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">1. Estimate: acute or obtuse?</span><span class="to">→</span><span class="box">2. Centre on the corner</span><span class="to">→</span><span class="box">3. Base line on 0°</span><span class="to">→</span><span class="box">4. Read the scale that starts at 0</span></div>
+      <p>If the angle looks <b>acute</b> your answer must be below 90°. If you read 135° for an acute angle, you used the wrong scale → it is <b>45°</b>.</p>
+      <p>Short arms? <b>Extend the lines</b> with a ruler before measuring.</p>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-measure" data-sec="measure"> I got this</label>
+  </section>
+
+  <section id="unknown">
+    <div class="sec-head"><span class="tag food">3</span><h2>Finding unknown angles</h2></div>
+    <div class="card"><p class="big">Every corner of a square or rectangle is <b>90°</b>. Split parts add up to 90°.</p></div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">A right angle is split into 48° and ∠y.</span><div class="stp"><b>∠y</b><span>90° − 48°</span></div><span class="ans">42°</span></div>
+      <div class="ex"><span class="exq">Square corner split into 18°, ∠x and 22°.</span><div class="stp"><b>∠x</b><span>90° − 18° − 22°</span></div><span class="ans">50°</span></div>
+      <div class="ex"><span class="exq">Rectangle corner split into ∠x, 36° and ∠y. ∠x is twice ∠y.</span><div class="stp"><b>x + y</b><span>90° − 36° = 54°</span><b>3 units</b><span>54° → 1 unit = 18°</span></div><span class="ans">∠y = 18°, ∠x = 36°</span></div>
+      <div class="ex"><span class="exq">Two corners at C: rectangle (∠DCB = 90°) and square (∠ECG = 90°). ∠DCE = 67°, ∠BCF = 35°. Find ∠FCG.</span><div class="stp"><b>∠ECB</b><span>90° − 67° = 23°</span><b>∠FCG</b><span>90° − 23° − 35°</span></div><span class="ans">32°</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-unknown" data-sec="unknown"> I got this</label>
+  </section>
+
+  <section id="shapes">
+    <div class="sec-head"><span class="tag sun">4</span><h2>Squares and rectangles</h2></div>
+    <div class="grid2">
+      <div class="mini sun"><h3>Rectangle</h3><p>4 right angles · opposite sides <b>equal</b> and <b>parallel</b></p></div>
+      <div class="mini water"><h3>Square</h3><p>4 right angles · <b>all 4 sides equal</b> · opposite sides parallel</p></div>
+    </div>
+    <div class="card">
+      <h3>Completing a square on a grid</h3>
+      <p>If side PQ goes <b>3 right and 2 up</b>, the next side turns 90°: <b>2 left and 3 up</b>. Count squares; do not guess with a ruler.</p>
+      <div class="chart">
+        <svg viewBox="0 0 220 200" role="img" aria-labelledby="sqT">
+          <title id="sqT">A square drawn on a grid. Side PQ goes 3 right and 2 up. The next side goes 2 left and 3 up, and so on.</title>
+          <g stroke="var(--line)" stroke-width="1">
+            <line x1="20" y1="20" x2="200" y2="20"/><line x1="20" y1="50" x2="200" y2="50"/><line x1="20" y1="80" x2="200" y2="80"/><line x1="20" y1="110" x2="200" y2="110"/><line x1="20" y1="140" x2="200" y2="140"/><line x1="20" y1="170" x2="200" y2="170"/>
+            <line x1="20" y1="20" x2="20" y2="170"/><line x1="50" y1="20" x2="50" y2="170"/><line x1="80" y1="20" x2="80" y2="170"/><line x1="110" y1="20" x2="110" y2="170"/><line x1="140" y1="20" x2="140" y2="170"/><line x1="170" y1="20" x2="170" y2="170"/><line x1="200" y1="20" x2="200" y2="170"/>
+          </g>
+          <polygon points="80,170 170,110 110,20 20,80" fill="none" stroke="var(--water)" stroke-width="3" stroke-dasharray="6 4"/>
+          <line x1="80" y1="170" x2="170" y2="110" stroke="var(--food)" stroke-width="4"/>
+          <g font-family="Nunito, Segoe UI, sans-serif" font-weight="800" font-size="13" fill="var(--fg)">
+            <text x="70" y="190">P</text><text x="176" y="106">Q</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-shapes" data-sec="shapes"> I got this</label>
+  </section>
+
+  <section id="lines">
+    <div class="sec-head"><span class="tag water">5</span><h2>Parallel and perpendicular lines</h2></div>
+    <div class="grid2">
+      <div class="mini water"><h3>Parallel ( ∥ )</h3><p>Never meet. Always the same distance apart. On a grid: same "steps" (e.g. 2 right, 1 up).</p></div>
+      <div class="mini food"><h3>Perpendicular ( ⊥ )</h3><p>Meet at a <b>right angle</b>. A vertical line is perpendicular to a horizontal line.</p></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-lines" data-sec="lines"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Reading the outer scale for an acute angle → 135°</span></div><div class="row"><span class="ok">✓</span><span>Estimate first. Acute must be <b>less than 90°</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Forgetting a part when subtracting from 90°.</span></div><div class="row"><span class="ok">✓</span><span>List every part of the corner: <b>all parts add to 90°</b>.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Drawing a "square" that only looks square.</span></div><div class="row"><span class="ok">✓</span><span>Count grid steps for each side.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Acute &lt; 90° · right = 90° · obtuse between 90° and 180°.</div>
+        <div>Corners of squares and rectangles = 90°. Parts add up to 90°.</div>
+        <div>Parallel never meet. Perpendicular meet at 90°.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var MCQ=[
+    {q:'Which of these is an obtuse angle?',o:['45°','90°','120°','180°'],a:2,e:'Obtuse angles are between 90° and 180°.'},
+    {q:'ABCD is a rectangle. The corner at D is split into ∠x, 36° and ∠y. ∠x is twice ∠y. Find ∠y.',o:['18°','27°','54°','72°'],a:0,e:'x + y = 90° − 36° = 54°. 3 units = 54°, ∠y = 18°.'},
+    {q:'ABCD is a square. The corner at D is split into 18°, ∠x and 22°. Find ∠x.',o:['40°','50°','68°','72°'],a:1,e:'90° − 18° − 22° = 50°.'},
+    {q:'How many right angles does a rectangle have?',o:['1','2','3','4'],a:3,e:'All 4 corners are right angles.'},
+    {q:'Which statement about a square is NOT true?',o:['All 4 sides are equal.','It has 4 right angles.','Opposite sides are parallel.','Only 2 of its sides are equal.'],a:3,e:'All 4 sides of a square are equal.'},
+    {q:'Two lines meet at a right angle. They are ___ lines.',o:['parallel','perpendicular','curved','equal'],a:1,e:'Perpendicular lines meet at 90°.'}
+  ];
+  var SA=[
+    {q:'ABCD is a rectangle. A line from C makes an angle of 48° with CD. Find ∠y, the other part of the corner at C.',a:['42'],unit:'°',e:'90° − 48° = 42°.'},
+    {q:'A right angle is split into three angles: 25°, 40° and ∠x. Find ∠x.',a:['25'],unit:'°',e:'90° − 25° − 40° = 25°.'},
+    {q:'What kind of angle is 95°? (acute, right or obtuse)',a:['obtuse'],exact:true,e:'95° is between 90° and 180°.'},
+    {q:'3 right angles = ___ degrees',a:['270'],unit:'°',e:'3 × 90° = 270°.'},
+    {q:'Two angles make a right angle together. One is 4 times the other. What is the smaller angle?',a:['18'],unit:'°',e:'5 units = 90°, 1 unit = 18°.'}
+  ];
+  var PS=[
+    {q:'In rectangle ABCD, a line from D splits the corner ∠ADC into ∠p and ∠q. ∠p is 20° bigger than ∠q.',
+     parts:[{p:'(a) Find ∠q.',a:['35'],unit:'°',m:2},{p:'(b) Find ∠p.',a:['55'],unit:'°',m:1}],
+     sol:'<div class="ln">p + q = 90°. Take away the extra 20°: 2 × q = 70° → <b class="f">∠q = 35°</b>.</div><div class="ln">∠p = 35° + 20° = <b class="f">55°</b>.</div>'},
+    {q:'ABCD is a rectangle and EFGC is a square. They share corner C. ∠DCE = 67°. A line CF splits the square\'s corner so that ∠BCF = 35° (B is between E and F).',
+     parts:[{p:'(a) Find ∠ECB.',a:['23'],unit:'°',m:1},{p:'(b) Find ∠FCG.',a:['32'],unit:'°',m:2}],
+     sol:'<div class="ln">(a) ∠DCB = 90° (rectangle). ∠ECB = 90° − 67° = <b class="f">23°</b>.</div><div class="ln">(b) ∠ECG = 90° (square) = ∠ECB + ∠BCF + ∠FCG → ∠FCG = 90° − 23° − 35° = <b class="f">32°</b>.</div>'},
+    {q:'The corner ∠ADC of square ABCD is split by two lines into three angles: ∠a, 30° and ∠b. ∠a and ∠b are equal.',
+     parts:[{p:'(a) Find ∠a.',a:['30'],unit:'°',m:2},{p:'(b) Is ∠a + 30° acute, right or obtuse?',a:['acute'],exact:true,m:1}],
+     sol:'<div class="ln">(a) a + b = 90° − 30° = 60°, and a = b → <b class="f">∠a = 30°</b>.</div><div class="ln">(b) 30° + 30° = 60° → <b class="f">acute</b>.</div>'}
+  ];
