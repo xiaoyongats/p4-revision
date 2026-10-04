@@ -143,7 +143,7 @@ var r=document.getElementById('reset'),ry=document.getElementById('resetyes'),rn
 r.addEventListener('click',function(){r.hidden=true;ry.hidden=false;rn.hidden=false;});
 rn.addEventListener('click',function(){r.hidden=false;ry.hidden=true;rn.hidden=true;});
 ry.addEventListener('click',function(){
-  DATA.forEach(function(s){s.topics.forEach(function(t){['-done','-best','-max'].forEach(function(x){try{localStorage.removeItem(t.key+x);}catch(e){}});});});
+  DATA.forEach(function(s){s.topics.forEach(function(t){['-done','-best','-max','-answers'].forEach(function(x){try{localStorage.removeItem(t.key+x);}catch(e){}});});});
   r.hidden=false;ry.hidden=true;rn.hidden=true;show(current);
 });
 </script>
