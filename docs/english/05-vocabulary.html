@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vocabulary Quick Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Colour is meaning on every page: blue = rule/method, orange = answer or key word, green = correct, red = watch out. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}
+/* english extras */
+.ctx{background:var(--sun-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px;font-size:.95rem;line-height:1.6}
+.ctx .ptitle{font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.passage{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:12px 16px;display:grid;gap:8px;line-height:1.7}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair>div{border-radius:12px;padding:10px 12px;min-width:0}
+.pair .bad{background:var(--warn-soft)}
+.pair .good{background:var(--leaf-soft)}
+.u{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.blank{display:inline-block;min-width:4em;border-bottom:2px solid var(--fg)}
+@media (max-width:480px){.pair{grid-template-columns:1fr}}
+.ex .stp b{white-space:normal}
+.qtext{display:block}
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+<style>
+.appnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0;font-weight:800;font-size:.95rem}
+.appnav a{color:var(--water);text-decoration:none}
+.appnav a:hover,.appnav a:focus-visible{text-decoration:underline}
+.appnav .subj{color:var(--muted);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:24px 8px}
+.pager a{display:grid;gap:2px;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
+.pager a:hover,.pager a:focus-visible{border-color:var(--water);outline:none}
+.pager a.next{text-align:right;grid-column:2}
+.pager small{color:var(--muted);font-weight:800;font-size:.8rem}
+.pager b{font-family:var(--font-display);font-size:1.05rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="appnav" aria-label="App"><a href="../index.html#english">← All topics</a><span class="subj">English</span></nav>
+  <header class="top">
+    <span class="eyebrow">P4 English · Words</span>
+    <h1>Vocabulary</h1>
+    <p class="lead">Vocabulary MCQ tests word meaning in a sentence. The answer is hidden in the <b>clue words</b> around the blank. <span class="f">Orange</span> marks the clues.</p>
+  </header>
+
+  <nav class="bar" aria-label="Sections">
+    <div class="progress"><span id="ptext">0 done</span><div class="track"><div class="fill" id="pfill"></div></div></div>
+    <div class="chips" id="chips">
+      <a href="#method">Method</a>
+      <a href="#feelings">Feeling words</a>
+      <a href="#actions">Say, move, sound</a>
+      <a href="#forms">Word forms</a>
+      <a href="#confuse">Look-alikes</a>
+      <a href="#traps">Watch out</a>
+      <a href="#quiz" class="quizchip">Quiz</a>
+    </div>
+  </nav>
+
+  <section id="method">
+    <div class="sec-head"><span class="tag water">1</span><h2>The clue-word method</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">1. Read the whole sentence</span><span class="to">→</span><span class="box">2. Underline the clue words</span><span class="to">→</span><span class="box">3. Happy or sad? Good or bad?</span><span class="to">→</span><span class="box">4. Try each option in the blank</span></div>
+    </div>
+    <div class="grid2">
+      <div class="ex"><span class="exq">Vicky <span class="f">squealed with delight</span>. She was ___ to see her new bicycle.</span><div class="stp"><b>clue</b><span>delight → very happy</span></div><span class="ans">overjoyed</span></div>
+      <div class="ex"><span class="exq">I admire Jack for his ___ as he <span class="f">always tells the truth</span>.</span><div class="stp"><b>clue</b><span>tells the truth</span></div><span class="ans">honesty</span></div>
+      <div class="ex"><span class="exq">Mariam found it <span class="f">difficult</span> to bake the cake. She did not read the instructions ___.</span><div class="stp"><b>clue</b><span>she made mistakes reading</span></div><span class="ans">carefully</span></div>
+      <div class="ex"><span class="exq">Mr Tan was ___ that he had <span class="f">only suffered minor injuries</span>.</span><div class="stp"><b>clue</b><span>it could have been worse → thankful</span></div><span class="ans">grateful</span></div>
+    </div>
+    <label class="gotit"><input type="checkbox" id="done-method" data-sec="method"> I got this</label>
+  </section>
+
+  <section id="feelings">
+    <div class="sec-head"><span class="tag food">2</span><h2>Feeling words (also great for compositions)</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--leaf)">Very happy</td><td>overjoyed, thrilled, delighted, elated, ecstatic</td></tr>
+      <tr><td style="--part:var(--leaf)">Thankful / proud</td><td>grateful, appreciative, proud, relieved (worry is over)</td></tr>
+      <tr><td style="--part:var(--water)">Sad</td><td>disappointed, miserable, heartbroken, upset, devastated</td></tr>
+      <tr><td style="--part:var(--warn)">Scared</td><td>terrified, frightened, petrified, anxious, nervous, timid</td></tr>
+      <tr><td style="--part:var(--warn)">Angry</td><td>furious, frustrated, annoyed, irritated</td></tr>
+      <tr><td style="--part:var(--sun)">Other</td><td>confused, embarrassed, curious, confident, courageous, remorseful (sorry for a wrong)</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-feelings" data-sec="feelings"> I got this</label>
+  </section>
+
+  <section id="actions">
+    <div class="sec-head"><span class="tag sun">3</span><h2>Ways to say, move and sound</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--water)">Saying</td><td><b>whispered</b> (softly, a secret) · <b>shouted / yelled</b> (loudly) · <b>muttered</b> (unhappily, quietly) · <b>stammered</b> (nervous) · <b>exclaimed</b> (surprised) · <b>pleaded</b> (begging)</td></tr>
+      <tr><td style="--part:var(--water)">Water</td><td><b>dripping</b> (drops, a leaking tap) · <b>gushing</b> (a lot, fast) · <b>oozing</b> (thick, slowly) · <b>sloshing</b> (moving about in a container)</td></tr>
+      <tr><td style="--part:var(--water)">Moving</td><td>strolled · dashed · tiptoed · trudged · wandered · scurried</td></tr>
+      <tr><td style="--part:var(--water)">Looking</td><td>glanced · stared · peeked · gazed · glared (angrily)</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-actions" data-sec="actions"> I got this</label>
+  </section>
+
+  <section id="forms">
+    <div class="sec-head"><span class="tag leaf">4</span><h2>Word forms (endings)</h2></div>
+    <div class="tbl-wrap"><table class="pv">
+      <tr><th>Naming word (noun)</th><th>Describing word (adjective)</th><th>How (adverb)</th></tr>
+      <tr><td>honesty</td><td>honest</td><td>honestly</td></tr>
+      <tr><td>care</td><td>careful</td><td>carefully</td></tr>
+      <tr><td>ability</td><td>able</td><td>ably</td></tr>
+      <tr><td>protection</td><td>protective</td><td>protectively</td></tr>
+      <tr><td>danger</td><td>dangerous</td><td>dangerously</td></tr>
+    </table></div>
+    <p class="card"><span>After <b>his / her / the</b> → noun (his <b>honesty</b>). Before a noun → adjective (<b>protective</b> gear). After a verb, telling how → adverb (read <b>carefully</b>).</span></p>
+    <label class="gotit"><input type="checkbox" id="done-forms" data-sec="forms"> I got this</label>
+  </section>
+
+  <section id="confuse">
+    <div class="sec-head"><span class="tag warn">5</span><h2>Look-alike words</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--warn)">remind / warn / advise</td><td><b>remind</b> = help someone remember · <b>warn</b> = tell about danger · <b>advise</b> = suggest what to do</td></tr>
+      <tr><td style="--part:var(--warn)">occasion / situation</td><td><b>occasion</b> = a special event (a birthday) · <b>situation</b> = what is happening</td></tr>
+      <tr><td style="--part:var(--warn)">ability / power</td><td><b>ability</b> to see clearly · <b>power</b> = strength or control</td></tr>
+      <tr><td style="--part:var(--warn)">revise / renew</td><td><b>revised</b> the recipe = changed it to improve it · <b>renewed</b> = made it valid again (a passport)</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-confuse" data-sec="confuse"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">6</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Choosing the word you like best.</span></div><div class="row"><span class="ok">✓</span><span>Choose the word the <b>clues</b> support.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Reading only the words just before the blank.</span></div><div class="row"><span class="ok">✓</span><span>The clue is often in the <b>next</b> sentence.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Underline the clues. Decide: happy or sad, good or bad.</div>
+        <div>Try every option in the blank and read it aloud in your head.</div>
+        <div>Check the word form: his ___ → noun · ___ gear → adjective · read ___ → adverb.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="sec-head"><span class="tag food">Quiz</span><h2>Test yourself</h2></div>
+    <p class="lead">Answer every question, then press <b>Check my answers</b> to see your score, the model answers and explanations.</p>
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 0</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+    </div>
+    <div class="qpart" id="partA"><h3>Part A: Choose the answer</h3><div id="mcq" class="qpart"></div></div>
+    <div class="qpart" id="partB"><h3>Part B: Fill in the blank</h3><p class="hint">Type one word (or the words asked for). Spelling counts!</p><div id="fillq" class="qpart"></div></div>
+    <div class="qpart" id="partC"><h3>Part C: Write</h3><p class="hint">Write a full sentence. Remember the capital letter at the start and the full stop at the end.</p><div id="wrq" class="qpart"></div></div>
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Check my answers</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+
+<div class="wrap"><nav class="pager" aria-label="Topics"><a class="prev" href="04-prepositions-connectors.html"><small>← Previous</small><b>Prepositions and Connectors</b></a><a class="next" href="06-spelling-editing.html"><small>Next →</small><b>Spelling and Editing</b></a></nav></div>
+<script>
+(function(){
+  var KEY='p4e-vocab-done';
+  var boxes=[].slice.call(document.querySelectorAll('input[data-sec]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){saved={};}
+  function update(){
+    var n=0,state={};
+    boxes.forEach(function(b){
+      state[b.dataset.sec]=b.checked; if(b.checked)n++;
+      var chip=document.querySelector('#chips a[href="#'+b.dataset.sec+'"]');
+      if(chip) chip.classList.toggle('done',b.checked);
+    });
+    document.getElementById('ptext').textContent=n+' of '+boxes.length+' done';
+    document.getElementById('pfill').style.width=(n/boxes.length*100)+'%';
+    try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}
+  }
+  boxes.forEach(function(b){ if(saved[b.dataset.sec]) b.checked=true; b.addEventListener('change',update); });
+  update();
+})();
+
+/* ---------- QUIZ (english) ---------- */
+(function(){
+  var MCQ=[
+    {q:'Vicky squealed with delight. She was ___ to see the shiny new bicycle her parents bought for her.',o:['upset','confident','overjoyed','disappointed'],a:2,e:'"squealed with delight" → very happy → overjoyed.'},
+    {q:'Alison wrote a note in her diary to ___ herself to revise for her spelling test on Thursday.',o:['warn','advise','remind','question'],a:2,e:'Help herself remember → remind.'},
+    {q:'The eagle\'s ___ to see clearly from far helps it find food from high up in the sky.',o:['ability','power','control','energy'],a:0,e:'Being able to do something → ability.'},
+    {q:'Grandfather\'s 80th birthday was the perfect ___ to gather the whole family together for dinner.',o:['situation','invitation','occasion','explanation'],a:2,e:'A special event → occasion.'},
+    {q:'"Mum, we need to fix this leaking tap. Little drops of water are ___ from it," said Alex.',o:['oozing','gushing','dripping','sloshing'],a:2,e:'Little drops from a leaking tap → dripping.'},
+    {q:'Wearing ___ gear like a helmet or kneepads keeps us safe when cycling.',o:['proactive','protective','productive','preservative'],a:1,e:'Keeps us safe → protective.'},
+    {q:'I admire Jack for his ___ as he always tells the truth.',o:['honesty','curiosity','patience','diligence'],a:0,e:'Tells the truth → honesty.'},
+    {q:'Thomas ___ to his friend that he had a secret he wanted to share in private.',o:['agreed','shouted','answered','whispered'],a:3,e:'A secret, in private → whispered.'},
+    {q:'Mr Tan was ___ that he had only suffered minor injuries from his bicycle accident.',o:['fearful','grateful','peaceful','remorseful'],a:1,e:'It could have been much worse → thankful → grateful.'},
+    {q:'Tom ___ his mother\'s recipe to improve the taste of the ice cream.',o:['revised','reduced','renewed','restarted'],a:0,e:'Changed it to make it better → revised.'}
+  ];
+  var FILL=[
+    {q:'Change the word in brackets: She was praised for her (honest) ___.',a:['honesty'],e:'After "her" → noun → honesty.'},
+    {q:'Change the word in brackets: Please carry the eggs (care) ___.',a:['carefully'],e:'How to carry → adverb → carefully.'},
+    {q:'Change the word in brackets: The road is (danger) ___ at night.',a:['dangerous'],e:'Describing the road → adjective → dangerous.'},
+    {q:'Give ONE word that means "very angry".',a:['furious','livid','enraged','irate'],e:'furious.'}
+  ];
+  var WRITE=[];
+  /* MCQ: {q,o,a,e,ctx}   FILL: {q,a:[...],e,ctx}   WRITE: {q,a:[sentences]|k:[keyword groups],model,e,m,ctx}
+     ctx = optional passage/poster HTML shown above the question. */
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+  function norm(s){
+    return String(s==null?'':s).toLowerCase().replace(/[‘’`]/g,"'").replace(/[“”]/g,'"')
+      .replace(/\s+([,.!?;:])/g,'$1').replace(/\s+/g,' ').trim().replace(/[.!]+$/,'').trim();
+  }
+  function same(input,list){var a=norm(input);if(!a)return false;return list.some(function(x){return norm(x)===a;});}
+  var n=0;
+  function card(id,marks,item){
+    n++;var c=el('div','q');c.id=id;
+    if(item.ctx)c.appendChild(el('div','ctx',item.ctx));
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+n));head.appendChild(el('span','qmarks',marks+(marks>1?' marks':' mark')));c.appendChild(head);
+    c.appendChild(el('div','qtext',item.q));return c;
+  }
+  MCQ.forEach(function(item,i){
+    var c=card('mcq'+i,1,item),opts=el('div','opts');
+    item.o.forEach(function(t,j){var lab=el('label','opt');var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));opts.appendChild(lab);});
+    c.appendChild(opts);document.getElementById('mcq').appendChild(c);
+  });
+  FILL.forEach(function(item,i){
+    var c=card('fill'+i,1,item),row=el('div','ansrow');
+    var inp=document.createElement('input');inp.type='text';inp.id='fillans'+i;inp.autocomplete='off';inp.spellcheck=false;inp.setAttribute('aria-label','Answer');inp.placeholder='answer';
+    row.appendChild(inp);c.appendChild(row);document.getElementById('fillq').appendChild(c);
+  });
+  WRITE.forEach(function(item,i){
+    var m=item.k?item.k.length:(item.m||1);var c=card('wr'+i,m,item);
+    var ta=document.createElement('textarea');ta.id='wrans'+i;ta.spellcheck=false;ta.setAttribute('aria-label','Answer');ta.placeholder=item.start||'Write your answer here…';
+    c.appendChild(ta);document.getElementById('wrq').appendChild(c);
+  });
+  if(!MCQ.length)document.getElementById('partA').hidden=true;
+  if(!FILL.length)document.getElementById('partB').hidden=true;
+  if(!WRITE.length)document.getElementById('partC').hidden=true;
+  function clearFb(c){c.querySelectorAll('.feedback').forEach(function(f){f.remove();});c.classList.remove('right','wrong','partial');}
+  function state(c,got,max){c.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+  var wrGot=[];
+  function score(){
+    var sA=0,sB=0,sC=0,mC=0;
+    MCQ.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)sA++;});
+    FILL.forEach(function(item,i){if(same(document.getElementById('fillans'+i).value,item.a))sB++;});
+    WRITE.forEach(function(item,i){var m=item.k?item.k.length:(item.m||1);mC+=m;sC+=wrGot[i]||0;});
+    var max=MCQ.length+FILL.length+mC,total=sA+sB+sC;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(total/max*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Choose: '+sA+'/'+MCQ.length+'</span><span>Fill in: '+sB+'/'+FILL.length+'</span><span>Write: '+sC+'/'+mC+'</span>';
+    var pct=total/max;
+    document.getElementById('scoremsg').textContent=pct>=0.9?'Excellent! You know this topic well.':pct>=0.7?'Good work. Read the explanations for the ones you missed.':pct>=0.5?'Getting there. Read the notes again, then try again.':'Go through the notes and examples, then have another go.';
+    try{localStorage.setItem('p4e-vocab-best',String(Math.max(total,+(localStorage.getItem('p4e-vocab-best')||0))));localStorage.setItem('p4e-vocab-max',String(max));}catch(e){}
+  }
+  function check(){
+    var blanks=0;
+    MCQ.forEach(function(item,i){
+      var c=document.getElementById('mcq'+i);clearFb(c);
+      var ch=c.querySelector('input:checked');if(!ch)blanks++;
+      var labels=c.querySelectorAll('.opt');labels.forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+      labels[item.a].classList.add('is-correct');var good=ch&&+ch.value===item.a;
+      if(ch&&!good)labels[+ch.value].classList.add('is-picked-wrong');state(c,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(ch?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+') '+item.o[item.a]+'.'));
+      fb.appendChild(el('div','work',item.e));c.appendChild(fb);
+    });
+    FILL.forEach(function(item,i){
+      var c=document.getElementById('fill'+i);clearFb(c);var v=document.getElementById('fillans'+i).value;if(!v.trim())blanks++;
+      var good=same(v,item.a);state(c,good?1:0,1);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct!':(v.trim()?'Not quite.':'No answer.')+' Answer: '+item.a[0]));
+      if(item.e)fb.appendChild(el('div','work',item.e));c.appendChild(fb);
+    });
+    WRITE.forEach(function(item,i){
+      var c=document.getElementById('wr'+i);clearFb(c);var v=document.getElementById('wrans'+i).value;if(!v.trim())blanks++;
+      var fb=el('div','feedback'),verdict=el('span','verdict');fb.appendChild(verdict);
+      fb.appendChild(el('div','work','<b>Model answer:</b> '+(item.model||item.a[0])+(item.e?'<br>'+item.e:'')));
+      var kw=el('div','kw'),m=item.k?item.k.length:(item.m||1),got;
+      function paint(){c.classList.remove('right','wrong','partial');state(c,wrGot[i],m);verdict.textContent=wrGot[i]+' of '+m+(m>1?' marks':' mark');}
+      if(item.k){
+        var low=v.toLowerCase();var hits=item.k.map(function(g){return v.trim()!==''&&g.all.every(function(r){return r.test(low);});});
+        wrGot[i]=hits.filter(Boolean).length;
+        item.k.forEach(function(g,j){
+          var b=el('button',null,(hits[j]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',hits[j]?'true':'false');
+          b.addEventListener('click',function(){hits[j]=!hits[j];b.setAttribute('aria-pressed',hits[j]?'true':'false');b.textContent=(hits[j]?'✓ ':'✗ ')+g.l;wrGot[i]=hits.filter(Boolean).length;paint();score();});
+          kw.appendChild(b);
+        });
+        fb.appendChild(el('p','hint','Ideas needed (1 mark each). Green means found in your answer. If you wrote the same idea in other words, tap it.'));
+      }else{
+        var noCap=v.trim()!==''&&!/^\s*["“A-Z]/.test(v);
+        got=same(v,item.a)&&!noCap;wrGot[i]=got?m:0;
+        if(noCap)fb.appendChild(el('p','hint','<b>Start your sentence with a capital letter.</b>'));
+        var b=el('button',null,got?'✓ Matches the model answer':'My answer means the same and is correct');b.type='button';b.setAttribute('aria-pressed',got?'true':'false');
+        b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');wrGot[i]=on?m:0;paint();score();});
+        kw.appendChild(b);
+        if(!got)fb.appendChild(el('p','hint','Compare carefully: same words, same order, correct full stop and commas. Only tap the button if your sentence is really correct (ask a grown-up if unsure).'));
+      }
+      fb.appendChild(kw);paint();c.appendChild(fb);
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    score();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+  function reset(){
+    document.querySelectorAll('#quiz input, #quiz textarea').forEach(function(r){if(r.type==='radio')r.checked=false;else r.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFb);
+    document.querySelectorAll('#quiz .opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});
+    wrGot=[];document.getElementById('scorebox').hidden=true;document.getElementById('blanknote').textContent='';
+    document.getElementById('mcq').scrollIntoView({block:'start'});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+})();
+/* ---------- SAVE ANSWERS (shared by science + math) ----------
+   Keeps every quiz answer in localStorage so it survives closing the page.
+   Saved: radio choices, typed answers, whether answers were checked, keyword taps. */
+(function(){
+  var K='p4e-vocab-answers',quiz=document.getElementById('quiz');if(!quiz)return;
+  function load(){try{return JSON.parse(localStorage.getItem(K)||'null');}catch(e){return null;}}
+  function store(s){try{localStorage.setItem(K,JSON.stringify(s));}catch(e){}}
+  var state=load()||{v:{},checked:false,kw:null},restoring=false;
+  function collect(){
+    var v={};
+    quiz.querySelectorAll('input[type=radio]:checked').forEach(function(r){v[r.name]=r.value;});
+    quiz.querySelectorAll('input[type=text],textarea').forEach(function(t){if(t.value)v['#'+t.id]=t.value;});
+    state.v=v;
+  }
+  function kwState(){return [].map.call(quiz.querySelectorAll('.kw button'),function(b){return b.getAttribute('aria-pressed')==='true';});}
+  function save(){if(restoring)return;collect();store(state);}
+  quiz.addEventListener('input',save);
+  quiz.addEventListener('change',save);
+  quiz.addEventListener('click',function(e){
+    if(restoring)return;
+    var b=e.target.closest('button');if(!b)return;
+    if(b.id==='submit'){state.checked=true;collect();state.kw=kwState();store(state);}
+    else if(b.id==='reset'){state={v:{},checked:false,kw:null};try{localStorage.removeItem(K);}catch(err){}}
+    else if(b.closest('.kw')){state.kw=kwState();store(state);}
+  });
+  /* restore */
+  var v=state.v||{},any=false;
+  Object.keys(v).forEach(function(k){
+    if(k.charAt(0)==='#'){var t=document.getElementById(k.slice(1));if(t){t.value=v[k];any=true;}}
+    else{var r=quiz.querySelector('input[type=radio][name="'+k+'"][value="'+v[k]+'"]');if(r){r.checked=true;any=true;}}
+  });
+  if(state.checked&&any){
+    restoring=true;
+    var orig=Element.prototype.scrollIntoView;Element.prototype.scrollIntoView=function(){};
+    try{
+      document.getElementById('submit').click();
+      if(state.kw){var bs=quiz.querySelectorAll('.kw button');state.kw.forEach(function(p,i){var b=bs[i];if(b&&(b.getAttribute('aria-pressed')==='true')!==p)b.click();});}
+    }finally{Element.prototype.scrollIntoView=orig;restoring=false;}
+  }
+  if(any){
+    var note=document.createElement('p');note.className='hint';
+    note.textContent=state.checked?'Your saved answers and results are shown below. Press "Try again" to start fresh.':'Your saved answers are filled in below.';
+    var lead=quiz.querySelector('.lead');if(lead)lead.after(note);
+  }
+})();
+</script>
+</body>
+</html>

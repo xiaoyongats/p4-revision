@@ -1,0 +1,72 @@
+<!--meta
+title: Comprehension Cloze Notes
+eyebrow: P4 English · Reading
+h1: Comprehension Cloze
+lead: A short passage with blanks and <b>no word bank</b>. Write one suitable word in each blank. The words before AND after the blank tell you what fits.
+key: p4e-compcloze
+chips: method=Method|kinds=What kind of word?|common=Common answers|traps=Watch out
+-->
+<!--body-->
+  <section id="method">
+    <div class="sec-head"><span class="tag water">1</span><h2>Method</h2></div>
+    <div class="card">
+      <div class="steps"><span class="box">1. Read the whole passage first</span><span class="to">→</span><span class="box">2. Read the full sentence around the blank</span><span class="to">→</span><span class="box">3. What kind of word is missing?</span><span class="to">→</span><span class="box">4. Write it, then re-read the sentence</span></div>
+    </div>
+    <div class="ex"><span class="exq">Some scientists believe dinosaurs were grey or green <span class="blank"></span> colour. These colours might have helped them <span class="blank"></span> in with their surroundings. <span class="blank"></span>, other scientists suggest they were brightly coloured. Such colours might have helped males <span class="blank"></span> the attention of females.</span>
+      <div class="stp"><b>grey or green ___ colour</b><span>a preposition → <b class="f">in</b></span><b>helped them ___ in with</b><span>a verb that goes with "in" → <b class="f">blend</b></span><b>___, other scientists …</b><span>an opposite idea follows → <b class="f">However</b></span><b>helped males ___ the attention</b><span>a verb → <b class="f">attract</b></span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-method" data-sec="method"> I got this</label>
+  </section>
+
+  <section id="kinds">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>What kind of word is missing?</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--leaf)">before a noun (a / the …)</td><td>adjective or article: a / an / the / some</td></tr>
+      <tr><td style="--part:var(--leaf)">after a person, before an object</td><td>verb (check the tense!)</td></tr>
+      <tr><td style="--part:var(--leaf)">between two ideas</td><td>connector: and, but, so, because, however, although</td></tr>
+      <tr><td style="--part:var(--leaf)">before a place or time</td><td>preposition: in, on, at, to, from, with</td></tr>
+      <tr><td style="--part:var(--leaf)">replacing a noun</td><td>pronoun: it, they, them, their, who, which</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-kinds" data-sec="kinds"> I got this</label>
+  </section>
+
+  <section id="common">
+    <div class="sec-head"><span class="tag sun">3</span><h2>Common answers</h2></div>
+    <div class="steps"><span class="box">the</span><span class="box">a / an</span><span class="box">in / on / at</span><span class="box">to</span><span class="box">of</span><span class="box">and / but / so</span><span class="box">however</span><span class="box">because</span><span class="box">which / who</span><span class="box">it / they / their</span><span class="box">was / were</span><span class="box">had</span></div>
+    <div class="card"><p>Phrases to remember: <b>blend in</b> with · <b>pay attention</b> to · <b>take care</b> of · <b>in spite</b> of · <b>as soon</b> as · <b>instead</b> of · <b>look forward</b> to</p></div>
+    <label class="gotit"><input type="checkbox" id="done-common" data-sec="common"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">4</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Writing two words or a phrase.</span></div><div class="row"><span class="ok">✓</span><span><b>One word</b> per blank.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Present tense in a story told in the past.</span></div><div class="row"><span class="ok">✓</span><span>Match the tense of the passage.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Forgetting a capital letter at the start of a sentence (However).</span></div><div class="row"><span class="ok">✓</span><span>Capital letter if the blank starts the sentence.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Read the whole passage, then the whole sentence.</div>
+        <div>Decide the kind of word: verb, preposition, connector, pronoun, article.</div>
+        <div>One word, correct tense, re-read to check it sounds right.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var P1='<div class="passage">Dinosaurs are mysterious creatures. Some scientists believe that dinosaurs were grey or green (1) ___ colour. These colours might have helped the dinosaurs (2) ___ in with their surroundings. (3) ___, other scientists suggest that dinosaurs could have been brightly coloured. Such colours might have helped males (4) ___ the attention of females.</div>';
+  var P2='<div class="passage">Last Saturday, Mei Ling woke up early (5) ___ she wanted to help her mother at the market. She packed (6) ___ apple and a bottle of water into her bag. At the market, there (7) ___ many people. Mei Ling helped (8) ___ mother carry the heavy bags. She was tired (9) ___ happy at the end of the day.</div>';
+  var MCQ=[];
+  var FILL=[
+    {ctx:P1,q:'(1) grey or green ___ colour',a:['in'],e:'"in colour" → preposition.'},
+    {q:'(2) helped the dinosaurs ___ in with their surroundings',a:['blend','fit'],e:'blend in with = look like the surroundings.'},
+    {q:'(3) ___, other scientists suggest …',a:['however'],e:'An opposite idea follows → However (capital H).'},
+    {q:'(4) helped males ___ the attention of females',a:['attract','get','catch','grab'],e:'attract attention.'},
+    {ctx:P2,q:'(5) woke up early ___ she wanted to help',a:['because','as','since'],e:'A reason follows → because.'},
+    {q:'(6) She packed ___ apple',a:['an'],e:'"apple" starts with a vowel sound → an.'},
+    {q:'(7) there ___ many people',a:['were'],e:'Past + many people → were.'},
+    {q:'(8) helped ___ mother',a:['her'],e:'Mei Ling\'s mother → her.'},
+    {q:'(9) She was tired ___ happy',a:['but','yet'],e:'Two different feelings → but.'}
+  ];
+  var WRITE=[];

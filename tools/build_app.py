@@ -26,6 +26,8 @@ SUBJECTS = [
      'blurb': 'P4 topics plus the P3 topics that are tested in the P4 exam.'},
     {'id': 'math', 'name': 'Math', 'src': 'math/learning-points',
      'blurb': 'Numbers, fractions, decimals, measurement, geometry, data and problem sums.'},
+    {'id': 'english', 'name': 'English', 'src': 'english/learning-points',
+     'blurb': 'Grammar, vocabulary, synthesis, comprehension, composition and oral, following the Paper 2 sections.'},
 ]
 
 HEAD = '''<!doctype html>

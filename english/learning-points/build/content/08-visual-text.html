@@ -1,0 +1,80 @@
+<!--meta
+title: Visual Text Notes
+eyebrow: P4 English · Reading
+h1: Visual Text Comprehension
+lead: A poster, flyer or advertisement with 4 MCQ questions. Every answer is printed on the poster. Find it, and read the small print.
+key: p4e-visual
+chips: parts=Parts of a poster|types=Question types|method=Method|traps=Watch out
+-->
+<!--body-->
+  <section id="parts">
+    <div class="sec-head"><span class="tag water">1</span><h2>Parts of a poster</h2></div>
+    <div class="ctx">
+      <span class="ptitle">Pet Adoption Day</span>
+      <span>Calling all pet lovers! Here's your chance to adopt a pet! Give it a loving home because every pet deserves a second chance.</span>
+      <span><b>Date:</b> 6 December · <b>Time:</b> 10 a.m. to 5 p.m. · <b>Venue:</b> Daisy Pet Centre</span>
+      <span>Points to note: Dogs need regular walks. Cats enjoy playing with toys. Rabbits love to be cuddled. Birds may make some noise.</span>
+      <span>Free pet grooming bags for the first 100 pet owners.</span>
+      <span>Visit www.carepetshelter.sg for more details.</span>
+      <span><b>Sponsors:</b> Happy Vets, Animal Helpers · <b>Organiser:</b> Care Pet Shelter</span>
+    </div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--water)">Title</td><td>what the event is about</td></tr>
+      <tr><td style="--part:var(--water)">Purpose</td><td>the <b>main</b> reason (here: find homes for the animals)</td></tr>
+      <tr><td style="--part:var(--water)">When / where</td><td>date, time, venue</td></tr>
+      <tr><td style="--part:var(--food)">Organiser vs sponsor</td><td><b>Organiser</b> runs the event · <b>Sponsor</b> gives money or prizes</td></tr>
+      <tr><td style="--part:var(--food)">More information</td><td>website, phone number, QR code</td></tr>
+      <tr><td style="--part:var(--warn)">Small print</td><td>conditions: "first 100", "while stocks last", "children below 12 must be accompanied"</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-parts" data-sec="parts"> I got this</label>
+  </section>
+
+  <section id="types">
+    <div class="sec-head"><span class="tag leaf">2</span><h2>Common question types</h2></div>
+    <div class="tbl-wrap"><table class="jobs">
+      <tr><td style="--part:var(--leaf)">"The main purpose is …"</td><td>Look at the title and the first big line, not a small detail.</td></tr>
+      <tr><td style="--part:var(--leaf)">"Which is NOT true?"</td><td>Check each option against the poster. Watch for opposite words (love ↔ dislike).</td></tr>
+      <tr><td style="--part:var(--leaf)">"If he wants to know more, he can …"</td><td>Website / phone / QR code.</td></tr>
+      <tr><td style="--part:var(--leaf)">"Who will get …?"</td><td>Read the condition carefully: the first 100 <b>pet owners</b> (not visitors).</td></tr>
+    </table></div>
+    <label class="gotit"><input type="checkbox" id="done-types" data-sec="types"> I got this</label>
+  </section>
+
+  <section id="method">
+    <div class="sec-head"><span class="tag sun">3</span><h2>Method</h2></div>
+    <div class="card"><div class="steps"><span class="box">1. Read the question first</span><span class="to">→</span><span class="box">2. Underline its key word</span><span class="to">→</span><span class="box">3. Find that word on the poster</span><span class="to">→</span><span class="box">4. Match the meaning, not just the words</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-method" data-sec="method"> I got this</label>
+  </section>
+
+  <section id="traps">
+    <div class="sec-head"><span class="tag warn">4</span><h2>Watch out!</h2></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>The sponsor is the organiser.</span></div><div class="row"><span class="ok">✓</span><span>They are labelled separately. Read the label.</span></div></div>
+    <div class="warn-card"><div class="row"><span class="x">✗</span><span>Main purpose = giving out free bags.</span></div><div class="row"><span class="ok">✓</span><span>That is an extra. The main purpose is in the title.</span></div></div>
+    <label class="gotit"><input type="checkbox" id="done-traps" data-sec="traps"> I got this</label>
+  </section>
+
+  <section id="summary">
+    <div class="summary">
+      <h2>Remember in 3 lines</h2>
+      <div class="flow">
+        <div>Every answer is on the poster.</div>
+        <div>Organiser runs it, sponsor supports it. Purpose = title.</div>
+        <div>NOT true → check every option. Read the small print.</div>
+      </div>
+    </div>
+  </section>
+<!--quiz-->
+  var POSTER='<div class="ctx"><span class="ptitle">Pet Adoption Day</span><span>Calling all pet lovers! Here\'s your chance to adopt a pet! Pick your favourite animal and give it a loving home because every pet deserves a second chance.</span><span><b>Date:</b> 6 December 2025 · <b>Time:</b> 10 a.m. to 5 p.m. · <b>Venue:</b> Daisy Pet Centre</span><span>Points to note: Dogs need regular walks. Cats enjoy playing with toys. Rabbits love to be cuddled. Birds may make some noise.</span><span>Our pet experts will share how you can care for your pets. Our staff will help you choose a suitable pet.</span><span>Free pet grooming bags will be given to the first 100 pet owners.</span><span>Visit www.carepetshelter.sg for more details on the event.</span><span><b>Sponsors:</b> Happy Vets, Animal Helpers · <b>Organiser:</b> Care Pet Shelter</span></div>';
+  var FAIR='<div class="ctx"><span class="ptitle">Green Fun Fair</span><span>Bring your old newspapers and plastic bottles and get a free plant!</span><span><b>Saturday, 15 November</b> · 9 a.m. to 1 p.m. · Sunny Primary School Hall</span><span>Games booths · Upcycling workshop at 10 a.m. (register at the door, only 30 places) · Healthy snacks for sale</span><span>Children below 10 must be accompanied by an adult.</span><span>Organised by: Sunny Primary School Green Club · Supported by: CleanCity Council</span><span>Questions? Call 6123 4567.</span></div>';
+  var MCQ=[
+    {ctx:POSTER,q:'The organiser of this event is ___.',o:['Happy Vets','Animal Helpers','Care Pet Shelter','Daisy Pet Centre'],a:2,e:'Look at the label "Organiser". Happy Vets and Animal Helpers are sponsors; Daisy Pet Centre is the venue.'},
+    {q:'If Allan wants to know more about Pet Adoption Day, he can ___. (same poster)',o:['call Happy Vets','go to Daisy Pet Centre','visit www.carepetshelter.sg','volunteer at Animal Helpers'],a:2,e:'"Visit www.carepetshelter.sg for more details."'},
+    {q:'According to the poster, which statement is NOT true?',o:['Birds can be noisy.','Cats like playing with toys.','Rabbits dislike being hugged.','Dogs must go for walks often.'],a:2,e:'The poster says rabbits LOVE to be cuddled.'},
+    {q:'The main purpose of the event is to ___.',o:['learn from other pet lovers','give out pet grooming bags','teach pet owners how to care for their pets','find homes for the animals'],a:3,e:'The title and first line are about adopting pets.'},
+    {ctx:FAIR,q:'What must visitors bring to get a free plant?',o:['money for snacks','old newspapers and plastic bottles','an adult','a registration form'],a:1,e:'"Bring your old newspapers and plastic bottles and get a free plant!"'},
+    {q:'Who must come with an adult? (Green Fun Fair)',o:['all visitors','children below 10','children below 12','workshop teachers'],a:1,e:'"Children below 10 must be accompanied by an adult."'},
+    {q:'Which is TRUE about the upcycling workshop?',o:['It starts at 9 a.m.','Anyone can join without registering.','Only 30 people can take part.','It is organised by CleanCity Council.'],a:2,e:'"only 30 places". It starts at 10 a.m. and you register at the door.'},
+    {q:'CleanCity Council is the ___ of the Green Fun Fair.',o:['organiser','supporter','venue','school'],a:1,e:'"Supported by: CleanCity Council".'}
+  ];
+  var FILL=[];
+  var WRITE=[];

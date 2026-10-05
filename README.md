@@ -1,6 +1,6 @@
 # P4 Exam Revision App
 
-A simple web app for Primary 4 Science and Math revision: learning points, diagrams, "watch out" traps and self-marking quizzes for 23 topics. No server, no install, no account. Progress (ticked sections, best quiz scores) is saved in the browser on that device.
+A simple web app for Primary 4 Science and Math revision: learning points, diagrams, "watch out" traps and self-marking quizzes for 35 topics (Science, Math, English). No server, no install, no account. Progress (ticked sections, best quiz scores) is saved in the browser on that device.
 
 ## Use it on this computer
 
@@ -30,6 +30,7 @@ The `.gitignore` keeps the downloaded exam-paper PDFs out of the repository. The
 | `docs/` | **The app.** `index.html` is the home page; `science/` and `math/` hold the topic pages. This is what you open or publish. |
 | `science/` | Science notes (`*.md`), the 4 science exam papers, and `learning-points/` (page sources and build scripts). |
 | `math/` | Math README, exam papers in `papers/`, and `learning-points/` (page sources and build scripts). |
+| `english/` | English README, exam papers in `papers/`, and `learning-points/` (page sources and build scripts). |
 | `tools/` | `build_app.py` and the home page template `home.html`. |
 
 ## Changing the content
