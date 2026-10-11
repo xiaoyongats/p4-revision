@@ -38,6 +38,7 @@ HEAD = '''<!doctype html>
 '''
 
 NAV_CSS = '''<style>
+[hidden]{display:none!important}
 .appnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0;font-weight:800;font-size:.95rem}
 .appnav a{color:var(--water);text-decoration:none}
 .appnav a:hover,.appnav a:focus-visible{text-decoration:underline}
