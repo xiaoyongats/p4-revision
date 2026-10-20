@@ -28,6 +28,8 @@ SUBJECTS = [
      'blurb': 'Numbers, fractions, decimals, measurement, geometry, data and problem sums.'},
     {'id': 'english', 'name': 'English', 'src': 'english/learning-points',
      'blurb': 'Grammar, vocabulary, synthesis, comprehension, composition and oral, following the Paper 2 sections.'},
+    {'id': 'mock', 'name': 'Mock Papers', 'src': 'mock', 'nav': 'All papers',
+     'blurb': 'Full exam papers with a 1 h 45 min timer: Booklet A (28 MCQ, 56 marks) and Booklet B (open-ended, 44 marks). New questions in the style of the 2024 school papers.'},
 ]
 
 HEAD = '''<!doctype html>
@@ -58,7 +60,8 @@ def topic_info(path):
     title = re.search(r'<title>(.*?)</title>', src).group(1)
     h1 = re.search(r'<h1>(.*?)</h1>', src).group(1)
     eyebrow = re.search(r'<span class="eyebrow">(.*?)</span>', src).group(1)
-    key = re.search(r"var KEY='(.*?)-done'", src).group(1)
+    m = re.search(r"var KEY='(.*?)-done'", src) or re.search(r'data-key="(.*?)"', src)
+    key = m.group(1)
     sections = len(set(re.findall(r'data-sec="([^"]+)"', src)))
     return {'file': os.path.basename(path), 'title': title, 'h1': h1, 'eyebrow': eyebrow,
             'key': key, 'sections': sections, 'src': src}
@@ -71,15 +74,15 @@ def wrap_page(t, subject, prev_t, next_t):
     # drop the page's own meta lines (HEAD already has them)
     head = re.sub(r'<meta charset="utf-8">\n?|<meta name="viewport"[^>]*>\n?', '', head)
     nav = ('\n  <nav class="appnav" aria-label="App">'
-           '<a href="../index.html#%s">← All topics</a><span class="subj">%s</span></nav>'
-           % (subject['id'], subject['name']))
+           '<a href="../index.html#%s">← %s</a><span class="subj">%s</span></nav>'
+           % (subject['id'], subject.get('nav', 'All topics'), subject['name']))
     body = body.replace('<div class="wrap">', '<div class="wrap">' + nav, 1)
     links = ''
     if prev_t:
         links += '<a class="prev" href="%s"><small>← Previous</small><b>%s</b></a>' % (prev_t['file'], html.escape(prev_t['h1']))
     if next_t:
         links += '<a class="next" href="%s"><small>Next →</small><b>%s</b></a>' % (next_t['file'], html.escape(next_t['h1']))
-    pager = '\n<div class="wrap"><nav class="pager" aria-label="Topics">%s</nav></div>\n' % links
+    pager = '\n<div class="wrap"><nav class="pager" aria-label="Topics">%s</nav></div>\n' % links if links else '\n'
     i = body.rindex('<script>')
     body = body[:i] + pager + body[i:]
     return HEAD + head + '\n' + NAV_CSS + '</head>\n<body>\n' + body.strip('\n') + '\n</body>\n</html>\n'

@@ -114,16 +114,17 @@ function show(id){
     var a=el('a','card');a.href=s.id+'/'+t.file;
     a.appendChild(el('span','eb',t.eyebrow));
     var h=el('h3');h.appendChild(el('span','num',(i+1)+'. '));h.appendChild(document.createTextNode(t.h1));a.appendChild(h);
-    var bar=el('div','bar');var fill=el('i');fill.style.width=(Math.min(p.done,t.sections)/t.sections*100)+'%';bar.appendChild(fill);a.appendChild(bar);
+    var paper=!t.sections;  /* mock papers: no sections, progress = best score */
+    var bar=el('div','bar');var fill=el('i');fill.style.width=(paper?(p.pct||0)*100:Math.min(p.done,t.sections)/t.sections*100)+'%';bar.appendChild(fill);a.appendChild(bar);
     var meta=el('div','meta');
-    meta.appendChild(el('span',null,Math.min(p.done,t.sections)+' / '+t.sections+' sections'));
-    meta.appendChild(el('span',null,p.best!=null&&p.max?'Quiz best '+p.best+' / '+p.max:'Quiz not tried'));
+    meta.appendChild(el('span',null,paper?'1 h 45 min · 100 marks':Math.min(p.done,t.sections)+' / '+t.sections+' sections'));
+    meta.appendChild(el('span',null,p.best!=null&&p.max?(paper?'Best ':'Quiz best ')+p.best+' / '+p.max:(paper?'Not attempted':'Quiz not tried')));
     a.appendChild(meta);
-    a.appendChild(el('span','pill '+p.state,p.state==='done'?'Mastered':p.state==='going'?'In progress':'Not started'));
+    a.appendChild(el('span','pill '+p.state,p.state==='done'?(paper?'90%+':'Mastered'):p.state==='going'?(paper?'Attempted':'In progress'):'Not started'));
     grid.appendChild(a);
   });
   var sum=document.getElementById('summary');sum.innerHTML='';
-  [[studied+' / '+s.topics.length,'started'],[complete+' / '+s.topics.length,'mastered'],[pcts.length?Math.round(pcts.reduce(function(a,b){return a+b;},0)/pcts.length*100)+'%':'–','avg quiz']].forEach(function(x){
+  [[studied+' / '+s.topics.length,s.id==='mock'?'attempted':'started'],[complete+' / '+s.topics.length,s.id==='mock'?'scored 90%+':'mastered'],[pcts.length?Math.round(pcts.reduce(function(a,b){return a+b;},0)/pcts.length*100)+'%':'–',s.id==='mock'?'avg best score':'avg quiz']].forEach(function(x){
     var d=el('div','stat');d.appendChild(el('span','n',x[0]));d.appendChild(el('span','l',x[1]));sum.appendChild(d);
   });
   var nx=document.getElementById('next');
@@ -143,7 +144,7 @@ var r=document.getElementById('reset'),ry=document.getElementById('resetyes'),rn
 r.addEventListener('click',function(){r.hidden=true;ry.hidden=false;rn.hidden=false;});
 rn.addEventListener('click',function(){r.hidden=false;ry.hidden=true;rn.hidden=true;});
 ry.addEventListener('click',function(){
-  DATA.forEach(function(s){s.topics.forEach(function(t){['-done','-best','-max','-answers'].forEach(function(x){try{localStorage.removeItem(t.key+x);}catch(e){}});});});
+  DATA.forEach(function(s){s.topics.forEach(function(t){['-done','-best','-max','-answers','-last','-timer'].forEach(function(x){try{localStorage.removeItem(t.key+x);}catch(e){}});});});
   r.hidden=false;ry.hidden=true;rn.hidden=true;show(current);
 });
 </script>
