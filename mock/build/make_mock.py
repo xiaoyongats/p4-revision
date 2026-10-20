@@ -10,8 +10,11 @@ Each paper in mock/build/papers/*.js starts with a meta comment block:
     h1: ...
     lead: ...
     key: ...
+    sub: short line for the home card, e.g. 1 h 45 min · 100 marks
+    intro: file in parts/ shown above the questions
+    quiz_lead: one line above Booklet A
     */
-followed by   var A=[...];  (Booklet A MCQ)   var B=[...];  (Booklet B open-ended)
+followed by   var CFG={...}; var TOPICS={...}; var A=[...]; var B=[...];  (see parts/engine.js)
 Output: mock/NN-name.html (picked up by tools/build_app.py as the "Mock Papers" tab).
 """
 import glob
@@ -58,7 +61,8 @@ for f in sorted(glob.glob(os.path.join(here, 'papers', '*.js'))):
     quiz = src.split('*/', 1)[1].strip('\n')
     out = t
     for k, v in {'TITLE': meta['title'], 'EYEBROW': meta['eyebrow'], 'H1': meta['h1'], 'LEAD': meta['lead'],
-                 'KEY': meta['key'], 'BODY': part('intro.html').rstrip('\n'), 'QUIZ': quiz}.items():
+                 'KEY': meta['key'], 'SUB': meta['sub'], 'QUIZ_LEAD': meta['quiz_lead'],
+                 'BODY': part(meta['intro']).rstrip('\n'), 'QUIZ': quiz}.items():
         out = out.replace('{{' + k + '}}', v)
     assert '{{' not in out, f
     name = os.path.splitext(os.path.basename(f))[0] + '.html'

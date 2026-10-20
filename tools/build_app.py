@@ -29,7 +29,7 @@ SUBJECTS = [
     {'id': 'english', 'name': 'English', 'src': 'english/learning-points',
      'blurb': 'Grammar, vocabulary, synthesis, comprehension, composition and oral, following the Paper 2 sections.'},
     {'id': 'mock', 'name': 'Mock Papers', 'src': 'mock', 'nav': 'All papers',
-     'blurb': 'Full exam papers with a 1 h 45 min timer: Booklet A (28 MCQ, 56 marks) and Booklet B (open-ended, 44 marks). New questions in the style of the 2024 school papers.'},
+     'blurb': 'Full timed exam papers in the school format: Booklet A (choose) and Booklet B (write). All questions are new, written in the style of real school papers.'},
 ]
 
 HEAD = '''<!doctype html>
@@ -63,8 +63,9 @@ def topic_info(path):
     m = re.search(r"var KEY='(.*?)-done'", src) or re.search(r'data-key="(.*?)"', src)
     key = m.group(1)
     sections = len(set(re.findall(r'data-sec="([^"]+)"', src)))
+    sub = re.search(r'data-sub="(.*?)"', src)
     return {'file': os.path.basename(path), 'title': title, 'h1': h1, 'eyebrow': eyebrow,
-            'key': key, 'sections': sections, 'src': src}
+            'key': key, 'sections': sections, 'sub': sub.group(1) if sub else '', 'src': src}
 
 
 def wrap_page(t, subject, prev_t, next_t):
@@ -101,7 +102,7 @@ def main():
             page = wrap_page(t, s, topics[i - 1] if i else None, topics[i + 1] if i + 1 < len(topics) else None)
             io.open(os.path.join(outdir, t['file']), 'w', encoding='utf-8', newline='\n').write(page)
         data.append({'id': s['id'], 'name': s['name'], 'blurb': s['blurb'],
-                     'topics': [{k: t[k] for k in ('file', 'h1', 'eyebrow', 'key', 'sections')} for t in topics]})
+                     'topics': [{k: t[k] for k in ('file', 'h1', 'eyebrow', 'key', 'sections', 'sub')} for t in topics]})
         print('%s: %d topics' % (s['id'], len(topics)))
     home = io.open(os.path.join(ROOT, 'tools', 'home.html'), encoding='utf-8').read()
     home = home.replace('/*DATA*/null', json.dumps(data, ensure_ascii=False))

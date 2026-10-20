@@ -117,7 +117,7 @@ function show(id){
     var paper=!t.sections;  /* mock papers: no sections, progress = best score */
     var bar=el('div','bar');var fill=el('i');fill.style.width=(paper?(p.pct||0)*100:Math.min(p.done,t.sections)/t.sections*100)+'%';bar.appendChild(fill);a.appendChild(bar);
     var meta=el('div','meta');
-    meta.appendChild(el('span',null,paper?'1 h 45 min · 100 marks':Math.min(p.done,t.sections)+' / '+t.sections+' sections'));
+    meta.appendChild(el('span',null,paper?t.sub:Math.min(p.done,t.sections)+' / '+t.sections+' sections'));
     meta.appendChild(el('span',null,p.best!=null&&p.max?(paper?'Best ':'Quiz best ')+p.best+' / '+p.max:(paper?'Not attempted':'Quiz not tried')));
     a.appendChild(meta);
     a.appendChild(el('span','pill '+p.state,p.state==='done'?(paper?'90%+':'Mastered'):p.state==='going'?(paper?'Attempted':'In progress'):'Not started'));

@@ -4,7 +4,14 @@ eyebrow: P4 Science · Mock exam
 h1: Science Mock Paper 1
 lead: A full end-of-year paper in the same format as the 2024 school papers (Rosyth, Raffles Girls', Henry Park, Nanyang, SCGS, Tao Nan). All questions are new. Covers every P4 topic plus the P3 topics that are tested.
 key: p4m-sci1
+sub: 1 h 45 min · 100 marks
+intro: intro-science.html
+quiz_lead: Choose one answer for each Booklet A question. For Booklet B, write your answers in the boxes.
 */
+  var CFG={amark:2,minutes:105,base:'../science/'};
+  var TOPICS={'01-plant-systems':'Plant systems','02-human-systems':'Human digestive system','03-matter':'Matter','04-light':'Light',
+    '05-shadows':'Shadows','06-heat':'Heat','07-effects-of-heat':'Effects of heat','08-p3-diversity':'Diversity (P3)',
+    '09-p3-materials':'Materials (P3)','10-p3-life-cycles':'Life cycles (P3)','11-p3-magnets':'Magnets (P3)'};
   function tbl(rows){return '<div class="tbl-wrap"><table class="pv">'+rows.map(function(r,i){return '<tr>'+r.map(function(c){return i?'<td>'+c+'</td>':'<th>'+c+'</th>';}).join('')+'</tr>';}).join('')+'</table></div>';}
   function gut(L){
     function lab(x,y,tx,ty,t){if(!t)return '';var left=tx<140;

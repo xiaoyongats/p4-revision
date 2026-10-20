@@ -27,3 +27,11 @@
 #revise ul{gap:4px}
 .opt span{min-width:0}
 @media (max-width:480px){.timerbar{grid-template-columns:auto 1fr}.timerbar .btn{grid-column:1/-1}}
+.sech{font-size:1.15rem;margin-top:8px;color:var(--water)}
+.ctx .passage p{margin:0}
+.passage{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:12px 16px;display:grid;gap:10px;line-height:1.75}
+.poster{background:var(--card);border:3px solid var(--food);border-radius:14px;padding:14px 16px;display:grid;gap:8px;text-align:center}
+.poster h4{font-family:var(--font-display);font-size:1.5rem;margin:0;color:var(--food)}
+.poster ul{text-align:left}
+.wbank{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card);font-weight:800}
+.bl{font-weight:800;color:var(--water)}
