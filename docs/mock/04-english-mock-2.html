@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Mock Paper 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Mock exam paper: Booklet A (choose), Booklet B (write), timer at the top, marked by key ideas like the real exam. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}
+/* mock paper extras */
+.timerbar{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--bg);padding-block:10px;border-bottom:2px solid var(--line)}
+.tclock{display:grid;line-height:1.1}
+.tlabel{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.tnum{font-family:var(--font-display);font-weight:800;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.timerbar.low .tnum{color:var(--warn)}
+.timerbar.up .tnum{color:var(--warn)}
+.timerbar .track{height:10px}
+.btn.small{font-size:.95rem;padding:6px 14px}
+.mtab td,.mtab th{text-align:left}
+.ctx{background:var(--sun-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:10px;line-height:1.6;min-width:0}
+.ctx svg,.qtext svg{max-width:100%;height:auto;display:block;margin-inline:auto}
+.ctx .pv,.qtext .pv{margin-inline:auto}
+.qtext{display:grid;gap:8px}
+.bpart{display:grid;gap:8px;border-radius:12px;padding:8px 10px;border:2px solid transparent;min-width:0}
+.bpart.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.bpart.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.bpart.is-partial{border-color:var(--sun);background:var(--sun-soft)}
+.bpart .pq{font-weight:700}
+.bpart .pm{color:var(--muted);font-weight:800;font-size:.85rem;white-space:nowrap}
+.bpart input[type=text]{font:inherit;font-weight:800;width:16em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.bpart input[type=text]:focus{outline:none;border-color:var(--water)}
+.bpart textarea{min-height:70px}
+.bpart .feedback{background:var(--card)}
+.revlink{color:var(--water);font-weight:800}
+#revise{display:grid;gap:6px}
+#revise ul{gap:4px}
+.opt span{min-width:0}
+@media (max-width:480px){.timerbar{grid-template-columns:auto 1fr}.timerbar .btn{grid-column:1/-1}}
+.sech{font-size:1.15rem;margin-top:8px;color:var(--water)}
+.ctx .passage p{margin:0}
+.passage{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:12px 16px;display:grid;gap:10px;line-height:1.75}
+.poster{background:var(--card);border:3px solid var(--food);border-radius:14px;padding:14px 16px;display:grid;gap:8px;text-align:center}
+.poster h4{font-family:var(--font-display);font-size:1.5rem;margin:0;color:var(--food)}
+.poster ul{text-align:left}
+.wbank{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card);font-weight:800}
+.bl{font-weight:800;color:var(--water)}
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+<style>
+[hidden]{display:none!important}
+.appnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px 0;font-weight:800;font-size:.95rem}
+.appnav a{color:var(--water);text-decoration:none}
+.appnav a:hover,.appnav a:focus-visible{text-decoration:underline}
+.appnav .subj{color:var(--muted);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:24px 8px}
+.pager a{display:grid;gap:2px;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}
+.pager a:hover,.pager a:focus-visible{border-color:var(--water);outline:none}
+.pager a.next{text-align:right;grid-column:2}
+.pager small{color:var(--muted);font-weight:800;font-size:.8rem}
+.pager b{font-family:var(--font-display);font-size:1.05rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="appnav" aria-label="App"><a href="../index.html#mock">← All papers</a><span class="subj">Mock Papers</span></nav>
+  <header class="top">
+    <span class="eyebrow">P4 English · Mock exam · Paper 2</span>
+    <h1>English Mock Paper 2</h1>
+    <p class="lead">A second full Paper 2 (language use and comprehension) in the format of the 2025 end-of-year papers. All questions and passages are new and different from Mock Paper 1.</p>
+  </header>
+
+  <div class="timerbar" id="timerbar" data-key="p4m-eng2" data-sub="Paper 2 · 1 h 15 min · 50 marks">
+    <div class="tclock"><span class="tlabel" id="tlabel">Time</span><span class="tnum" id="tnum">1:45:00</span></div>
+    <div class="track"><div class="fill" id="tfill"></div></div>
+    <button class="btn small" id="tstart" type="button">Start the paper</button>
+  </div>
+
+  <section id="howto">
+    <div class="card">
+      <div class="tbl-wrap"><table class="pv mtab">
+        <tr><th>Booklet</th><th>Sections</th><th>Marks</th></tr>
+        <tr><td>A: Choose<br>(Q1 to 20)</td><td>Grammar MCQ 10 · Vocabulary MCQ 6 · Visual text 4</td><td>20</td></tr>
+        <tr><td>B: Write<br>(Q21 to 34)</td><td>Grammar cloze 8 · Synthesis 4 · Comprehension 1 (8) · Comprehension 2 (10)</td><td>30</td></tr>
+        <tr><td><b>Total</b></td><td><b>Paper 2 · 1 h 15 min</b></td><td><b>50</b></td></tr>
+      </table></div>
+      <ul>
+        <li>Press <b>Start the paper</b> to begin the timer. Work like it is the real exam: no notes, no dictionary.</li>
+        <li>Aim to finish Booklet A in about <b>20 minutes</b>. Leave the most time for the two comprehension passages.</li>
+        <li>Synthesis: write <b>one full sentence</b> with a capital letter and a full stop. Comprehension: answer in full sentences, using words from the passage.</li>
+        <li>Your answers are saved as you go. When you finish, press <b>Mark my paper</b> at the bottom.</li>
+        <li>This is Paper 2 only. Practise Paper 1 (composition, 20 marks) on the <a class="revlink" href="../english/11-composition.html">Composition page</a>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <p class="lead">Choose one answer for each Booklet A question. For Booklet B, type your answers in the boxes.</p>
+    <div class="qpart" id="partA"><div class="sec-head"><span class="tag water">A</span><h2>Booklet A</h2><span class="qmarks" id="infoA"></span></div><div id="mcq" class="qpart"></div></div>
+    <div class="qpart" id="partB"><div class="sec-head"><span class="tag food">B</span><h2>Booklet B</h2><span class="qmarks" id="infoB"></span></div><div id="oeq" class="qpart"></div></div>
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 100</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+      <div id="revise"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Mark my paper</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+
+<div class="wrap"><nav class="pager" aria-label="Topics"><a class="prev" href="03-science-mock-2.html"><small>← Previous</small><b>Science Mock Paper 2</b></a></nav></div>
+<script>
+/* ---------- QUIZ (mock paper) ---------- */
+(function(){
+  var CFG={amark:1,minutes:75,base:'../english/'};
+  var TOPICS={'01-verbs-tenses':'Verbs and tenses','02-subject-verb-agreement':'Subject–verb agreement','03-pronouns-quantifiers':'Pronouns and quantifiers',
+    '04-prepositions-connectors':'Prepositions and connectors','05-vocabulary':'Vocabulary','06-spelling-editing':'Spelling and editing',
+    '07-synthesis':'Synthesis','08-visual-text':'Visual text','09-comprehension-cloze':'Comprehension cloze','10-comprehension':'Comprehension'};
+  function passage(ps){return '<div class="passage">'+ps.map(function(p,i){return '<p><b>'+(i+1)+'</b> &nbsp;'+p+'</p>';}).join('')+'</div>';}
+  var POSTER='<div class="poster"><h4>Holiday Reading Challenge</h4><p>Read! Collect stamps! Win prizes!</p>'+
+    '<p><b>Who:</b> Primary 1 to Primary 6 pupils<br><b>When:</b> 1 to 30 November<br><b>Where:</b> Sunny Hills Library (open 10 a.m. to 8 p.m., <b>closed on Mondays</b>)</p>'+
+    '<ul><li>Borrow books from Sunny Hills Library.</li><li>For every book you finish, get a stamp on your Reading Card at the counter.</li></ul>'+
+    '<p><b>Prizes</b><br>5 stamps: a bookmark &nbsp;·&nbsp; 10 stamps: a storybook &nbsp;·&nbsp; 15 stamps: a $20 bookshop voucher</p>'+
+    '<p class="hint">Only books borrowed from Sunny Hills Library count.</p></div>';
+
+  var A=[
+    {h:'Grammar MCQ (10 marks)',t:'01-verbs-tenses',q:'My brother usually _______ his homework before dinner.',o:['do','does','did','doing'],a:1,
+     e:'"Usually" shows a habit, and "my brother" is one person, so use <b>does</b>.'},
+    {t:'01-verbs-tenses',q:'While I _______ my shoelaces, the bus drove past.',o:['tie','am tying','ties','was tying'],a:3,
+     e:'One action was going on (tying) when another happened in the past (the bus drove past): use the past continuous, <b>was tying</b>.'},
+    {t:'01-verbs-tenses',q:'The children _______ to the zoo last Friday.',o:['went','go','goes','have gone'],a:0,
+     e:'"Last Friday" is in the past, so use the simple past: <b>went</b>.'},
+    {t:'02-subject-verb-agreement',q:'The flowers in the vase _______ very fresh.',o:['is','was','look','looks'],a:2,
+     e:'The subject is "the flowers" (plural), not "the vase". Flowers <b>look</b>.'},
+    {t:'02-subject-verb-agreement',q:'Everybody in the class _______ excited about the school camp.',o:['are','were','is','have'],a:2,
+     e:'"Everybody" is singular, so use <b>is</b>.'},
+    {t:'02-subject-verb-agreement',q:'My grandparents _______ living in Malaysia now.',o:['are','is','was','has'],a:0,
+     e:'"Grandparents" is plural and "now" is the present: <b>are</b>.'},
+    {t:'03-pronouns-quantifiers',q:'Grandma gave Jia and _______ a box of mooncakes.',o:['I','mine','my','me'],a:3,
+     e:'After the verb ("gave"), use <b>me</b>. Test it: "Grandma gave me a box", not "gave I".'},
+    {t:'03-pronouns-quantifiers',q:'The cat licked _______ paws after its meal.',o:['it&rsquo;s','its','their','his'],a:1,
+     e:'<b>Its</b> (no apostrophe) means "belonging to it". <b>It&rsquo;s</b> means "it is".'},
+    {t:'03-pronouns-quantifiers',q:'How _______ sugar do you need for the cake?',o:['much','many','few','lot'],a:0,
+     e:'Sugar cannot be counted, so ask "how <b>much</b>". Use "how many" for things we can count (how many eggs).'},
+    {t:'04-prepositions-connectors',q:'Ali was very tired, _______ he finished his homework before going to bed.',o:['because','so','but','or'],a:2,
+     e:'Being tired and still finishing his homework are opposite ideas, so use <b>but</b>.'},
+    {h:'Vocabulary MCQ (6 marks)',t:'05-vocabulary',q:'The library is a _______ place, so please lower your voice.',o:['noisy','busy','crowded','quiet'],a:3,
+     e:'We lower our voices to keep a place <b>quiet</b>.'},
+    {t:'05-vocabulary',q:'Leon was _______ to see his best friend again after a month apart.',o:['annoyed','delighted','nervous','jealous'],a:1,
+     e:'Seeing a best friend after a long time makes you very happy: <b>delighted</b>.'},
+    {t:'05-vocabulary',q:'The magician&rsquo;s trick was so _______ that the audience gasped.',o:['boring','ordinary','amazing','simple'],a:2,
+     e:'People gasp when something is surprising: <b>amazing</b>.'},
+    {t:'05-vocabulary',q:'The cook _______ the soup to see if it needed more salt.',o:['tasted','wasted','tested','toasted'],a:0,
+     e:'We <b>taste</b> food with our tongue to check its flavour. Careful with look-alike words.'},
+    {t:'05-vocabulary',q:'Mr Tan always arrives on time for every meeting. He is very _______.',o:['lazy','forgetful','rude','punctual'],a:3,
+     e:'<b>Punctual</b> means always on time.'},
+    {t:'05-vocabulary',q:'The puppy _______ its tail happily when it saw its owner.',o:['shook','wagged','waved','swung'],a:1,
+     e:'A dog <b>wags</b> its tail. We wave our hands.'},
+    {h:'Visual Text Comprehension (4 marks)',t:'08-visual-text',ctx:POSTER,q:'Study the poster. What is the main purpose of the poster?',
+     o:['to sell books to children','to tell people that the library is closed on Mondays','to encourage children to read more during the holidays','to advertise a bookshop'],a:2,
+     e:'The poster invites pupils to read books in November and win prizes. The Monday closing is only a small detail.'},
+    {t:'08-visual-text',q:'Look at the poster in Q17. Mei finished 12 books from the library. What is the best prize she can get?',
+     o:['a storybook','a bookmark','a $20 bookshop voucher','nothing'],a:0,
+     e:'12 stamps is more than 10 but less than 15, so the best prize she can get is the <b>storybook</b>.'},
+    {t:'08-visual-text',q:'Look at the poster in Q17. Which of these books will <b>not</b> earn a stamp?',
+     o:['a comic borrowed from Sunny Hills Library','a storybook borrowed on a Saturday','a picture book borrowed from Sunny Hills Library','a book Jun bought from a bookshop'],a:3,
+     e:'"Only books borrowed from Sunny Hills Library count." A book bought from a bookshop does not count.'},
+    {t:'08-visual-text',q:'Look at the poster in Q17. On which day can Ravi <b>not</b> collect a stamp at the counter?',
+     o:['Sunday','Monday','Saturday','Wednesday'],a:1,
+     e:'The library is <b>closed on Mondays</b>.'}
+  ];
+
+  var B=[
+    {h:'Grammar Cloze (8 marks)',n:'21–24',t:'04-prepositions-connectors',ctx:'<p>Fill in each blank with the correct word from the box. Write the <b>letter or the word</b>. Use each word once only.</p>'+
+      '<div class="wbank"><span>(A) across</span><span>(B) at</span><span>(C) for</span><span>(D) in</span><span>(E) under</span><span>(F) with</span></div>'+
+      '<div class="passage"><p>Kumar woke up early <span class="bl">(21)</span> _____ the morning to go fishing <span class="bl">(22)</span> _____ his father. They walked <span class="bl">(23)</span> _____ the bridge to reach the jetty. They waited <span class="bl">(24)</span> _____ two hours before they finally caught a fish.</p></div>',parts:[
+      {p:'(21)',q:'',w:[/^\(?d\)?\s*(in)?$|^in$/],model:'(D) in',e:'We say <b>in</b> the morning (but <b>at</b> night).'},
+      {p:'(22)',q:'',w:[/^\(?f\)?\s*(with)?$|^with$/],model:'(F) with',e:'He went fishing together <b>with</b> his father.'},
+      {p:'(23)',q:'',w:[/^\(?a\)?\s*(across)?$|^across$/],model:'(A) across',e:'They walked from one side of the bridge to the other: <b>across</b>.'},
+      {p:'(24)',q:'',w:[/^\(?c\)?\s*(for)?$|^for$/],model:'(C) for',e:'Use <b>for</b> with a length of time: for two hours.'}]},
+    {n:'25–28',t:'01-verbs-tenses',ctx:'<p>Write the correct word from the brackets.</p>'+
+      '<div class="passage"><p>Last December, my family <span class="bl">(25)</span> [ fly / flew / flown ] to Japan for a holiday. It <span class="bl">(26)</span> [ is / was ] very cold there. Every morning, we <span class="bl">(27)</span> [ drink / drank ] hot chocolate to keep warm. Now I <span class="bl">(28)</span> [ want / wanted / wants ] to go back again!</p></div>',parts:[
+      {p:'(25)',q:'',w:['flew'],e:'"Last December" = past: <b>flew</b>. "Flown" needs has/have.'},
+      {p:'(26)',q:'',w:['was'],e:'The story is in the past: it <b>was</b> cold.'},
+      {p:'(27)',q:'',w:['drank'],e:'Still part of the holiday in the past: <b>drank</b>.'},
+      {p:'(28)',q:'',w:['want'],e:'"Now" = present tense, and with "I" we use <b>want</b> (not "wants").'}]},
+    {h:'Synthesis (4 marks)',n:29,t:'07-synthesis',ctx:'<p>Rewrite the sentences as <b>one</b> sentence, using the word(s) given. The meaning must stay the same.</p>',parts:[
+      {p:'',q:'Sara was feeling unwell. She still went to school. &nbsp;(Begin with: <b>Although</b> …)',start:'Although …',
+       s:['Although Sara was feeling unwell, she went to school.','Although Sara was feeling unwell, she still went to school.','Although she was feeling unwell, Sara went to school.','Although she was feeling unwell, Sara still went to school.','Although Sara was unwell, she went to school.','Although Sara was unwell, she still went to school.'],
+       e:'Do not use "but" together with "although". Put a comma after the "Although …" part.'}]},
+    {n:30,t:'07-synthesis',parts:[
+      {p:'',q:'The cake was delicious. My mother baked the cake. &nbsp;(Use: <b>which</b>)',
+       s:['The cake which my mother baked was delicious.','The cake, which my mother baked, was delicious.','The cake which was baked by my mother was delicious.'],
+       e:'"Which my mother baked" goes straight after "The cake", and the second "the cake" is dropped.'}]},
+    {n:31,t:'07-synthesis',parts:[
+      {p:'',q:'Ben did not finish his homework. Ben did not tidy his room. &nbsp;(Use: <b>neither … nor</b>)',
+       s:['Ben neither finished his homework nor tidied his room.'],
+       e:'Neither … nor already means "not", so remove "did not": Ben <b>neither</b> finished … <b>nor</b> tidied …'}]},
+    {n:32,t:'07-synthesis',parts:[
+      {p:'',q:'"Please close the window," the teacher said to Ali. &nbsp;(Begin with: <b>The teacher asked Ali</b> …)',start:'The teacher asked Ali …',
+       s:['The teacher asked Ali to close the window.'],
+       e:'A polite request becomes "asked … <b>to</b> + verb". Drop "please" and the speech marks.'}]},
+    {h:'Comprehension 1 (8 marks)',n:33,t:'10-comprehension',ctx:'<p>Read the passage, then answer the questions.</p>'+passage([
+      'Hui Min had practised her lines for the class play every evening for two weeks. She was playing the wise old owl, and she knew every word by heart.',
+      'On the day of the performance, the school hall was packed with parents. When Hui Min peeped out from behind the curtain, her heart began to pound and her hands turned cold. "What if I forget my lines?" she whispered to her friend, Aisha.',
+      'Aisha squeezed her hand. "Just look at the clock at the back of the hall and pretend it is our classroom," she said. "You have done this a hundred times."',
+      'When it was her turn, Hui Min stepped onto the stage. For a moment, her mind went blank. Then she remembered Aisha&rsquo;s advice. She fixed her eyes on the clock, took a deep breath and began to speak. Her voice grew louder and stronger with every line.',
+      'At the end of the play, the audience clapped and cheered. Mrs Wong, her form teacher, said that Hui Min was the best owl she had ever seen. Hui Min grinned at Aisha. She could not wait for the next school play.']),parts:[
+      {p:'(a)',q:'True or false? Hui Min practised her lines for two weeks.',o:['True','False'],a:0,e:'"every evening for two weeks"'},
+      {p:'(b)',q:'True or false? There were not many people in the hall.',o:['True','False'],a:1,e:'The hall was "<b>packed</b>" with parents: it was full.'},
+      {p:'(c)',q:'True or false? Aisha gave Hui Min some advice.',o:['True','False'],a:0,e:'Aisha told her to look at the clock and pretend it was their classroom.'},
+      {p:'(d)',q:'Hui Min&rsquo;s heart pounded because she was _______.',o:['excited about her costume','afraid that she would forget her lines','angry with Aisha'],a:1,e:'"What if I forget my lines?"'},
+      {p:'(e)',q:'What advice did Aisha give Hui Min?',k:[{l:'look at the clock / pretend the hall is their classroom',all:[/clock|classroom|pretend/]}],
+       model:'She told Hui Min to look at the clock at the back of the hall and pretend it was their classroom.'},
+      {p:'(f)',q:'Give <b>two</b> things Hui Min did to calm herself before she began to speak.',
+       k:[{l:'fixed her eyes on the clock',all:[/clock|eyes|look|stare/]},{l:'took a deep breath',all:[/breath/]}],
+       model:'She fixed her eyes on the clock and took a deep breath.'},
+      {p:'(g)',q:'How do you know that Hui Min enjoyed acting in the end?',k:[{l:'she could not wait for the next school play',all:[/next|again|wait|grin/]}],
+       model:'She could not wait for the next school play.'}]},
+    {h:'Comprehension 2 (10 marks)',n:34,t:'10-comprehension',ctx:'<p>Read the passage, then answer the questions in full sentences.</p>'+passage([
+      'One evening, there was a blackout in Block 25. The lifts stopped, the fans went still and the whole corridor was dark. Ethan, who lived on the twelfth floor with his grandmother, rushed to find a torch.',
+      'Ethan remembered that Mr Teo, their elderly neighbour, lived alone. Mr Teo used a walking stick and could not see well in the dark. "We should check on him," said Grandma. Ethan took the torch and knocked on Mr Teo&rsquo;s door.',
+      'Mr Teo opened the door slowly. He had been trying to find his medicine, which he had to take after dinner, but he could not read the labels without light. Ethan shone the torch on the bottles so that Mr Teo could find the right one.',
+      'Soon, other neighbours came out of their flats. Mrs Rahman brought a box of candles, and the Lim twins carried bottles of water up the stairs for the elderly residents who could not climb down. The corridor, usually so quiet, was filled with chatter and laughter.',
+      'Two hours later, the lights came back on. Mr Teo thanked Ethan again and again. That weekend, he invited Ethan and Grandma over for tea and taught Ethan how to play Chinese chess. From then on, Ethan visited him every Saturday.']),parts:[
+      {p:'(a)',q:'Name <b>two</b> things that stopped working during the blackout.',
+       k:[{l:'one thing (lifts / fans / lights)',all:[/lift|fan|light/]},{l:'a second thing',all:[/(lift|fan|light)[\s\S]*(lift|fan|light)/]}],
+       model:'The lifts and the fans stopped working (the lights went out too).'},
+      {p:'(b)',q:'Give <b>two</b> reasons why Grandma wanted to check on Mr Teo. (paragraph 2)',
+       k:[{l:'he lived alone',all:[/alone|by himself|on his own/]},{l:'he could not see well in the dark / used a walking stick',all:[/see|walking stick|dark|elderly|old/]}],
+       model:'Mr Teo lived alone, and he could not see well in the dark (he used a walking stick).'},
+      {p:'(c)',q:'What problem did Mr Teo have when Ethan arrived?',k:[{l:'he could not find / read the labels of his medicine',all:[/medicine/]}],
+       model:'He could not find his medicine because he could not read the labels without light.'},
+      {p:'(d)',q:'How did Ethan help Mr Teo?',k:[{l:'he shone the torch on the bottles',all:[/torch|light|shone|shine/]}],
+       model:'He shone the torch on the bottles so that Mr Teo could find the right medicine.'},
+      {p:'(e)',q:'Why did the Lim twins carry bottles of water up the stairs?',k:[{l:'the lifts were not working / the elderly could not climb down',all:[/lift|climb|stairs|could not|couldn't|old|elderly/]}],
+       model:'The lifts were not working, and the elderly residents could not climb down the stairs to get water.'},
+      {p:'(f)',q:'Find <b>one</b> word in paragraph 4 which shows that people were talking and having fun.',w:[/\b(chatter|laughter)\b/],model:'chatter',e:'<b>Laughter</b> is also correct.'},
+      {p:'(g)',q:'How did the friendship between Ethan and Mr Teo change after the blackout? Give <b>two</b> details.',
+       k:[{l:'they became friends / closer',all:[/friend|close|closer|know each other/]},{l:'Ethan visited every Saturday / they played chess / had tea',all:[/saturday|visit|chess|tea/]}],
+       model:'They became good friends. Mr Teo invited Ethan for tea and taught him Chinese chess, and Ethan visited him every Saturday.'}]}
+  ];
+  /* Each paper file sets:
+     CFG = {amark: marks per Booklet A question, minutes, base: topic folder for revise links}
+     TOPICS = {file: 'Topic name'}
+     A (Booklet A MCQ): {q,o,a,e,t,ctx,h}
+     B (Booklet B): {n,ctx,t,h,parts:[part]}
+       part = {p,q,model,e} plus ONE of
+         w: [regex | 'word']        short answer, 1 mark (strings compared ignoring case and end punctuation)
+         k: [{l,all:[regex]}]       key ideas, 1 mark each, every regex in a group must match
+         s: ['sentence', ...]       a full sentence, 1 mark, must match one model and start with a capital
+         o: ['choice', ...], a      tick one choice, 1 mark
+     t = topic file (for "revise" links), h = section heading shown before the question */
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+  function norm(s){
+    return String(s==null?'':s).toLowerCase().replace(/[‘’`]/g,"'").replace(/[“”]/g,'"')
+      .replace(/\s+([,.!?;:])/g,'$1').replace(/\s+/g,' ').trim().replace(/[.!]+$/,'').trim();
+  }
+  function pm(p){return p.k?p.k.length:1;}
+  function mk(n){return n+(n>1?' marks':' mark');}
+  function revLink(t){return t&&TOPICS[t]?' <a class="revlink" href="'+CFG.base+t+'.html">Revise: '+TOPICS[t]+' →</a>':'';}
+  var maxA=A.length*CFG.amark,maxB=0;B.forEach(function(q){q.parts.forEach(function(p){maxB+=pm(p);});});
+  document.getElementById('infoA').textContent=A.length+' questions · '+mk(maxA);
+  document.getElementById('infoB').textContent=mk(maxB);
+  function heading(item,box){if(item.h)box.appendChild(el('h3','sech',item.h));}
+  A.forEach(function(item,i){
+    var box=document.getElementById('mcq');heading(item,box);
+    var c=el('div','q');c.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+(i+1)));head.appendChild(el('span','qmarks',mk(CFG.amark)));c.appendChild(head);
+    if(item.ctx)c.appendChild(el('div','ctx',item.ctx));
+    c.appendChild(el('div','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){var lab=el('label','opt');var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));opts.appendChild(lab);});
+    c.appendChild(opts);box.appendChild(c);
+  });
+  B.forEach(function(qq,i){
+    var box=document.getElementById('oeq');heading(qq,box);
+    var c=el('div','q');c.id='bq'+i;var m=0;qq.parts.forEach(function(p){m+=pm(p);});
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+qq.n));head.appendChild(el('span','qmarks',mk(m)));c.appendChild(head);
+    if(qq.ctx)c.appendChild(el('div','ctx',qq.ctx));
+    qq.parts.forEach(function(p,j){
+      var row=el('div','bpart');row.id='bp'+i+'_'+j;
+      var qh=el('div','qhead');qh.appendChild(el('span','pq',(p.p?'<b>'+p.p+'</b> ':'')+p.q));qh.appendChild(el('span','pm','['+pm(p)+']'));row.appendChild(qh);
+      var inp;
+      if(p.o){
+        inp=el('div','opts');
+        p.o.forEach(function(t,n){var lab=el('label','opt');var r=document.createElement('input');r.type='radio';r.name='bo'+i+'_'+j;r.value=n;lab.appendChild(r);lab.appendChild(el('span',null,t));inp.appendChild(lab);});
+      }else{
+        if(p.w){inp=document.createElement('input');inp.type='text';inp.autocomplete='off';inp.placeholder='answer';}
+        else{inp=document.createElement('textarea');inp.placeholder=p.start||'Write your answer here…';}
+        inp.spellcheck=false;inp.id='ba'+i+'_'+j;inp.setAttribute('aria-label','Answer to '+qq.n+(p.p||''));
+      }
+      row.appendChild(inp);c.appendChild(row);
+    });
+    box.appendChild(c);
+  });
+  function clearFb(c){c.querySelectorAll('.feedback,.revhint').forEach(function(f){f.remove();});c.classList.remove('right','wrong','partial');c.querySelectorAll('.bpart').forEach(function(r){r.classList.remove('is-right','is-wrong','is-partial');});c.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});}
+  function state(c,got,max){c.classList.remove('right','wrong','partial');c.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+  var got={};  /* 'i_j' -> marks for Booklet B parts */
+  function score(){
+    var sA=0,sB=0,lost={};
+    A.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)sA+=CFG.amark;else lost[item.t]=(lost[item.t]||0)+CFG.amark;});
+    B.forEach(function(qq,i){qq.parts.forEach(function(p,j){var g=got[i+'_'+j]||0;sB+=g;if(g<pm(p))lost[qq.t]=(lost[qq.t]||0)+pm(p)-g;});});
+    var max=maxA+maxB,total=sA+sB,pct=total/max;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(pct*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>Booklet A: '+sA+'/'+maxA+'</span><span>Booklet B: '+sB+'/'+maxB+'</span>'+(timeUsed()?'<span>Time used: '+timeUsed()+'</span>':'');
+    document.getElementById('scoremsg').textContent=pct>=0.85?'Excellent! You are ready for the exam. Read the explanations for the few you missed.':pct>=0.7?'Good work. Go through every red question and the topics below.':pct>=0.5?'Getting there. Revise the topics below, then try the paper again.':'Revise the topics below one by one, then try the paper again.';
+    var keys=Object.keys(lost).filter(function(t){return TOPICS[t];}).sort(function(a,b){return lost[b]-lost[a];});
+    var rv=document.getElementById('revise');rv.innerHTML='';
+    if(keys.length){
+      rv.appendChild(el('b',null,'Marks lost by topic (revise the top ones first):'));
+      var ul=el('ul');keys.forEach(function(t){ul.appendChild(el('li',null,'<a class="revlink" href="'+CFG.base+t+'.html">'+TOPICS[t]+'</a>: '+mk(lost[t])));});rv.appendChild(ul);
+    }
+    try{localStorage.setItem('p4m-eng2-best',String(Math.max(total,+(localStorage.getItem('p4m-eng2-best')||0))));localStorage.setItem('p4m-eng2-max',String(max));localStorage.setItem('p4m-eng2-last',String(total));}catch(e){}
+  }
+  function check(){
+    var blanks=0;
+    A.forEach(function(item,i){
+      var c=document.getElementById('mcq'+i);clearFb(c);
+      var ch=c.querySelector('input:checked');if(!ch)blanks++;
+      var labels=c.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');var good=ch&&+ch.value===item.a;
+      if(ch&&!good)labels[+ch.value].classList.add('is-picked-wrong');state(c,good?CFG.amark:0,CFG.amark);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct! '+mk(CFG.amark):(ch?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+').'));
+      fb.appendChild(el('div','work',item.e+revLink(item.t)));c.appendChild(fb);
+    });
+    B.forEach(function(qq,i){
+      var c=document.getElementById('bq'+i);clearFb(c);
+      var paintQ=function(){var s=0,mx=0;qq.parts.forEach(function(p,j){s+=got[i+'_'+j]||0;mx+=pm(p);});state(c,s,mx);};
+      qq.parts.forEach(function(p,j){
+        var row=document.getElementById('bp'+i+'_'+j),m=pm(p),id=i+'_'+j,v,low;
+        if(p.o){var ch=row.querySelector('input:checked');v=ch?ch.value:'';}
+        else v=document.getElementById('ba'+i+'_'+j).value;
+        low=v.trim().toLowerCase();
+        if(!v.trim())blanks++;
+        var fb=el('div','feedback'),verdict=el('span','verdict');fb.appendChild(verdict);
+        var model=p.o?p.o[p.a]:(p.model||(p.s&&p.s[0])||(typeof p.w[0]==='string'?p.w[0]:''));
+        fb.appendChild(el('div','work','<b>Answer:</b> '+model+(p.e?'<br>'+p.e:'')));
+        var kw=el('div','kw');
+        function paint(){row.classList.remove('is-right','is-wrong','is-partial');row.classList.add(got[id]===m?'is-right':got[id]===0?'is-wrong':'is-partial');verdict.textContent=got[id]+' of '+mk(m);paintQ();}
+        function selfMark(ok,yes,no){
+          var b=el('button',null,ok?yes:no);b.type='button';b.setAttribute('aria-pressed',ok?'true':'false');
+          b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');got[id]=on?1:0;paint();score();});
+          kw.appendChild(b);
+        }
+        if(p.o){
+          var labs=row.querySelectorAll('.opt');labs[p.a].classList.add('is-correct');
+          got[id]=v!==''&&+v===p.a?1:0;if(v!==''&&!got[id])labs[+v].classList.add('is-picked-wrong');
+        }else if(p.k){
+          var hits=p.k.map(function(g){return low!==''&&g.all.every(function(r){return r.test(low);});});
+          got[id]=hits.filter(Boolean).length;
+          p.k.forEach(function(g,n){
+            var b=el('button',null,(hits[n]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',hits[n]?'true':'false');
+            b.addEventListener('click',function(){hits[n]=!hits[n];b.setAttribute('aria-pressed',hits[n]?'true':'false');b.textContent=(hits[n]?'✓ ':'✗ ')+g.l;got[id]=hits.filter(Boolean).length;paint();score();});
+            kw.appendChild(b);
+          });
+          fb.appendChild(el('p','hint','Key ideas (1 mark each). Green = found in your answer. If you wrote the same idea in other words, tap it.'));
+        }else if(p.s){
+          var noCap=v.trim()!==''&&!/^\s*["“A-Z]/.test(v);
+          var ok=low!==''&&!noCap&&p.s.some(function(x){return norm(x)===norm(v);});got[id]=ok?1:0;
+          if(noCap)fb.appendChild(el('p','hint','<b>Start your sentence with a capital letter.</b>'));
+          if(!ok)fb.appendChild(el('p','hint','Compare carefully: same meaning, correct tense, full stop and commas. Only tap the button if your sentence is really correct (ask a grown-up if unsure).'));
+          selfMark(ok,'✓ Matches the answer','My sentence means the same and is correct');
+        }else{
+          var ok2=low!==''&&p.w.some(function(r){return typeof r==='string'?norm(r)===norm(v):r.test(low);});got[id]=ok2?1:0;
+          selfMark(ok2,'✓ Correct','My answer is also correct');
+        }
+        if(!p.o)fb.appendChild(kw);
+        row.appendChild(fb);paint();
+      });
+      if(qq.t)c.appendChild(el('p','hint revhint',revLink(qq.t).trim()));
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    stopTimer();score();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+  function reset(){
+    document.querySelectorAll('#quiz input, #quiz textarea').forEach(function(r){if(r.type==='radio')r.checked=false;else r.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFb);
+    got={};document.getElementById('scorebox').hidden=true;document.getElementById('blanknote').textContent='';
+    try{localStorage.removeItem(TK);}catch(e){}
+    T={};tick();
+    window.scrollTo({top:0});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+
+  /* ---------- TIMER: start time kept in localStorage ---------- */
+  var TK='p4m-eng2-timer',LIMIT=CFG.minutes*60*1000,T={},iv=null;
+  try{T=JSON.parse(localStorage.getItem(TK)||'{}')||{};}catch(e){T={};}
+  function fmt(ms){var s=Math.max(0,Math.round(ms/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);s=s%60;return h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
+  function timeUsed(){if(!T.start)return '';var used=(T.end||Date.now())-T.start;var mins=Math.round(used/60000);return mins>=60?Math.floor(mins/60)+' h '+(mins%60)+' min':mins+' min';}
+  function saveT(){try{localStorage.setItem(TK,JSON.stringify(T));}catch(e){}}
+  function tick(){
+    var bar=document.getElementById('timerbar'),num=document.getElementById('tnum'),lab=document.getElementById('tlabel'),btn=document.getElementById('tstart'),fill=document.getElementById('tfill');
+    bar.classList.remove('low','up');
+    if(!T.start){num.textContent=fmt(LIMIT);lab.textContent='Time';fill.style.width='0%';btn.hidden=false;if(iv){clearInterval(iv);iv=null;}return;}
+    btn.hidden=true;
+    var used=(T.end||Date.now())-T.start,left=LIMIT-used;
+    fill.style.width=Math.min(100,used/LIMIT*100)+'%';
+    if(T.end){lab.textContent='Finished in';num.textContent=fmt(used);if(iv){clearInterval(iv);iv=null;}return;}
+    if(left<=0){lab.textContent="Time's up!";num.textContent='0:00:00';bar.classList.add('up');return;}
+    lab.textContent='Time left';num.textContent=fmt(left);if(left<10*60*1000)bar.classList.add('low');
+  }
+  function startTimer(){if(!T.start){T={start:Date.now()};saveT();}if(!iv)iv=setInterval(tick,1000);tick();}
+  function stopTimer(){if(T.start&&!T.end){T.end=Date.now();saveT();}tick();}
+  document.getElementById('tstart').addEventListener('click',startTimer);
+  /* answering also starts the clock */
+  document.getElementById('quiz').addEventListener('change',function(){if(!T.start)startTimer();});
+  if(T.start&&!T.end)startTimer();else tick();
+})();
+/* ---------- SAVE ANSWERS (shared by science + math) ----------
+   Keeps every quiz answer in localStorage so it survives closing the page.
+   Saved: radio choices, typed answers, whether answers were checked, keyword taps. */
+(function(){
+  var K='p4m-eng2-answers',quiz=document.getElementById('quiz');if(!quiz)return;
+  function load(){try{return JSON.parse(localStorage.getItem(K)||'null');}catch(e){return null;}}
+  function store(s){try{localStorage.setItem(K,JSON.stringify(s));}catch(e){}}
+  var state=load()||{v:{},checked:false,kw:null},restoring=false;
+  function collect(){
+    var v={};
+    quiz.querySelectorAll('input[type=radio]:checked').forEach(function(r){v[r.name]=r.value;});
+    quiz.querySelectorAll('input[type=text],textarea').forEach(function(t){if(t.value)v['#'+t.id]=t.value;});
+    state.v=v;
+  }
+  function kwState(){return [].map.call(quiz.querySelectorAll('.kw button'),function(b){return b.getAttribute('aria-pressed')==='true';});}
+  function save(){if(restoring)return;collect();store(state);}
+  quiz.addEventListener('input',save);
+  quiz.addEventListener('change',save);
+  quiz.addEventListener('click',function(e){
+    if(restoring)return;
+    var b=e.target.closest('button');if(!b)return;
+    if(b.id==='submit'){state.checked=true;collect();state.kw=kwState();store(state);}
+    else if(b.id==='reset'){state={v:{},checked:false,kw:null};try{localStorage.removeItem(K);}catch(err){}}
+    else if(b.closest('.kw')){state.kw=kwState();store(state);}
+  });
+  /* restore */
+  var v=state.v||{},any=false;
+  Object.keys(v).forEach(function(k){
+    if(k.charAt(0)==='#'){var t=document.getElementById(k.slice(1));if(t){t.value=v[k];any=true;}}
+    else{var r=quiz.querySelector('input[type=radio][name="'+k+'"][value="'+v[k]+'"]');if(r){r.checked=true;any=true;}}
+  });
+  if(state.checked&&any){
+    restoring=true;
+    var orig=Element.prototype.scrollIntoView;Element.prototype.scrollIntoView=function(){};
+    try{
+      document.getElementById('submit').click();
+      if(state.kw){var bs=quiz.querySelectorAll('.kw button');state.kw.forEach(function(p,i){var b=bs[i];if(b&&(b.getAttribute('aria-pressed')==='true')!==p)b.click();});}
+    }finally{Element.prototype.scrollIntoView=orig;restoring=false;}
+  }
+  if(any){
+    var note=document.createElement('p');note.className='hint';
+    note.textContent=state.checked?'Your saved answers and results are shown below. Press "Try again" to start fresh.':'Your saved answers are filled in below.';
+    var lead=quiz.querySelector('.lead');if(lead)lead.after(note);
+  }
+})();
+</script>
+</body>
+</html>
