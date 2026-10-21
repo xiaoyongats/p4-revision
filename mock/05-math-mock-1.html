@@ -1,0 +1,698 @@
+<title>Math Mock Paper 1</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Layout: one friendly reading column; a sticky chip bar jumps between sections; quiz at the end.
+   Mock exam paper: Booklet A (choose), Booklet B (write), timer at the top, marked by key ideas like the real exam. */
+:root{
+  --bg:#f3f8ef; --card:#ffffff; --fg:#1f2d24; --muted:#5b6b60; --line:#d9e6d5;
+  --leaf:#2f8a4a; --leaf-soft:#e2f3e3;
+  --water:#2474c9; --water-soft:#e1eefb;
+  --food:#d9690f; --food-soft:#fdeedd;
+  --soil:#8a5a34; --soil-soft:#f3e8dd;
+  --sun:#e8b417; --sun-soft:#fdf5d6;
+  --warn:#c23b3b; --warn-soft:#fbe6e6;
+  --brown-iodine:#9a5b1f; --blueblack:#1e2347;
+  --font-display:"Baloo 2","Trebuchet MS",system-ui,sans-serif;
+  --font-body:"Nunito","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+    --leaf:#5cc27a; --leaf-soft:#1f3627;
+    --water:#6aaef5; --water-soft:#1a2c40;
+    --food:#f5a04f; --food-soft:#3a2816;
+    --soil:#d0a074; --soil-soft:#33261b;
+    --sun:#f5cf55; --sun-soft:#3a3218;
+    --warn:#f07c7c; --warn-soft:#3d1f1f;
+    --brown-iodine:#b9773a; --blueblack:#3a4380;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#e8f0e9; --muted:#a3b3a7; --line:#2c3a31;
+  --leaf:#5cc27a; --leaf-soft:#1f3627;
+  --water:#6aaef5; --water-soft:#1a2c40;
+  --food:#f5a04f; --food-soft:#3a2816;
+  --soil:#d0a074; --soil-soft:#33261b;
+  --sun:#f5cf55; --sun-soft:#3a3218;
+  --warn:#f07c7c; --warn-soft:#3d1f1f;
+  --brown-iodine:#b9773a; --blueblack:#3a4380;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:var(--font-display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:800}
+h2{font-size:1.65rem;font-weight:800}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+b{font-weight:800}
+
+/* keyword highlights */
+.w{color:var(--water);font-weight:800}
+.f{color:var(--food);font-weight:800}
+.g{color:var(--leaf);font-weight:800}
+.s{color:var(--soil);font-weight:800}
+
+header.top{padding-block:28px 12px;display:grid;gap:8px}
+.eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lead{color:var(--muted);max-width:60ch}
+
+/* progress + chips */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:grid;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips a{flex:0 0 auto;text-decoration:none;color:var(--fg);background:var(--card);border:2px solid var(--line);border-radius:999px;padding:4px 12px;font-weight:800;font-size:.9rem}
+.chips a:hover,.chips a:focus-visible{border-color:var(--leaf);outline:none}
+.chips a.done{background:var(--leaf-soft);border-color:var(--leaf)}
+.progress{display:flex;align-items:center;gap:10px;font-size:.85rem;color:var(--muted);font-weight:800}
+.track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.fill{height:100%;width:0;background:var(--leaf);border-radius:99px;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+
+section{padding-block:28px 6px;display:grid;gap:16px;scroll-margin-top:96px}
+.sec-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tag{font-family:var(--font-display);font-weight:800;font-size:.95rem;border-radius:10px;padding:2px 10px;color:var(--bg)}
+.tag.leaf{background:var(--leaf)} .tag.water{background:var(--water)} .tag.soil{background:var(--soil)} .tag.food{background:var(--food)} .tag.warn{background:var(--warn)} .tag.sun{background:var(--sun);color:#2a2205}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.big{font-size:1.2rem;font-weight:800;font-family:var(--font-display);line-height:1.3}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.mini{border-radius:14px;padding:12px 14px;display:grid;gap:4px;min-width:0}
+.mini h3{font-size:1.05rem}
+.mini p{font-size:.95rem}
+.mini.leaf{background:var(--leaf-soft)} .mini.water{background:var(--water-soft)} .mini.food{background:var(--food-soft)} .mini.soil{background:var(--soil-soft)} .mini.sun{background:var(--sun-soft)}
+
+/* job table */
+.jobs{width:100%;border-collapse:separate;border-spacing:0 8px}
+.jobs td{background:var(--card);padding:10px 12px;vertical-align:top;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.jobs td:first-child{border-left:6px solid var(--part);border-radius:12px 0 0 12px;font-family:var(--font-display);font-weight:800;font-size:1.1rem;white-space:nowrap;width:1%}
+.jobs td:last-child{border-right:1px solid var(--line);border-radius:0 12px 12px 0}
+.tbl-wrap{overflow-x:auto}
+
+/* recipe equation */
+.recipe{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--font-display);font-weight:800;font-size:1.05rem}
+.pill{border-radius:999px;padding:4px 14px;border:2px solid currentColor}
+.op{color:var(--muted);font-size:1.3rem}
+
+/* iodine chips */
+.iodine{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-weight:800}
+.swatch{display:inline-flex;align-items:center;gap:8px}
+.dot{width:26px;height:26px;border-radius:50%;display:inline-block;border:2px solid var(--line)}
+
+.warn-card{background:var(--warn-soft);border:2px dashed var(--warn);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.warn-card .row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.x{color:var(--warn);font-weight:800}
+.ok{color:var(--leaf);font-weight:800}
+
+.sort{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.steps{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-weight:800}
+.steps .box{border-radius:12px;padding:6px 12px;background:var(--card);border:2px solid var(--line)}
+.steps .to{color:var(--muted);font-weight:800}
+.bars{display:grid;gap:8px}
+.barrow{display:grid;grid-template-columns:minmax(90px,30%) 1fr;gap:10px;align-items:center;font-weight:800;font-size:.95rem}
+.barrow .b{height:22px;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:var(--bg);font-size:.8rem;min-width:28px}
+.chart{overflow-x:auto}
+.chart svg{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+.sort .mini ul{padding-left:1.1em}
+
+figure{margin:0;display:grid;gap:6px;justify-items:center}
+figure svg{width:100%;max-width:440px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);text-align:center}
+.legend{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;font-size:.9rem;font-weight:800}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:22px;height:5px;border-radius:3px;display:inline-block}
+
+.gotit{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-weight:800;cursor:pointer;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-family:var(--font-body);font-size:.95rem;color:var(--fg)}
+.gotit input{width:20px;height:20px;accent-color:var(--leaf)}
+.gotit:has(input:checked){background:var(--leaf-soft);border-color:var(--leaf)}
+.gotit:focus-within{outline:3px solid var(--leaf);outline-offset:2px}
+
+.summary{background:var(--leaf-soft);border-radius:18px;padding:18px;display:grid;gap:10px}
+.flow{display:grid;gap:8px;font-weight:800}
+.flow div{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.flow .arrow{color:var(--muted)}
+
+/* math extras */
+.ansrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ansrow input{font:inherit;font-weight:800;font-size:1.1rem;width:11em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.ansrow input:focus{outline:none;border-color:var(--water)}
+.unit{font-weight:800;color:var(--muted)}
+.psrow{display:grid;gap:8px;border-radius:12px;padding:6px 8px;border:2px solid transparent}
+.psrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.psrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.feedback.mini-fb{padding:2px 4px;background:transparent}
+.work{display:grid;gap:6px;font-variant-numeric:tabular-nums}
+.ex{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--water);border-radius:14px;padding:14px 16px;display:grid;gap:8px;min-width:0}
+.ex .exq{font-weight:700}
+.ex .stp{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-variant-numeric:tabular-nums;align-items:baseline}
+.ex .stp b{color:var(--water);white-space:nowrap}
+.ans{font-family:var(--font-display);font-weight:800;color:var(--food);font-size:1.1rem}
+.bm{display:grid;gap:6px;overflow-x:auto;padding:4px 0}
+.bmrow{display:flex;align-items:center;min-width:max-content}
+.bmrow .lab{width:84px;font-weight:800;font-size:.9rem;flex:0 0 auto}
+.seg{height:30px;border:2px solid var(--water);background:var(--water-soft);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;margin-right:-2px;flex:0 0 auto;color:var(--fg)}
+.seg.o{border-color:var(--food);background:var(--food-soft)}
+.seg.g{border-color:var(--leaf);background:var(--leaf-soft)}
+.seg.x{border-style:dashed;background:transparent}
+.bmrow .tot{margin-left:10px;font-weight:800;color:var(--food);font-size:.9rem}
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.05;font-size:.9em;margin:0 2px}
+.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 2px}
+.pv{border-collapse:collapse;font-variant-numeric:tabular-nums}
+.pv td,.pv th{border:2px solid var(--line);padding:6px 10px;text-align:center}
+.pv th{font-size:.8rem;color:var(--muted)}
+.qtext{display:grid;gap:8px}
+.qtext svg{max-width:100%;height:auto}
+/* mock paper extras */
+.timerbar{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--bg);padding-block:10px;border-bottom:2px solid var(--line)}
+.tclock{display:grid;line-height:1.1}
+.tlabel{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.tnum{font-family:var(--font-display);font-weight:800;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.timerbar.low .tnum{color:var(--warn)}
+.timerbar.up .tnum{color:var(--warn)}
+.timerbar .track{height:10px}
+.btn.small{font-size:.95rem;padding:6px 14px}
+.mtab td,.mtab th{text-align:left}
+.ctx{background:var(--sun-soft);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:10px;line-height:1.6;min-width:0}
+.ctx svg,.qtext svg{max-width:100%;height:auto;display:block;margin-inline:auto}
+.ctx .pv,.qtext .pv{margin-inline:auto}
+.qtext{display:grid;gap:8px}
+.bpart{display:grid;gap:8px;border-radius:12px;padding:8px 10px;border:2px solid transparent;min-width:0}
+.bpart.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.bpart.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.bpart.is-partial{border-color:var(--sun);background:var(--sun-soft)}
+.bpart .pq{font-weight:700}
+.bpart .pm{color:var(--muted);font-weight:800;font-size:.85rem;white-space:nowrap}
+.bpart input[type=text]{font:inherit;font-weight:800;width:16em;max-width:100%;padding:8px 12px;border:2px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg)}
+.bpart input[type=text]:focus{outline:none;border-color:var(--water)}
+.bpart textarea{min-height:70px}
+.bpart .feedback{background:var(--card)}
+.revlink{color:var(--water);font-weight:800}
+#revise{display:grid;gap:6px}
+#revise ul{gap:4px}
+.opt span{min-width:0}
+@media (max-width:480px){.timerbar{grid-template-columns:auto 1fr}.timerbar .btn{grid-column:1/-1}}
+.sech{font-size:1.15rem;margin-top:8px;color:var(--water)}
+.ctx .passage p{margin:0}
+.passage{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--sun);border-radius:12px;padding:12px 16px;display:grid;gap:10px;line-height:1.75}
+.poster{background:var(--card);border:3px solid var(--food);border-radius:14px;padding:14px 16px;display:grid;gap:8px;text-align:center}
+.poster h4{font-family:var(--font-display);font-size:1.5rem;margin:0;color:var(--food)}
+.poster ul{text-align:left}
+.wbank{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--card);font-weight:800}
+.bl{font-weight:800;color:var(--water)}
+/* quiz */
+.chips a.quizchip{background:var(--food-soft);border-color:var(--food)}
+.qpart{display:grid;gap:12px}
+.qpart > h3{font-size:1.3rem}
+.q{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.q.right{border-color:var(--leaf)}
+.q.wrong{border-color:var(--warn)}
+.q.partial{border-color:var(--sun)}
+.qhead{display:flex;gap:10px;align-items:baseline;justify-content:space-between;flex-wrap:wrap}
+.qnum{font-family:var(--font-display);font-weight:800;color:var(--muted)}
+.qmarks{font-size:.85rem;color:var(--muted);font-weight:800}
+.qtext{font-weight:700}
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer;background:var(--bg)}
+.opt input{width:20px;height:20px;accent-color:var(--leaf);flex:0 0 auto}
+.opt:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.opt.is-correct{border-color:var(--leaf);background:var(--leaf-soft)}
+.opt.is-picked-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.opt:focus-within{outline:3px solid var(--water);outline-offset:2px}
+.tf{display:grid;gap:8px}
+.tfrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--bg)}
+.tfrow.is-right{border-color:var(--leaf);background:var(--leaf-soft)}
+.tfrow.is-wrong{border-color:var(--warn);background:var(--warn-soft)}
+.tfbtns{display:flex;gap:6px}
+.tfbtns label{display:inline-flex;align-items:center;gap:4px;font-weight:800;cursor:pointer;border:2px solid var(--line);border-radius:999px;padding:2px 10px;background:var(--card)}
+.tfbtns label:has(input:checked){border-color:var(--water);background:var(--water-soft)}
+.tfbtns input{accent-color:var(--water)}
+textarea{width:100%;min-height:84px;font:inherit;color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:12px;padding:10px 12px;resize:vertical}
+textarea:focus{outline:none;border-color:var(--water)}
+.feedback{border-radius:12px;padding:12px 14px;display:grid;gap:8px;background:var(--leaf-soft)}
+.q.wrong .feedback{background:var(--warn-soft)}
+.q.partial .feedback{background:var(--sun-soft)}
+.verdict{font-family:var(--font-display);font-weight:800;font-size:1.1rem}
+.kw{display:flex;flex-wrap:wrap;gap:8px}
+.kw button{font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;border-radius:999px;padding:4px 12px;border:2px solid var(--warn);background:var(--card);color:var(--fg)}
+.kw button[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf);color:var(--bg)}
+.kw button:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.hint{font-size:.85rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font-family:var(--font-display);font-weight:800;font-size:1.1rem;border:none;border-radius:14px;padding:10px 22px;cursor:pointer;background:var(--leaf);color:var(--bg)}
+.btn.ghost{background:var(--card);color:var(--fg);border:2px solid var(--line)}
+.btn:focus-visible{outline:3px solid var(--water);outline-offset:2px}
+.score{background:var(--card);border:3px solid var(--leaf);border-radius:18px;padding:18px;display:grid;gap:10px}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.score .track{height:14px}
+.breakdown{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:800;font-size:.95rem;color:var(--muted)}
+.blank-note{color:var(--warn);font-weight:800}
+
+@media (max-width:560px){
+  .jobs td:first-child{white-space:normal;width:36%;font-size:1rem}
+}
+@media (max-width:480px){
+  h1{font-size:1.8rem}
+  .sort{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">P4 Math · Mock exam</span>
+    <h1>Math Mock Paper 1</h1>
+    <p class="lead">A full end-of-year paper in the format of the 2025 school papers (ACS, Henry Park, Catholic High, Nanyang, Rosyth, Tao Nan). All questions are new. Covers all 12 P4 topics. No calculator.</p>
+  </header>
+
+  <div class="timerbar" id="timerbar" data-key="p4m-math1" data-sub="1 h 45 min · 100 marks">
+    <div class="tclock"><span class="tlabel" id="tlabel">Time</span><span class="tnum" id="tnum">1:45:00</span></div>
+    <div class="track"><div class="fill" id="tfill"></div></div>
+    <button class="btn small" id="tstart" type="button">Start the paper</button>
+  </div>
+
+  <section id="howto">
+    <div class="card">
+      <div class="tbl-wrap"><table class="pv mtab">
+        <tr><th>Section</th><th>Questions</th><th>Marks</th></tr>
+        <tr><td>A: Choose</td><td>1 to 15 (2 marks each)</td><td>30</td></tr>
+        <tr><td>B: Short answer</td><td>16 to 35 (2 marks each)</td><td>40</td></tr>
+        <tr><td>C: Problem sums</td><td>36 to 43 (3 or 4 marks each)</td><td>30</td></tr>
+        <tr><td><b>Total</b></td><td><b>1 h 45 min</b></td><td><b>100</b></td></tr>
+      </table></div>
+      <ul>
+        <li>Have <b>paper and a pencil</b> ready. Do your working on paper (draw bar models for problem sums), then type only the answer. No calculator.</li>
+        <li>Time plan: Section A about <b>20 min</b>, Section B about <b>35 min</b>, Section C about <b>35 min</b>, then <b>15 min</b> to check.</li>
+        <li>Typing answers: numbers like <b>2 315</b> or <b>2315</b>, money like <b>5.40</b>, fractions like <b>3/4</b> and mixed numbers like <b>2 3/4</b> (a space between). Fractions must be in simplest form.</li>
+        <li>After marking, each answer shows the full working. In the real exam, wrong answers with correct working can still get a method mark.</li>
+        <li>Your answers are saved as you go. When you finish, press <b>Mark my paper</b> at the bottom.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <p class="lead">Section A: choose one answer. Sections B and C: work on paper, then type your answer in the box.</p>
+    <div class="qpart" id="partA"><div class="sec-head"><span class="tag water">A</span><h2 id="hA">Booklet A</h2><span class="qmarks" id="infoA"></span></div><div id="mcq" class="qpart"></div></div>
+    <div class="qpart" id="partB"><div class="sec-head"><span class="tag food">B</span><h2 id="hB">Booklet B</h2><span class="qmarks" id="infoB"></span></div><div id="oeq" class="qpart"></div></div>
+    <div class="score" id="scorebox" hidden>
+      <span class="eyebrow">Your score</span>
+      <div class="num" id="scorenum">0 / 100</div>
+      <div class="track"><div class="fill" id="scorefill"></div></div>
+      <div class="breakdown" id="breakdown"></div>
+      <p id="scoremsg"></p>
+      <div id="revise"></div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="submit" type="button">Mark my paper</button>
+      <button class="btn ghost" id="reset" type="button">Try again</button>
+      <span class="blank-note" id="blanknote"></span>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ---------- QUIZ (mock paper) ---------- */
+(function(){
+  /* shared by the math mock papers (pasted in by make_mock.py via "include: _math.js") */
+  var TOPICS={'01-whole-numbers':'Whole numbers','02-factors-multiples':'Factors and multiples','03-four-operations':'Four operations',
+    '04-fractions':'Fractions','05-decimals':'Decimals','06-time':'Time','07-angles-lines':'Angles and lines','08-perimeter-area':'Perimeter and area',
+    '09-symmetry':'Symmetry','10-nets-solids':'Nets and solids','11-data':'Tables and graphs','12-problem-solving':'Problem sums'};
+  function tbl(rows){return '<div class="tbl-wrap"><table class="pv">'+rows.map(function(r,i){return '<tr>'+r.map(function(c){return i?'<td>'+c+'</td>':'<th>'+c+'</th>';}).join('')+'</tr>';}).join('')+'</table></div>';}
+  /* fraction: fr(3,4) or mixed: fr(3,4,2) = 2 3/4 */
+  function fr(a,b,w){return (w?w+'&#8202;':'')+'<span class="fr"><span>'+a+'</span><span>'+b+'</span></span>';}
+  var FT='font-size="14" font-weight="700" fill="currentColor"';
+  /* angles round point O on a line. rays = directions in degrees (0 = right, 180 = left), labels = one per gap from right to left.
+     total 90 draws a right angle (base + upright) instead of a straight line. */
+  function fan(rays,labels,total){
+    total=total||180;var cx=total===90?90:170,cy=150,R=120,s='';
+    function pt(d,r){var a=d*Math.PI/180;return [cx+r*Math.cos(a),cy-r*Math.sin(a)];}
+    var b=[0].concat(rays,[total]);
+    s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R+20)+'" y2="'+cy+'" stroke="currentColor" stroke-width="2.5"/>';
+    if(total===180)s+='<line x1="'+(cx-R-20)+'" y1="'+cy+'" x2="'+cx+'" y2="'+cy+'" stroke="currentColor" stroke-width="2.5"/>';
+    else s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+cx+'" y2="'+(cy-R-10)+'" stroke="currentColor" stroke-width="2.5"/><path d="M'+(cx+14)+' '+cy+' L'+(cx+14)+' '+(cy-14)+' L'+cx+' '+(cy-14)+'" fill="none" stroke="currentColor" stroke-width="1.5"/>';
+    rays.forEach(function(d){var p=pt(d,R);s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="var(--water)" stroke-width="2.5"/>';});
+    for(var i=0;i<b.length-1;i++){
+      var mid=(b[i]+b[i+1])/2,p=pt(mid,total===90&&b[i+1]-b[i]<40?62:50),a1=pt(b[i],30),a2=pt(b[i+1],30);
+      s+='<path d="M'+a1[0]+' '+a1[1]+' A30 30 0 0 0 '+a2[0]+' '+a2[1]+'" fill="none" stroke="var(--food)" stroke-width="1.5"/>';
+      s+='<text x="'+p[0]+'" y="'+(p[1]+5)+'" text-anchor="middle" '+FT+'>'+labels[i]+'</text>';
+    }
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="3" fill="currentColor"/>';
+    if(total===90)s+='<text x="'+(cx-14)+'" y="'+(cy-R-2)+'" '+FT+'>A</text><text x="'+(cx-16)+'" y="'+(cy+16)+'" '+FT+'>B</text><text x="'+(cx+R+24)+'" y="'+(cy+5)+'" '+FT+'>C</text>';
+    return '<svg viewBox="0 0 340 170" width="340" role="img" aria-label="Angles diagram">'+s+'</svg>';
+  }
+  /* rectilinear figure: pts in cm (y down), labs = [[x, y, text]] in cm; 1 cm = k px */
+  function poly(pts,labs,k){
+    k=k||22;var w=0,h=0;pts.forEach(function(p){w=Math.max(w,p[0]);h=Math.max(h,p[1]);});
+    var s='<polygon points="'+pts.map(function(p){return (p[0]*k+40)+','+(p[1]*k+25);}).join(' ')+'" fill="var(--water-soft)" stroke="var(--water)" stroke-width="2.5"/>';
+    labs.forEach(function(l){s+='<text x="'+(l[0]*k+40)+'" y="'+(l[1]*k+25+5)+'" text-anchor="middle" '+FT+'>'+l[2]+'</text>';});
+    return '<svg viewBox="0 0 '+(w*k+80)+' '+(h*k+70)+'" width="'+(w*k+80)+'" role="img" aria-label="Figure made of rectangles (not drawn to scale)">'+s+'</svg><p class="hint" style="text-align:center">The figure is not drawn to scale.</p>';
+  }
+  /* bar graph: data = [[label, value]], top = axis max, step */
+  function bars(data,top,step,ylab){
+    var H=180,W=60+data.length*70,s='',y0=200;
+    for(var v=0;v<=top;v+=step){var y=y0-v/top*H;s+='<line x1="50" y1="'+y+'" x2="'+(W-10)+'" y2="'+y+'" stroke="var(--line)"/><text x="44" y="'+(y+4)+'" text-anchor="end" font-size="12" fill="currentColor">'+v+'</text>';}
+    data.forEach(function(d,i){var x=70+i*70,h=d[1]/top*H;s+='<rect x="'+x+'" y="'+(y0-h)+'" width="36" height="'+h+'" fill="var(--water)"/><text x="'+(x+18)+'" y="'+(y0+18)+'" text-anchor="middle" '+FT+'>'+d[0]+'</text>';});
+    s+='<line x1="50" y1="'+y0+'" x2="'+(W-10)+'" y2="'+y0+'" stroke="currentColor" stroke-width="2"/><line x1="50" y1="'+y0+'" x2="50" y2="15" stroke="currentColor" stroke-width="2"/>';
+    s+='<text x="12" y="110" transform="rotate(-90 12 110)" text-anchor="middle" font-size="12" font-weight="700" fill="currentColor">'+ylab+'</text>';
+    return '<svg viewBox="0 0 '+W+' 225" width="'+W+'" role="img" aria-label="Bar graph">'+s+'</svg>';
+  }
+  /* pie chart: slices = [[fraction, label]] */
+  function pie(slices){
+    var cx=160,cy=110,r=90,a=-Math.PI/2,s='',cols=['var(--water-soft)','var(--food-soft)','var(--leaf-soft)','var(--sun-soft)'];
+    slices.forEach(function(sl,i){
+      var b=a+sl[0]*2*Math.PI,x1=cx+r*Math.cos(a),y1=cy+r*Math.sin(a),x2=cx+r*Math.cos(b),y2=cy+r*Math.sin(b),m=(a+b)/2;
+      s+='<path d="M'+cx+' '+cy+' L'+x1+' '+y1+' A'+r+' '+r+' 0 '+(sl[0]>0.5?1:0)+' 1 '+x2+' '+y2+' Z" fill="'+cols[i%4]+'" stroke="currentColor" stroke-width="1.5"/>';
+      var out=sl[0]<0.2,k=out?1.12:0.58,tx=cx+r*k*Math.cos(m),anc=out?(Math.cos(m)<0?'end':'start'):'middle';
+      s+='<text x="'+tx+'" y="'+(cy+r*k*Math.sin(m)+5)+'" text-anchor="'+anc+'" font-size="12" font-weight="700" fill="currentColor">'+sl[1]+'</text>';
+      a=b;});
+    return '<svg viewBox="0 0 320 220" width="320" role="img" aria-label="Pie chart">'+s+'</svg>';
+  }
+  var CFG={amark:2,minutes:105,base:'../math/',labA:'Section A',labB:'Sections B and C'};
+
+  var A=[
+    {h:'Section A: Multiple choice (30 marks)',t:'01-whole-numbers',q:'In 48 205, the digit 8 is in the _______ place.',o:['tens','hundreds','thousands','ten thousands'],a:2,
+     e:'48 205 = 4 ten thousands, <b>8 thousands</b>, 2 hundreds, 0 tens, 5 ones.'},
+    {t:'01-whole-numbers',q:'Round 36 482 to the nearest thousand.',o:['36 000','36 500','37 000','36 480'],a:0,
+     e:'Look at the hundreds digit: 4 is less than 5, so round down to <b>36 000</b>.'},
+    {t:'02-factors-multiples',q:'Which of these is a common factor of 18 and 24?',o:['4','6','9','12'],a:1,
+     e:'Factors of 18: 1, 2, 3, 6, 9, 18. Factors of 24: 1, 2, 3, 4, 6, 8, 12, 24. <b>6</b> is in both lists.'},
+    {t:'02-factors-multiples',q:'What is the 3rd multiple of 7?',o:['3','10','37','21'],a:3,
+     e:'Multiples of 7: 7, 14, <b>21</b>, … The 3rd multiple is 3 × 7 = 21.'},
+    {t:'01-whole-numbers',q:'6 × 1000 + 4 × 10 + 5 = ?',o:['6045','6405','6450','60 045'],a:0,
+     e:'6 thousands, 0 hundreds, 4 tens, 5 ones = <b>6045</b>.'},
+    {t:'04-fractions',q:'Which fraction is equal to '+fr(3,4)+'?',o:[fr(4,3),fr(6,9),fr(3,8),fr(9,12)],a:3,
+     e:'Multiply the top and bottom by 3: '+fr(3,4)+' = '+fr(9,12)+'.'},
+    {t:'04-fractions',q:'Express '+fr(3,5,2)+' as an improper fraction.',o:[fr(5,13),fr(6,5),fr(13,5),fr(11,5)],a:2,
+     e:'2 wholes = '+fr(10,5)+'. '+fr(10,5)+' + '+fr(3,5)+' = <b>'+fr(13,5)+'</b>.'},
+    {t:'05-decimals',q:'Which fraction is equal to 0.07?',o:[fr(7,10),fr(7,100),fr(7,1000),fr(70,10)],a:1,
+     e:'0.07 = 7 hundredths = '+fr(7,100)+'.'},
+    {t:'05-decimals',q:'Round 3.468 to 2 decimal places.',o:['3.46','3.5','3.4','3.47'],a:3,
+     e:'Look at the 3rd decimal place: 8 is 5 or more, so round up the hundredths: <b>3.47</b>.'},
+    {t:'06-time',q:'A lesson started at 10.50 a.m. and lasted 2 h 35 min. When did it end?',o:['12.25 p.m.','1.15 p.m.','1.25 p.m.','12.85 p.m.'],a:2,
+     e:'10.50 a.m. + 2 h = 12.50 p.m. 12.50 p.m. + 35 min = <b>1.25 p.m.</b> (There is no "12.85": 60 minutes make an hour.)'},
+    {t:'07-angles-lines',ctx:fan([52],['x','128°']),q:'The diagram shows a straight line. Find ∠x.',o:['38°','52°','62°','128°'],a:1,
+     e:'Angles on a straight line add up to 180°. 180° − 128° = <b>52°</b>.'},
+    {t:'09-symmetry',q:'Which letter has exactly <b>one</b> line of symmetry?',o:['H','S','A','X'],a:2,
+     e:'A has one line of symmetry (straight down the middle). H and X have two. S has none.'},
+    {t:'10-nets-solids',q:'How many faces, edges and vertices does a cube have?',o:['6 faces, 12 edges, 8 vertices','6 faces, 8 edges, 12 vertices','8 faces, 12 edges, 6 vertices','4 faces, 6 edges, 4 vertices'],a:0,
+     e:'A cube has 6 square faces, 12 edges and 8 corners (vertices).'},
+    {t:'08-perimeter-area',q:'A square has a perimeter of 36 cm. What is its area?',o:['9 cm²','36 cm²','144 cm²','81 cm²'],a:3,
+     e:'Side = 36 ÷ 4 = 9 cm. Area = 9 × 9 = <b>81 cm²</b>.'},
+    {t:'11-data',ctx:pie([[0.5,'Football'],[0.25,'Swimming'],[0.125,'Badminton'],[0.125,'Running']]),q:'The pie chart shows the favourite sports of 40 pupils. How many pupils chose swimming?',o:['4','10','20','30'],a:1,
+     e:'Swimming is '+fr(1,4)+' of the pie. '+fr(1,4)+' of 40 = 40 ÷ 4 = <b>10</b>.'}
+  ];
+
+  function sa(n,t,q,ans,ctx){var p={p:'',q:q,m:2};for(var k in ans)p[k]=ans[k];return {n:n,t:t,ctx:ctx,parts:[p]};}
+  var B=[
+    sa(16,'01-whole-numbers','Write 40 609 in words.',{w:[/^forty[- ]thousand,?\s*six hundred,?\s*(and\s+)?nine$/],model:'forty thousand, six hundred and nine',e:'40 609 = 40 thousands + 6 hundreds + 9 ones. There are no tens.'}),
+    sa(17,'03-four-operations','Find the value of 3408 × 6.',{n:[20448],e:'3408 × 6 = 20 448'}),
+    sa(18,'03-four-operations','Find the value of 7524 ÷ 9.',{n:[836],e:'7524 ÷ 9 = 836. Check: 836 × 9 = 7524.'}),
+    sa(19,'03-four-operations','What is the remainder when 2315 is divided by 7?',{n:[5],e:'2315 ÷ 7 = 330 remainder <b>5</b> (330 × 7 = 2310).'}),
+    sa(20,'02-factors-multiples','List <b>all</b> the factors of 28.',{set:[1,2,4,7,14,28],e:'Factor pairs: 1 × 28, 2 × 14, 4 × 7. Factors: 1, 2, 4, 7, 14, 28.'}),
+    sa(21,'02-factors-multiples','Find the lowest common multiple of 6 and 8.',{n:[24],e:'Multiples of 8: 8, 16, <b>24</b>. 24 is also a multiple of 6.'}),
+    sa(22,'04-fractions','Find '+fr(3,4)+' + '+fr(5,8)+'. Give your answer as a mixed number in its simplest form.',{w:[/^1\s+3\s*\/\s*8$/],model:fr(3,8,1),e:fr(3,4)+' = '+fr(6,8)+'. '+fr(6,8)+' + '+fr(5,8)+' = '+fr(11,8)+' = '+fr(3,8,1)+'.'}),
+    sa(23,'04-fractions','Find 5 − '+fr(2,3,2)+'.',{w:[/^2\s+1\s*\/\s*3$/],model:fr(1,3,2),e:'5 − 2 = 3. 3 − '+fr(2,3)+' = '+fr(1,3,2)+'.'}),
+    sa(24,'04-fractions','What fraction of 1 hour is 20 minutes? Give your answer in its simplest form.',{w:[/^1\s*\/\s*3$/],model:fr(1,3),e:'1 hour = 60 minutes. '+fr(20,60)+' = '+fr(1,3)+'.'}),
+    sa(25,'04-fractions','Find '+fr(3,5)+' of 45 kg.',{n:[27],u:'kg',e:'45 ÷ 5 = 9 (one fifth). 9 × 3 = 27 kg.'}),
+    sa(26,'05-decimals','Find the value of 12.6 − 4.85.',{n:[7.75],e:'12.60 − 4.85 = 7.75 (write 12.6 as 12.60 first).'}),
+    sa(27,'05-decimals','Find the value of 0.36 × 8.',{n:[2.88],e:'36 × 8 = 288, so 0.36 × 8 = 2.88.'}),
+    sa(28,'05-decimals','Express '+fr(3,4,2)+' as a decimal.',{n:[2.75],e:fr(3,4)+' = 0.75, so '+fr(3,4,2)+' = 2.75.'}),
+    sa(29,'05-decimals','4.05 km = _______ m',{n:[4050],u:'m',e:'1 km = 1000 m. 4.05 × 1000 = 4050 m.'}),
+    sa(30,'06-time','A movie started at 7.45 p.m. and lasted 1 h 50 min. At what time did it end?',{w:[/^9[.:]35\s*p\.?\s*m\.?$/],model:'9.35 p.m.',e:'7.45 p.m. + 1 h = 8.45 p.m. + 50 min = 9.35 p.m. Remember to write <b>p.m.</b>'}),
+    sa(31,'07-angles-lines','∠ABC is a right angle. Find ∠x.',{n:[56],u:'°',e:'A right angle is 90°. 90° − 34° = 56°.'},fan([34],['34°','x'],90)),
+    sa(32,'08-perimeter-area','The figure is made up of rectangles. Find its area.',{n:[81],u:'cm²',e:'Big rectangle 12 × 8 = 96 cm². Cut-out corner 5 × 3 = 15 cm². 96 − 15 = 81 cm².'},
+      poly([[0,0],[7,0],[7,3],[12,3],[12,8],[0,8]],[[6,8.9,'12 cm'],[-1,4,'8 cm'],[10,2.6,'5 cm'],[7.95,1.1,'3 cm']])),
+    sa(33,'08-perimeter-area','Find the perimeter of the figure in Q32.',{n:[40],u:'cm',e:'Moving the two sides of the cut corner outwards makes a 12 cm × 8 cm rectangle, so the perimeter is the same: 2 × (12 + 8) = 40 cm.'}),
+    sa(34,'09-symmetry','How many lines of symmetry does a square have?',{n:[4],e:'2 lines join the middles of opposite sides and 2 join opposite corners: 4 lines.'}),
+    sa(35,'11-data','The bar graph shows the number of books read by four pupils. How many more books did Chen read than Devi?',{n:[10],e:'Chen 15, Devi 5. 15 − 5 = 10.'},bars([['Ali',12],['Bala',8],['Chen',15],['Devi',5]],16,2,'Number of books'))
+  ];
+  B[0].h='Section B: Short-answer questions (40 marks)';
+  B.push(
+    {h:'Section C: Problem sums (30 marks)',n:36,t:'03-four-operations',ctx:'A baker made 1248 buns. He packed them into boxes of 6. He sold every box for $4.',parts:[
+      {p:'(a)',q:'How many boxes of buns were there?',n:[208],m:1,e:'1248 ÷ 6 = 208 boxes'},
+      {p:'(b)',q:'How much money did he collect?',n:[832],m:2,u:'$',e:'208 × $4 = $832'}]},
+    {n:37,t:'04-fractions',ctx:'Mrs Lee had 60 stickers. She gave '+fr(1,4)+' of them to her son and '+fr(2,5)+' of the remaining stickers to her daughter.',parts:[
+      {p:'(a)',q:'How many stickers did she give to her daughter?',n:[18],m:2,e:'Son: '+fr(1,4)+' × 60 = 15. Remaining: 60 − 15 = 45. Daughter: '+fr(2,5)+' × 45 = 18.'},
+      {p:'(b)',q:'How many stickers did she have left?',n:[27],m:2,e:'45 − 18 = 27'}]},
+    {n:38,t:'12-problem-solving',ctx:'Ali and Ben had 420 marbles altogether. Ali had 60 more marbles than Ben.',parts:[
+      {p:'(a)',q:'How many marbles did Ben have?',n:[180],m:2,e:'Bar model: Ben = 1 unit, Ali = 1 unit + 60.<br>2 units = 420 − 60 = 360. 1 unit = 180. Ben had 180 (Ali had 240).'},
+      {p:'(b)',q:'Ali then gave some marbles to Ben so that they had the same number. How many marbles did Ali give to Ben?',n:[30],m:2,e:'Each should have 420 ÷ 2 = 210. Ali gives 240 − 210 = 30. (Half of the difference: 60 ÷ 2 = 30.)'}]},
+    {n:39,t:'05-decimals',ctx:'A pen costs $1.85 and a notebook costs $2.40. Mei bought 4 pens and 3 notebooks. She paid with a $20 note.',parts:[
+      {p:'(a)',q:'How much did the 4 pens cost?',n:[7.4],m:1,u:'$',e:'4 × $1.85 = $7.40'},
+      {p:'(b)',q:'How much change did she get?',n:[5.4],m:3,u:'$',e:'3 notebooks: 3 × $2.40 = $7.20.<br>Total: $7.40 + $7.20 = $14.60.<br>Change: $20 − $14.60 = $5.40.'}]},
+    {n:40,t:'08-perimeter-area',ctx:'A rectangular field is 24 m long and 15 m wide. A square flower bed of side 6 m is in the field.',parts:[
+      {p:'(a)',q:'What is the area of the field that is <b>not</b> covered by the flower bed?',n:[324],m:2,u:'m²',e:'Field: 24 × 15 = 360 m². Flower bed: 6 × 6 = 36 m². 360 − 36 = 324 m².'},
+      {p:'(b)',q:'A fence is put up around the field. The fence costs $5 per metre. How much does the fence cost?',n:[390],m:2,u:'$',e:'Perimeter: 2 × (24 + 15) = 78 m. Cost: 78 × $5 = $390.'}]},
+    {n:41,t:'06-time',ctx:'A train left a station at 9.40 a.m. and reached its last stop at 2.15 p.m. the same day.',parts:[
+      {p:'(a)',q:'How long was the journey? (h and min)',w:[/^4\s*(h|hr|hrs|hours?)\s*(and\s*)?35\s*(min|mins|minutes?)?$/],m:2,model:'4 h 35 min',e:'9.40 a.m. → 1.40 p.m. is 4 h. 1.40 p.m. → 2.15 p.m. is 35 min. Total 4 h 35 min.'},
+      {p:'(b)',q:'On the way, the train stopped 3 times, for 15 minutes each time. For how many minutes was the train moving?',n:[230],m:2,u:'min',e:'4 h 35 min = 275 min. Stops: 3 × 15 = 45 min. 275 − 45 = 230 min.'}]},
+    {n:42,t:'04-fractions',ctx:'There are 36 pupils in a class. '+fr(1,3)+' of them walk to school, '+fr(1,4)+' of them take the bus, and the rest come by car.',parts:[
+      {p:'(a)',q:'What fraction of the pupils come by car?',w:[/^5\s*\/\s*12$/],m:2,model:fr(5,12),e:fr(1,3)+' + '+fr(1,4)+' = '+fr(4,12)+' + '+fr(3,12)+' = '+fr(7,12)+'. 1 − '+fr(7,12)+' = '+fr(5,12)+'.'},
+      {p:'(b)',q:'How many more pupils walk than take the bus?',n:[3],m:2,e:'Walk: 36 ÷ 3 = 12. Bus: 36 ÷ 4 = 9. 12 − 9 = 3.'}]},
+    {n:43,t:'12-problem-solving',ctx:'Rani used sticks to make a pattern of squares in a row.'+tbl([['Figure','1','2','3','4'],['Number of squares','1','2','3','4'],['Number of sticks','4','7','10','13']]),parts:[
+      {p:'(a)',q:'How many sticks are needed for Figure 6?',n:[19],m:1,e:'Each new square adds 3 sticks. Figure 6: 4 + 5 × 3 = 19.'},
+      {p:'(b)',q:'Which figure uses 61 sticks?',n:[20],m:2,model:'Figure 20',e:'Sticks = 1 + 3 × (figure number). 61 − 1 = 60. 60 ÷ 3 = 20. Figure 20.'}]}
+  );
+  /* Each paper file sets:
+     CFG = {amark: marks per Booklet A question, minutes, base: topic folder for revise links}
+     TOPICS = {file: 'Topic name'}
+     A (Booklet A MCQ): {q,o,a,e,t,ctx,h}
+     B (Booklet B): {n,ctx,t,h,parts:[part]}
+       part = {p,q,model,e} plus ONE of
+         w: [regex | 'word']        short answer, 1 mark (strings compared ignoring case and end punctuation)
+         k: [{l,all:[regex]}]       key ideas, 1 mark each, every regex in a group must match
+         s: ['sentence', ...]       a full sentence, 1 mark, must match one model and start with a capital
+         o: ['choice', ...], a      tick one choice, 1 mark
+         n: [number, ...]           a number answer; units, $ and commas are ignored; "3 1/2" and "7/2" work
+         set: [numbers]             a list of numbers in any order (e.g. all the factors of 12)
+       m = marks for a w / s / n / set part (default 1); u = unit shown after the box
+     CFG.labA / CFG.labB = names of the two parts (default Booklet A / Booklet B)
+     t = topic file (for "revise" links), h = section heading shown before the question */
+  var letters=['1','2','3','4'];
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+  function norm(s){
+    return String(s==null?'':s).toLowerCase().replace(/[‘’`]/g,"'").replace(/[“”]/g,'"')
+      .replace(/\s+([,.!?;:])/g,'$1').replace(/\s+/g,' ').trim().replace(/[.!]+$/,'').trim();
+  }
+  function pm(p){return p.k?p.k.length:(p.m||1);}
+  function num(s){
+    s=String(s).replace(/(\d)[ ,](?=\d{3}(?!\d))/g,'$1').replace(/\$/g,'');
+    var m=s.match(/(-?\d+(?:\.\d+)?)(?:\s+(\d+)\s*\/\s*(\d+)|\s*\/\s*(\d+))?/);if(!m)return NaN;
+    if(m[2])return +m[1]+m[2]/m[3];if(m[4])return m[1]/m[4];return +m[1];
+  }
+  function nums(s){return (String(s).replace(/(\d),(?=\d{3}(?!\d))/g,'$1').match(/\d+(?:\.\d+)?/g)||[]).map(Number);}
+  function sameSet(a,b){a=a.slice().sort(function(x,y){return x-y;});b=b.slice().sort(function(x,y){return x-y;});return a.length===b.length&&a.every(function(x,i){return Math.abs(x-b[i])<1e-9;});}
+  var LA=CFG.labA||'Booklet A',LB=CFG.labB||'Booklet B';
+  document.getElementById('hA').textContent=LA;document.getElementById('hB').textContent=LB;
+  function mk(n){return n+(n>1?' marks':' mark');}
+  function revLink(t){return t&&TOPICS[t]?' <a class="revlink" href="'+CFG.base+t+'.html">Revise: '+TOPICS[t]+' →</a>':'';}
+  var maxA=A.length*CFG.amark,maxB=0;B.forEach(function(q){q.parts.forEach(function(p){maxB+=pm(p);});});
+  document.getElementById('infoA').textContent=A.length+' questions · '+mk(maxA);
+  document.getElementById('infoB').textContent=mk(maxB);
+  function heading(item,box){if(item.h)box.appendChild(el('h3','sech',item.h));}
+  A.forEach(function(item,i){
+    var box=document.getElementById('mcq');heading(item,box);
+    var c=el('div','q');c.id='mcq'+i;
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+(i+1)));head.appendChild(el('span','qmarks',mk(CFG.amark)));c.appendChild(head);
+    if(item.ctx)c.appendChild(el('div','ctx',item.ctx));
+    c.appendChild(el('div','qtext',item.q));
+    var opts=el('div','opts');
+    item.o.forEach(function(t,j){var lab=el('label','opt');var inp=document.createElement('input');inp.type='radio';inp.name='mcq'+i;inp.id='mcq'+i+'_'+j;inp.value=j;lab.appendChild(inp);lab.appendChild(el('span',null,'('+letters[j]+') '+t));opts.appendChild(lab);});
+    c.appendChild(opts);box.appendChild(c);
+  });
+  B.forEach(function(qq,i){
+    var box=document.getElementById('oeq');heading(qq,box);
+    var c=el('div','q');c.id='bq'+i;var m=0;qq.parts.forEach(function(p){m+=pm(p);});
+    var head=el('div','qhead');head.appendChild(el('span','qnum','Q'+qq.n));head.appendChild(el('span','qmarks',mk(m)));c.appendChild(head);
+    if(qq.ctx)c.appendChild(el('div','ctx',qq.ctx));
+    qq.parts.forEach(function(p,j){
+      var row=el('div','bpart');row.id='bp'+i+'_'+j;
+      var qh=el('div','qhead');qh.appendChild(el('span','pq',(p.p?'<b>'+p.p+'</b> ':'')+p.q));qh.appendChild(el('span','pm','['+pm(p)+']'));row.appendChild(qh);
+      var inp;
+      if(p.o){
+        inp=el('div','opts');
+        p.o.forEach(function(t,n){var lab=el('label','opt');var r=document.createElement('input');r.type='radio';r.name='bo'+i+'_'+j;r.value=n;lab.appendChild(r);lab.appendChild(el('span',null,t));inp.appendChild(lab);});
+      }else{
+        if(p.w||p.n||p.set){inp=document.createElement('input');inp.type='text';inp.autocomplete='off';inp.placeholder='answer';}
+        else{inp=document.createElement('textarea');inp.placeholder=p.start||'Write your answer here…';}
+        inp.spellcheck=false;inp.id='ba'+i+'_'+j;inp.setAttribute('aria-label','Answer to '+qq.n+(p.p||''));
+      }
+      if(p.u){var ar=el('div','ansrow');if(p.u==='$'){ar.appendChild(el('span','unit','$'));ar.appendChild(inp);}else{ar.appendChild(inp);ar.appendChild(el('span','unit',p.u));}row.appendChild(ar);}
+      else row.appendChild(inp);
+      c.appendChild(row);
+    });
+    box.appendChild(c);
+  });
+  function clearFb(c){c.querySelectorAll('.feedback,.revhint').forEach(function(f){f.remove();});c.classList.remove('right','wrong','partial');c.querySelectorAll('.bpart').forEach(function(r){r.classList.remove('is-right','is-wrong','is-partial');});c.querySelectorAll('.opt').forEach(function(o){o.classList.remove('is-correct','is-picked-wrong');});}
+  function state(c,got,max){c.classList.remove('right','wrong','partial');c.classList.add(got===max?'right':(got===0?'wrong':'partial'));}
+  var got={};  /* 'i_j' -> marks for Booklet B parts */
+  function score(){
+    var sA=0,sB=0,lost={};
+    A.forEach(function(item,i){var c=document.querySelector('input[name="mcq'+i+'"]:checked');if(c&&+c.value===item.a)sA+=CFG.amark;else lost[item.t]=(lost[item.t]||0)+CFG.amark;});
+    B.forEach(function(qq,i){qq.parts.forEach(function(p,j){var g=got[i+'_'+j]||0;sB+=g;if(g<pm(p))lost[qq.t]=(lost[qq.t]||0)+pm(p)-g;});});
+    var max=maxA+maxB,total=sA+sB,pct=total/max;
+    document.getElementById('scorebox').hidden=false;
+    document.getElementById('scorenum').textContent=total+' / '+max;
+    document.getElementById('scorefill').style.width=(pct*100)+'%';
+    document.getElementById('breakdown').innerHTML='<span>'+LA+': '+sA+'/'+maxA+'</span><span>'+LB+': '+sB+'/'+maxB+'</span>'+(timeUsed()?'<span>Time used: '+timeUsed()+'</span>':'');
+    document.getElementById('scoremsg').textContent=pct>=0.85?'Excellent! You are ready for the exam. Read the explanations for the few you missed.':pct>=0.7?'Good work. Go through every red question and the topics below.':pct>=0.5?'Getting there. Revise the topics below, then try the paper again.':'Revise the topics below one by one, then try the paper again.';
+    var keys=Object.keys(lost).filter(function(t){return TOPICS[t];}).sort(function(a,b){return lost[b]-lost[a];});
+    var rv=document.getElementById('revise');rv.innerHTML='';
+    if(keys.length){
+      rv.appendChild(el('b',null,'Marks lost by topic (revise the top ones first):'));
+      var ul=el('ul');keys.forEach(function(t){ul.appendChild(el('li',null,'<a class="revlink" href="'+CFG.base+t+'.html">'+TOPICS[t]+'</a>: '+mk(lost[t])));});rv.appendChild(ul);
+    }
+    try{localStorage.setItem('p4m-math1-best',String(Math.max(total,+(localStorage.getItem('p4m-math1-best')||0))));localStorage.setItem('p4m-math1-max',String(max));localStorage.setItem('p4m-math1-last',String(total));}catch(e){}
+  }
+  function check(){
+    var blanks=0;
+    A.forEach(function(item,i){
+      var c=document.getElementById('mcq'+i);clearFb(c);
+      var ch=c.querySelector('input:checked');if(!ch)blanks++;
+      var labels=c.querySelectorAll('.opt');
+      labels[item.a].classList.add('is-correct');var good=ch&&+ch.value===item.a;
+      if(ch&&!good)labels[+ch.value].classList.add('is-picked-wrong');state(c,good?CFG.amark:0,CFG.amark);
+      var fb=el('div','feedback');fb.appendChild(el('span','verdict',good?'Correct! '+mk(CFG.amark):(ch?'Not quite.':'No answer.')+' The answer is ('+letters[item.a]+').'));
+      fb.appendChild(el('div','work',item.e+revLink(item.t)));c.appendChild(fb);
+    });
+    B.forEach(function(qq,i){
+      var c=document.getElementById('bq'+i);clearFb(c);
+      var paintQ=function(){var s=0,mx=0;qq.parts.forEach(function(p,j){s+=got[i+'_'+j]||0;mx+=pm(p);});state(c,s,mx);};
+      qq.parts.forEach(function(p,j){
+        var row=document.getElementById('bp'+i+'_'+j),m=pm(p),id=i+'_'+j,v,low;
+        if(p.o){var ch=row.querySelector('input:checked');v=ch?ch.value:'';}
+        else v=document.getElementById('ba'+i+'_'+j).value;
+        low=v.trim().toLowerCase();
+        if(!v.trim())blanks++;
+        var fb=el('div','feedback'),verdict=el('span','verdict');fb.appendChild(verdict);
+        var model=p.o?p.o[p.a]:(p.model||(p.s&&p.s[0])||(p.n&&(p.u==='$'?'$'+p.n[0].toFixed(p.n[0]%1?2:0):p.n[0]+(p.u?' '+p.u:'')))||(p.set&&p.set.join(', '))||(typeof p.w[0]==='string'?p.w[0]:''));
+        fb.appendChild(el('div','work','<b>Answer:</b> '+model+(p.e?'<br>'+p.e:'')));
+        var kw=el('div','kw');
+        function paint(){row.classList.remove('is-right','is-wrong','is-partial');row.classList.add(got[id]===m?'is-right':got[id]===0?'is-wrong':'is-partial');verdict.textContent=got[id]+' of '+mk(m);paintQ();}
+        function selfMark(ok,yes,no){
+          var b=el('button',null,ok?yes:no);b.type='button';b.setAttribute('aria-pressed',ok?'true':'false');
+          b.addEventListener('click',function(){var on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on?'true':'false');got[id]=on?m:0;paint();score();});
+          kw.appendChild(b);
+        }
+        if(p.o){
+          var labs=row.querySelectorAll('.opt');labs[p.a].classList.add('is-correct');
+          got[id]=v!==''&&+v===p.a?1:0;if(v!==''&&!got[id])labs[+v].classList.add('is-picked-wrong');
+        }else if(p.k){
+          var hits=p.k.map(function(g){return low!==''&&g.all.every(function(r){return r.test(low);});});
+          got[id]=hits.filter(Boolean).length;
+          p.k.forEach(function(g,n){
+            var b=el('button',null,(hits[n]?'✓ ':'✗ ')+g.l);b.type='button';b.setAttribute('aria-pressed',hits[n]?'true':'false');
+            b.addEventListener('click',function(){hits[n]=!hits[n];b.setAttribute('aria-pressed',hits[n]?'true':'false');b.textContent=(hits[n]?'✓ ':'✗ ')+g.l;got[id]=hits.filter(Boolean).length;paint();score();});
+            kw.appendChild(b);
+          });
+          fb.appendChild(el('p','hint','Key ideas (1 mark each). Green = found in your answer. If you wrote the same idea in other words, tap it.'));
+        }else if(p.s){
+          var noCap=v.trim()!==''&&!/^\s*["“A-Z]/.test(v);
+          var ok=low!==''&&!noCap&&p.s.some(function(x){return norm(x)===norm(v);});got[id]=ok?m:0;
+          if(noCap)fb.appendChild(el('p','hint','<b>Start your sentence with a capital letter.</b>'));
+          if(!ok)fb.appendChild(el('p','hint','Compare carefully: same meaning, correct tense, full stop and commas. Only tap the button if your sentence is really correct (ask a grown-up if unsure).'));
+          selfMark(ok,'✓ Matches the answer','My sentence means the same and is correct');
+        }else if(p.n||p.set){
+          var ok3=low!==''&&(p.set?sameSet(nums(v),p.set):p.n.some(function(x){return Math.abs(num(v)-x)<1e-9;}));got[id]=ok3?m:0;
+          if(!ok3&&m>1)fb.appendChild(el('p','hint','In the real exam you may still get a method mark if your working was right. Check your working against the answer above.'));
+          selfMark(ok3,'✓ Correct','My answer is also correct');
+        }else{
+          var ok2=low!==''&&p.w.some(function(r){return typeof r==='string'?norm(r)===norm(v):r.test(low);});got[id]=ok2?m:0;
+          selfMark(ok2,'✓ Correct','My answer is also correct');
+        }
+        if(!p.o)fb.appendChild(kw);
+        row.appendChild(fb);paint();
+      });
+      if(qq.t)c.appendChild(el('p','hint revhint',revLink(qq.t).trim()));
+    });
+    document.getElementById('blanknote').textContent=blanks?('You left '+blanks+' blank.'):'';
+    stopTimer();score();
+    document.getElementById('scorebox').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
+  function reset(){
+    document.querySelectorAll('#quiz input, #quiz textarea').forEach(function(r){if(r.type==='radio')r.checked=false;else r.value='';});
+    document.querySelectorAll('#quiz .q').forEach(clearFb);
+    got={};document.getElementById('scorebox').hidden=true;document.getElementById('blanknote').textContent='';
+    try{localStorage.removeItem(TK);}catch(e){}
+    T={};tick();
+    window.scrollTo({top:0});
+  }
+  document.getElementById('submit').addEventListener('click',check);
+  document.getElementById('reset').addEventListener('click',reset);
+
+  /* ---------- TIMER: start time kept in localStorage ---------- */
+  var TK='p4m-math1-timer',LIMIT=CFG.minutes*60*1000,T={},iv=null;
+  try{T=JSON.parse(localStorage.getItem(TK)||'{}')||{};}catch(e){T={};}
+  function fmt(ms){var s=Math.max(0,Math.round(ms/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);s=s%60;return h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;}
+  function timeUsed(){if(!T.start)return '';var used=(T.end||Date.now())-T.start;var mins=Math.round(used/60000);return mins>=60?Math.floor(mins/60)+' h '+(mins%60)+' min':mins+' min';}
+  function saveT(){try{localStorage.setItem(TK,JSON.stringify(T));}catch(e){}}
+  function tick(){
+    var bar=document.getElementById('timerbar'),num=document.getElementById('tnum'),lab=document.getElementById('tlabel'),btn=document.getElementById('tstart'),fill=document.getElementById('tfill');
+    bar.classList.remove('low','up');
+    if(!T.start){num.textContent=fmt(LIMIT);lab.textContent='Time';fill.style.width='0%';btn.hidden=false;if(iv){clearInterval(iv);iv=null;}return;}
+    btn.hidden=true;
+    var used=(T.end||Date.now())-T.start,left=LIMIT-used;
+    fill.style.width=Math.min(100,used/LIMIT*100)+'%';
+    if(T.end){lab.textContent='Finished in';num.textContent=fmt(used);if(iv){clearInterval(iv);iv=null;}return;}
+    if(left<=0){lab.textContent="Time's up!";num.textContent='0:00:00';bar.classList.add('up');return;}
+    lab.textContent='Time left';num.textContent=fmt(left);if(left<10*60*1000)bar.classList.add('low');
+  }
+  function startTimer(){if(!T.start){T={start:Date.now()};saveT();}if(!iv)iv=setInterval(tick,1000);tick();}
+  function stopTimer(){if(T.start&&!T.end){T.end=Date.now();saveT();}tick();}
+  document.getElementById('tstart').addEventListener('click',startTimer);
+  /* answering also starts the clock */
+  document.getElementById('quiz').addEventListener('change',function(){if(!T.start)startTimer();});
+  if(T.start&&!T.end)startTimer();else tick();
+})();
+/* ---------- SAVE ANSWERS (shared by science + math) ----------
+   Keeps every quiz answer in localStorage so it survives closing the page.
+   Saved: radio choices, typed answers, whether answers were checked, keyword taps. */
+(function(){
+  var K='p4m-math1-answers',quiz=document.getElementById('quiz');if(!quiz)return;
+  function load(){try{return JSON.parse(localStorage.getItem(K)||'null');}catch(e){return null;}}
+  function store(s){try{localStorage.setItem(K,JSON.stringify(s));}catch(e){}}
+  var state=load()||{v:{},checked:false,kw:null},restoring=false;
+  function collect(){
+    var v={};
+    quiz.querySelectorAll('input[type=radio]:checked').forEach(function(r){v[r.name]=r.value;});
+    quiz.querySelectorAll('input[type=text],textarea').forEach(function(t){if(t.value)v['#'+t.id]=t.value;});
+    state.v=v;
+  }
+  function kwState(){return [].map.call(quiz.querySelectorAll('.kw button'),function(b){return b.getAttribute('aria-pressed')==='true';});}
+  function save(){if(restoring)return;collect();store(state);}
+  quiz.addEventListener('input',save);
+  quiz.addEventListener('change',save);
+  quiz.addEventListener('click',function(e){
+    if(restoring)return;
+    var b=e.target.closest('button');if(!b)return;
+    if(b.id==='submit'){state.checked=true;collect();state.kw=kwState();store(state);}
+    else if(b.id==='reset'){state={v:{},checked:false,kw:null};try{localStorage.removeItem(K);}catch(err){}}
+    else if(b.closest('.kw')){state.kw=kwState();store(state);}
+  });
+  /* restore */
+  var v=state.v||{},any=false;
+  Object.keys(v).forEach(function(k){
+    if(k.charAt(0)==='#'){var t=document.getElementById(k.slice(1));if(t){t.value=v[k];any=true;}}
+    else{var r=quiz.querySelector('input[type=radio][name="'+k+'"][value="'+v[k]+'"]');if(r){r.checked=true;any=true;}}
+  });
+  if(state.checked&&any){
+    restoring=true;
+    var orig=Element.prototype.scrollIntoView;Element.prototype.scrollIntoView=function(){};
+    try{
+      document.getElementById('submit').click();
+      if(state.kw){var bs=quiz.querySelectorAll('.kw button');state.kw.forEach(function(p,i){var b=bs[i];if(b&&(b.getAttribute('aria-pressed')==='true')!==p)b.click();});}
+    }finally{Element.prototype.scrollIntoView=orig;restoring=false;}
+  }
+  if(any){
+    var note=document.createElement('p');note.className='hint';
+    note.textContent=state.checked?'Your saved answers and results are shown below. Press "Try again" to start fresh.':'Your saved answers are filled in below.';
+    var lead=quiz.querySelector('.lead');if(lead)lead.after(note);
+  }
+})();
+</script>

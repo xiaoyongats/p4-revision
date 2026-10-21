@@ -52,13 +52,16 @@ t = t.replace('/* quiz */', css + '/* quiz */', 1)
 t = t.replace('Colour is meaning on every page: blue = water/cold, orange = food/heat, green = living/correct, brown = soil/solid, red = watch out.',
               'Mock exam paper: Booklet A (choose), Booklet B (write), timer at the top, marked by key ideas like the real exam.')
 
-for f in sorted(glob.glob(os.path.join(here, 'papers', '*.js'))):
+for f in sorted(glob.glob(os.path.join(here, 'papers', '[0-9]*.js'))):
     src = io.open(f, encoding='utf-8').read()
     meta = {}
     for line in re.search(r'/\*meta\n(.*?)\n\*/', src, re.S).group(1).split('\n'):
         k, v = line.split(':', 1)
         meta[k.strip()] = v.strip()
     quiz = src.split('*/', 1)[1].strip('\n')
+    for inc in meta.get('include', '').split():
+        # shared helpers (e.g. papers/_math.js) are pasted in front of the paper's own code
+        quiz = io.open(os.path.join(here, 'papers', inc), encoding='utf-8').read().strip('\n') + '\n' + quiz
     out = t
     for k, v in {'TITLE': meta['title'], 'EYEBROW': meta['eyebrow'], 'H1': meta['h1'], 'LEAD': meta['lead'],
                  'KEY': meta['key'], 'SUB': meta['sub'], 'QUIZ_LEAD': meta['quiz_lead'],
