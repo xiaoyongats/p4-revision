@@ -371,7 +371,7 @@ textarea:focus{outline:none;border-color:var(--water)}
     k=k||22;var w=0,h=0;pts.forEach(function(p){w=Math.max(w,p[0]);h=Math.max(h,p[1]);});
     var s='<polygon points="'+pts.map(function(p){return (p[0]*k+40)+','+(p[1]*k+25);}).join(' ')+'" fill="var(--water-soft)" stroke="var(--water)" stroke-width="2.5"/>';
     labs.forEach(function(l){s+='<text x="'+(l[0]*k+40)+'" y="'+(l[1]*k+25+5)+'" text-anchor="middle" '+FT+'>'+l[2]+'</text>';});
-    return '<svg viewBox="0 0 '+(w*k+80)+' '+(h*k+70)+'" width="'+(w*k+80)+'" role="img" aria-label="Figure made of rectangles (not drawn to scale)">'+s+'</svg><p class="hint" style="text-align:center">The figure is not drawn to scale.</p>';
+    return '<svg viewBox="0 0 '+(w*k+100)+' '+(h*k+70)+'" width="'+(w*k+100)+'" role="img" aria-label="Figure made of rectangles (not drawn to scale)">'+s+'</svg><p class="hint" style="text-align:center">The figure is not drawn to scale.</p>';
   }
   /* bar graph: data = [[label, value]], top = axis max, step */
   function bars(data,top,step,ylab){
